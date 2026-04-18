@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;        // ความเร็วตัวละคร
     public Rigidbody2D rb;
     public Vector2 moveInput;
+    public float sprint = 3f;
 
     void Update()
     {
@@ -14,6 +15,14 @@ public class PlayerMovement : MonoBehaviour
 
         // ป้องกันเดินเร็วขึ้นตอนเฉียง
         moveInput = moveInput.normalized;
-        rb.linearVelocity = moveInput * speed;
+        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rb.linearVelocity = moveInput * speed* sprint;
+        }
+        else
+        {
+            rb.linearVelocity = moveInput * speed;
+        }
     }
 }
