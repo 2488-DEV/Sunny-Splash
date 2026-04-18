@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Sunny_Splash.slnx",
+    "dotnet.defaultSolution": "Sunny-Splash.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
