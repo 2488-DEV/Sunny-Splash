@@ -13,7 +13,11 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 10
+=======
+  serializedVersion: 9
+>>>>>>> BIN
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,12 +42,21 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
+=======
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> BIN
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 13
   m_BakeOnSceneLoad: 0
+=======
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+>>>>>>> BIN
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,6 +79,12 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+<<<<<<< HEAD
+=======
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+>>>>>>> BIN
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -100,7 +119,11 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
+<<<<<<< HEAD
     serializedVersion: 3
+=======
+    serializedVersion: 2
+>>>>>>> BIN
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -113,7 +136,11 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
+<<<<<<< HEAD
     buildHeightMesh: 0
+=======
+    accuratePlacement: 0
+>>>>>>> BIN
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -150,6 +177,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 3
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -225,6 +256,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 7
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -300,6 +335,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 572391790}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 0
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -420,9 +459,13 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+<<<<<<< HEAD
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
+=======
+  m_AdditionalShaderChannelsFlag: 0
+>>>>>>> BIN
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -441,6 +484,10 @@ RectTransform:
   - {fileID: 470478396}
   - {fileID: 1285370725}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 1
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -478,6 +525,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 1
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -553,6 +604,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 5
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -628,6 +683,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 2
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -710,6 +769,10 @@ RectTransform:
   - {fileID: 2001430381}
   - {fileID: 404714932}
   m_Father: {fileID: 572391790}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 1
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -771,6 +834,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 0
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -855,6 +922,7 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+<<<<<<< HEAD
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
@@ -866,6 +934,11 @@ Camera:
   m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+=======
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+>>>>>>> BIN
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -899,13 +972,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732271971}
+<<<<<<< HEAD
   serializedVersion: 2
+=======
+>>>>>>> BIN
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 0
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1800880975
 GameObject:
@@ -967,13 +1047,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800880975}
+<<<<<<< HEAD
   serializedVersion: 2
+=======
+>>>>>>> BIN
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 2
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1955618560
 GameObject:
@@ -1006,6 +1093,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 4
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1081,6 +1172,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285370725}
+<<<<<<< HEAD
+=======
+  m_RootOrder: 6
+>>>>>>> BIN
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1125,6 +1220,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001430380}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1132,3 +1228,5 @@ SceneRoots:
   - {fileID: 1732271974}
   - {fileID: 572391790}
   - {fileID: 1800880978}
+=======
+>>>>>>> BIN
