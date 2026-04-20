@@ -5,6 +5,8 @@ PrefabImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 318607
@@ -12,3 +14,4 @@ AssetOrigin:
   packageVersion: 1.0
   assetPath: Assets/maanetorn/Farm Game UI - Simple 2D UI/Prefabs/BlueBtn.prefab
   uploadId: 760604
+>>>>>>> BIN

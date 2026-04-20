@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 moveInput;
     public float sprint = 3f;
+    public SpriteRenderer spriteRenderer;
 
     void Update()
     {
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = moveInput * speed* sprint;
         }
+
         else
         {
             rb.linearVelocity = moveInput * speed;

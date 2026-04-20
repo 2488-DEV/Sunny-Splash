@@ -657,6 +657,7 @@ MonoBehaviour:
   rb: {fileID: 542137630}
   moveInput: {x: 0, y: 0}
   sprint: 2.5
+  spriteRenderer: {fileID: 0}
 --- !u!212 &542137632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1705,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f2e1641a768fd4f960afd8d0f1f339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overHeatBar: {fileID: 0}
+  overHeatBar: {fileID: 2076618930}
 --- !u!1 &1124257108
 GameObject:
   m_ObjectHideFlags: 0

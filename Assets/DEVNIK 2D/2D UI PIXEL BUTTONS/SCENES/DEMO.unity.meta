@@ -5,6 +5,8 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 329983
@@ -12,3 +14,4 @@ AssetOrigin:
   packageVersion: 1.0
   assetPath: Assets/DEVNIK 2D/2D UI PIXEL BUTTONS/SCENES/DEMO.unity
   uploadId: 780706
+>>>>>>> BIN
