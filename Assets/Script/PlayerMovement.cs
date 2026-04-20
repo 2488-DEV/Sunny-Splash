@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprint = 3f;
 
     public bool isInWater = false;
+    public bool isInShadow = false;
 
     void Update()
     {
@@ -50,10 +51,9 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("IsSwim", isInWater); //animation ว่ายน้ำ
 
-        if (isInWater || !sunSystem.isSunActive)
+        if (isInWater)
         {
             rb.linearVelocity = moveInput * (speed * 0.75f);
-            overHeatBar.timer = 0f;
         }
     }
 }
