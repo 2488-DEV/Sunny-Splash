@@ -4,11 +4,17 @@ using UnityEngine.UI;
 
 public class OverHeatBar : MonoBehaviour
 {
-    public Slider slider;
-    public float maxValue = 100f;
     public WaterColler waterColler;
-    public float timer = 0f;
+    public PlayerMovement playerMovement;
+    public SunSystem sunSystem;
 
+    public Slider slider;
+    public Image fillImage;
+    public GameObject player;
+
+    public float maxValue = 100f;
+    public float timer = 0f;
+    
     void Start()
     {
         slider.maxValue = maxValue;
@@ -23,6 +29,22 @@ public class OverHeatBar : MonoBehaviour
         {
             slider.value += 1f;
             timer = 0f;
+        }
+
+        if (slider.value >= 100f)
+        {
+            Debug.Log("YOU ARE DEAD");
+            player.SetActive(false);
+        }
+        
+        else if (slider.value >= 90f)
+        {
+            fillImage.color = Color.red;
+        }
+
+        else
+        {
+            fillImage.color = new Color32(255,113,0,255);
         }
     }
 }
