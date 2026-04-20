@@ -5,6 +5,8 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 365530
@@ -12,3 +14,4 @@ AssetOrigin:
   packageVersion: 1.0.0
   assetPath: Assets/Layer Lab/2D Icons-CasualIconPack/Scene/DemoScene_2D Icons-CasualIconPack.unity
   uploadId: 873376
+>>>>>>> BIN
