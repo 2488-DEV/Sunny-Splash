@@ -3,44 +3,46 @@ using UnityEngine.Audio;
 
 public class MainMenuControl : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject settingPanel;
     public GameObject informationPanel;
     public GameObject howToPlayPanel;
-    public AudioMixer myMixer;
+    public GameObject levelSelectPanel;
 
-    // เชื่อมกับสคริปต์ ButtonSound โดยตรง
+    [Header("Audio")]
+    public AudioMixer myMixer;
     public ButtonSound buttonSoundScript;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // เรียกใช้ฟังก์ชัน PlayClick ที่คุณเขียนไว้ในอีกสคริปต์
-            if (buttonSoundScript != null)
-            {
-                buttonSoundScript.PlayClick();
-            }
+            if (buttonSoundScript != null) buttonSoundScript.PlayClick();
 
+            // 1. ถ้าหน้า Setting เปิดอยู่แล้ว -> ให้ปิดทุกอย่าง (รวมถึงตัวเอง)
             if (settingPanel.activeSelf)
             {
-                CloseSetting();
+                CloseAllPanels();
             }
+            // 2. ถ้าหน้าอื่น (Level/Info/HowTo) เปิดอยู่ หรือไม่มีอะไรเปิดเลย -> ให้ปิดหน้าอื่นแล้วเปิด Setting ทันที
             else
             {
-                CloseAllPanels();
-                OpenSetting();
+                CloseAllPanels(); // เคลียร์หน้าอื่นทิ้งก่อน
+                OpenSetting();    // เปิด Setting ขึ้นมา
             }
         }
     }
 
-    public void OpenSetting()
+    public void OpenLevelSelect()
     {
-        settingPanel.SetActive(true);
+        if (buttonSoundScript != null) buttonSoundScript.PlayClick();
+        CloseAllPanels();
+        if (levelSelectPanel != null) levelSelectPanel.SetActive(true);
     }
 
-    public void CloseSetting()
+    public void OpenSetting()
     {
-        settingPanel.SetActive(false);
+        if (settingPanel != null) settingPanel.SetActive(true);
     }
 
     public void CloseAllPanels()
@@ -48,6 +50,7 @@ public class MainMenuControl : MonoBehaviour
         if (settingPanel != null) settingPanel.SetActive(false);
         if (informationPanel != null) informationPanel.SetActive(false);
         if (howToPlayPanel != null) howToPlayPanel.SetActive(false);
+        if (levelSelectPanel != null) levelSelectPanel.SetActive(false);
     }
 
     public void SetVolume(float sliderValue)
