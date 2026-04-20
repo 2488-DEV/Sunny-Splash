@@ -8,6 +8,7 @@ public class OverHeatBar : MonoBehaviour
     public float maxValue = 100f;
     public WaterColler waterColler;
     public float timer = 0f;
+    public Image fillImage;
 
     void Start()
     {
@@ -23,6 +24,11 @@ public class OverHeatBar : MonoBehaviour
         {
             slider.value += 1f;
             timer = 0f;
+        }
+
+        if (slider.value == 90)
+        {
+
         }
     }
 }
