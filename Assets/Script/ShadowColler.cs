@@ -1,20 +1,18 @@
 using UnityEngine;
 
-public class WaterColler : MonoBehaviour
+public class ShadowColler : MonoBehaviour
 {
     public OverHeatBar overHeatBar;
-    public PlayerMovement playerMovement;
 
-    private float timer = 0f;
+    public bool isPlayerInside = false;
 
-    private bool isPlayerInside = false;
-    
+    public float timer =0f;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = true;
-            playerMovement.isInWater = true;
         }
     }
 
@@ -23,7 +21,6 @@ public class WaterColler : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = false;
-            playerMovement.isInWater = false;
         }
     }
 
@@ -31,12 +28,10 @@ public class WaterColler : MonoBehaviour
     {
         if (isPlayerInside)
         {
-
             timer += Time.deltaTime;
-
             if (timer >= 1f)
             {
-                overHeatBar.slider.value -= 2f; // ลดทีละ 2
+                overHeatBar.timer =0f;
                 timer = 0f;
             }
         }

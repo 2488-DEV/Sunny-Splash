@@ -23,6 +23,11 @@ public class OverHeatBar : MonoBehaviour
 
     void Update()
     {
+        if (playerMovement.isInWater || !sunSystem.isSunActive)
+        {
+            return;
+        }
+
         timer += Time.deltaTime; // นับเวลาจริง (ขึ้นกับ Time.timeScale)
 
         if (timer >= 1f)
