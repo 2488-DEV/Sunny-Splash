@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 moveInput;
     public float sprint = 3f;
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     void Update()
     {
@@ -26,5 +27,17 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = moveInput * speed;
         }
+
+        if (moveInput != Vector2.zero)
+        {
+            animator.SetBool("IsRunning",true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning",false);
+        }
+
+        if (moveInput.x != 0)
+        spriteRenderer.flipX = moveInput.x < 0;
     }
 }
