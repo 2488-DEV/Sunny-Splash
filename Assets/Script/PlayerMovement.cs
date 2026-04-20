@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 moveInput;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public OverHeatBar overHeatBar;
+    public SunSystem sunSystem;
 
     public float speed = 5f;        // ความเร็วตัวละคร
     public float sprint = 3f;
@@ -48,9 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("IsSwim", isInWater); //animation ว่ายน้ำ
 
-        if (isInWater)
+        if (isInWater || !sunSystem.isSunActive)
         {
             rb.linearVelocity = moveInput * (speed * 0.75f);
+            overHeatBar.timer = 0f;
         }
     }
 }
