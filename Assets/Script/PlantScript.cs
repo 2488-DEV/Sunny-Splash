@@ -6,7 +6,9 @@ public class PlantScript : MonoBehaviour
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
 
-    private PlayerScript player; 
+    private PlayerScript player;
+    
+    private StaminaBar staminaBar;
 
     void Start()
     {
@@ -15,27 +17,45 @@ public class PlantScript : MonoBehaviour
         {
             player = playerObj.GetComponent<PlayerScript>();
         }
+        staminaBar = FindFirstObjectByType<StaminaBar>();
     }
 
     void Update()
     {   
-        if (IsInRange && player != null)
+        if (IsInRange && player != null && Input.GetKeyDown(KeyCode.Space) && staminaBar.slider.value >= 10)
         {
             if (currentStage == PlantState.Dead)
             {
-                if (player.IsShovel && Input.GetKeyDown(KeyCode.Space))
+                if (player.IsShovel)
                 {
                     HandlePlantLogic();
                 }
             }
-            else
+            else if (currentStage == PlantState.Empty)
             {
-                if (!player.IsShovel && Input.GetKeyDown(KeyCode.Space))
+                if (!player.IsShovel && player.seed >= 1)
+                {
+                    player.seed -= 1;
+                    player.UpdateSeedCount();
+                    HandlePlantLogic();
+                }
+            }
+            else if (currentStage == PlantState.Dehydrated)
+            {
+                if (!player.IsShovel && player.water_gauge >= 10)
+                {
+                    player.water_gauge -= 10;
+                    HandlePlantLogic();
+                    player.UpdateWater();
+                }
+            }
+            else if (currentStage == PlantState.Fresh)
+            {
+                if (!player.IsShovel)
                 {
                     HandlePlantLogic();
                 }
             }
-            
             
         }
         UpdateVisuals();
@@ -49,6 +69,7 @@ public class PlantScript : MonoBehaviour
             currentStage = PlantState.Dehydrated;
         else if (currentStage == PlantState.Dehydrated)
             currentStage = PlantState.Fresh;
+        staminaBar.slider.value -= 10;
     }
 
     void UpdateVisuals()

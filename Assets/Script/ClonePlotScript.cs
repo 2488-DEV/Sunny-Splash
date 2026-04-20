@@ -18,8 +18,7 @@ public class ClonePlotScript : MonoBehaviour
 
                 if (script != null)
                 {
-                    // 2. ส่งค่าเลข 1 (หรือค่าที่สุ่ม) เข้าไปในตัวแปร currentStage ของสคริปต์นั้น
-                    script.currentStage = (PlantScript.PlantState)Random.Range(1,3); 
+                    script.currentStage = (PlantScript.PlantState)Random.Range(0,3); 
                 }
 
                 clone.transform.position = new Vector3(plot.transform.position.x + i * 3 , plot.transform.position.y + y , 0f);
