@@ -5,7 +5,12 @@ public class PlantScript : MonoBehaviour
     public bool IsInRange;
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
+    public AudioSource source;
+    public AudioClip digSfx;
+    public AudioClip plantSfx;
+    public AudioClip wateringSfx;
 
+    
     private PlayerScript player;
     
     private StaminaBar staminaBar;
@@ -77,11 +82,20 @@ public class PlantScript : MonoBehaviour
     void HandlePlantLogic()
     {
         if (currentStage == PlantState.Dead)
+        {
             currentStage = PlantState.Empty;
+            source.PlayOneShot(digSfx);
+        }
         else if (currentStage == PlantState.Empty)
+        {
             currentStage = PlantState.Dehydrated;
+            source.PlayOneShot(plantSfx);
+        }
         else if (currentStage == PlantState.Dehydrated)
+        {
             currentStage = PlantState.Fresh;
+            source.PlayOneShot(wateringSfx);
+        }
         staminaBar.slider.value -= 10;
     }
 
