@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class OverHeatBar : MonoBehaviour
-{
+{   
     public WaterColler waterColler;
     public PlayerMovement playerMovement;
     public SunSystem sunSystem;
@@ -23,18 +23,29 @@ public class OverHeatBar : MonoBehaviour
 
     void Update()
     {
-        if (playerMovement.isInWater || !sunSystem.isSunActive)
-        {
-            return;
-        }
 
         timer += Time.deltaTime; // นับเวลาจริง (ขึ้นกับ Time.timeScale)
 
         if (timer >= 1f)
         {
-            slider.value += 1f;
-            timer = 0f;
+        // ลำดับความสำคัญ
+            if (playerMovement.isInWater)
+            {
+            slider.value -= 3f; // น้ำลดเร็ว
+            }
+            else if (playerMovement.isInShadow)
+            {
+            slider.value -= 1f; // เงาลดช้า
+            }
+            else if (sunSystem.isSunActive)
+            {
+            slider.value += 1f; // โดนแดดเพิ่ม
+            }
+
+        timer = 0f;
         }
+        
+        slider.value = Mathf.Clamp(slider.value, 0, 100);
 
         if (slider.value >= 100f)
         {

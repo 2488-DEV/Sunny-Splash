@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;        // ความเร็วตัวละคร
     public float sprint = 3f;
 
-    public bool isInWater = false;
     public bool isInShadow = false;
+    public bool isInWater = false;
 
     void Update()
     {

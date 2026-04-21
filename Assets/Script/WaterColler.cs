@@ -4,6 +4,7 @@ public class WaterColler : MonoBehaviour
 {
     public OverHeatBar overHeatBar;
     public PlayerMovement playerMovement;
+    public ShadowColler shadowColler;
 
     private float timer = 0f;
 
@@ -29,6 +30,7 @@ public class WaterColler : MonoBehaviour
 
     void Update()
     {
+
         if (isPlayerInside)
         {
 

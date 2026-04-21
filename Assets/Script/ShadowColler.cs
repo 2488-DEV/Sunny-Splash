@@ -3,6 +3,7 @@ using UnityEngine;
 public class ShadowColler : MonoBehaviour
 {
     public OverHeatBar overHeatBar;
+    public WaterColler waterColler;
 
     public bool isPlayerInside = false;
 
@@ -13,6 +14,7 @@ public class ShadowColler : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = true;
+            collision.GetComponent<PlayerMovement>().isInShadow = true;
         }
     }
 
@@ -21,19 +23,7 @@ public class ShadowColler : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = false;
-        }
-    }
-
-    void Update()
-    {
-        if (isPlayerInside)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 1f)
-            {
-                overHeatBar.timer =0f;
-                timer = 0f;
-            }
+            collision.GetComponent<PlayerMovement>().isInShadow = false;
         }
     }
 }
