@@ -6,7 +6,6 @@ public class SeedScript : MonoBehaviour
     public bool IsInRange;
     private PlayerScript player;
     private ShovelScript shovel;
-    public TextMeshProUGUI interact;
 
     void Start()
     {
@@ -24,11 +23,17 @@ public class SeedScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                // Block if already performing an action
+                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
                 if (player != null)
                 {
-                    player.seed += 1;
-                    player.UpdateSeedCount();
-                    gameObject.SetActive(false);
+                    PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
+                    {
+                        player.seed += 1;
+                        player.UpdateSeedCount();
+                        gameObject.SetActive(false);
+                    });
                 }
             }
         }
@@ -40,7 +45,7 @@ public class SeedScript : MonoBehaviour
             IsInRange = true;
             Debug.Log("Enter");
             transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-            interact.enabled = true;
+
         }
 
     }
@@ -50,7 +55,6 @@ public class SeedScript : MonoBehaviour
         {
             IsInRange = false;
             Debug.Log("Exit");
-            interact.enabled = false;
             transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
         }
     }

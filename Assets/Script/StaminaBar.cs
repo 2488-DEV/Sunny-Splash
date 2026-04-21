@@ -23,6 +23,13 @@ public class StaminaBar : MonoBehaviour
 
     void Update()
     {   
+        // Don't drain movement stamina during actions (player is frozen)
+        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction)
+        {
+            timer += Time.deltaTime;
+            return;
+        }
+
         if (player.IsShovel)
         {
             if ((Input.GetAxisRaw("Vertical") != 0) || (Input.GetAxisRaw("Horizontal") != 0))
@@ -34,10 +41,6 @@ public class StaminaBar : MonoBehaviour
         {
             slider.value += 2f;
             timer = 0f;
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            slider.value -= 0.1f;
         }
         
         timer += Time.deltaTime; // นับเวลาจริง (ขึ้นกับ Time.timeScale)
