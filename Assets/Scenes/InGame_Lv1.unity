@@ -53636,6 +53636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SunSytem
       objectReference: {fileID: 0}
+    - target: {fileID: 2992832068899799578, guid: b54ac8b829afc2648b9817452b69c7cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
