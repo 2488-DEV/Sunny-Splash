@@ -38,7 +38,7 @@ public class WaterColler : MonoBehaviour
 
             if (timer >= 1f)
             {
-                overHeatBar.slider.value -= 2f; // ลดทีละ 2
+                overHeatBar.slider.value -= 1f; // ลดทีละ 2
                 timer = 0f;
             }
         }

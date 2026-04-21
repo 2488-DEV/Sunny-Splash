@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1842096811
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: 1316169585
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 6432516018070999772, guid: 4ece30ff87361424280cb1dd54c25812,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,11 +182,15 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   spriteRenderer: {fileID: 8010691839546482517}
   animator: {fileID: 7215789026620862646}
-  overHeatBar: {fileID: 0}
-  sunSystem: {fileID: 0}
+  overHeatBar: {fileID: 8290381526628737200, guid: 29bf3beb68489444c8ed7b5928244157,
+    type: 3}
+  sunSystem: {fileID: 1875578503568760510, guid: b54ac8b829afc2648b9817452b69c7cd,
+    type: 3}
   speed: 5
   sprint: 3
+  isInShadow: 0
   isInWater: 0
+  WaterWalking: 0
 --- !u!95 &7215789026620862646
 Animator:
   serializedVersion: 7
@@ -235,8 +239,8 @@ Transform:
   m_GameObject: {fileID: 8185238364070889253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -1.52, z: 0.05}
-  m_LocalScale: {x: 3.63, y: 2.3898234, z: 3.63}
+  m_LocalPosition: {x: -0.061, y: -1.259, z: 0.05}
+  m_LocalScale: {x: 3.66, y: 2.409574, z: 3.66}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6757852922189398890}
@@ -282,7 +286,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1869315837
+  m_SortingLayerID: 1316169585
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300060, guid: ed7554aeefd5da44a9fe1ee9b93afe77, type: 3}

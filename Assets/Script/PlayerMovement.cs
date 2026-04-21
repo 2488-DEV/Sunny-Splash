@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isInShadow = false;
     public bool isInWater = false;
+    public bool WaterWalking = false;
 
     void Update()
     {
@@ -37,11 +39,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput != Vector2.zero) //animation วิ่ง
         {
             animator.SetBool("IsRunning",true);
+            WaterWalking = true;
         }
 
         else //animation เดิน
         {
             animator.SetBool("IsRunning",false);
+            WaterWalking = false;
         }
 
         if (moveInput.x != 0) //flip
@@ -49,11 +53,22 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer.flipX = moveInput.x < 0;
         }
 
-        animator.SetBool("IsSwim", isInWater); //animation ว่ายน้ำ
-
         if (isInWater)
         {
-            rb.linearVelocity = moveInput * (speed * 0.75f);
+            animator.SetBool("IsSwim", isInWater);
+            animator.SetBool("IsSwiming", WaterWalking);
+            rb.linearVelocity = moveInput * (speed * 0.25f);
+
+            if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
+            {
+                rb.linearVelocity = moveInput * speed* sprint *0.4f;
+            }
+        }
+
+        else
+        {
+            animator.SetBool("IsSwim", false);
+            animator.SetBool("IsSwiming", false);
         }
     }
 }
