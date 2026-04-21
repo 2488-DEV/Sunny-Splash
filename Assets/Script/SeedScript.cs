@@ -6,7 +6,6 @@ public class SeedScript : MonoBehaviour
     public bool IsInRange;
     private PlayerScript player;
     private ShovelScript shovel;
-    public TextMeshProUGUI interact;
 
     void Start()
     {
@@ -46,7 +45,7 @@ public class SeedScript : MonoBehaviour
             IsInRange = true;
             Debug.Log("Enter");
             transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-            interact.enabled = true;
+
         }
 
     }
@@ -56,7 +55,6 @@ public class SeedScript : MonoBehaviour
         {
             IsInRange = false;
             Debug.Log("Exit");
-            interact.enabled = false;
             transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
         }
     }

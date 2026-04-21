@@ -42,10 +42,6 @@ public class StaminaBar : MonoBehaviour
             slider.value += 2f;
             timer = 0f;
         }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            slider.value -= 0.1f;
-        }
         
         timer += Time.deltaTime; // นับเวลาจริง (ขึ้นกับ Time.timeScale)
     }

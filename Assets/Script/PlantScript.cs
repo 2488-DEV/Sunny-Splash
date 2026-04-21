@@ -9,7 +9,6 @@ public class PlantScript : MonoBehaviour
     private PlayerScript player;
     
     private StaminaBar staminaBar;
-
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -62,16 +61,11 @@ public class PlantScript : MonoBehaviour
                         player.water_gauge -= 10;
                         HandlePlantLogic();
                         player.UpdateWater();
-                    });
-                }
-            }
-            else if (currentStage == PlantState.Fresh)
-            {
-                if (!player.IsShovel)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Harvest, () =>
-                    {
-                        HandlePlantLogic();
+                        if (player.tree > 0)
+                        {
+                            player.tree -= 1;
+                            player.UpdateTreeCount();
+                        }
                     });
                 }
             }

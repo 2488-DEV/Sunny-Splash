@@ -5,117 +5,71 @@ public class ActionBarUI : MonoBehaviour
 {
     [Header("UI References")]
     public Slider progressBar;
-    public GameObject uiContainer; // The UI parent object to show/hide and move
-
-    [Header("Screen Space Settings")]
-    public Transform playerTransform; // Track this object
-    public Vector3 worldOffset = new Vector3(0, -1f, 0); // Distance below player in world units
-
-    [Header("Optional - Fill Color")]
-    public Image fillImage;
-    public Color fillColor = new Color32(100, 200, 100, 255); // Green
-
-    private Camera mainCam;
-    private RectTransform rectTransform;
-
+    public GameObject uiContainer;
+    private Canvas playerCanvas;
     void Start()
     {
-        mainCam = Camera.main;
-
         if (uiContainer != null)
         {
-            rectTransform = uiContainer.GetComponent<RectTransform>();
-            uiContainer.SetActive(false);
+            playerCanvas = uiContainer.GetComponentInParent<Canvas>();
         }
+        // 1. ติดตาม Event เมื่อเริ่มและจบ Action
+        PlayerActionManager.Instance.OnActionStarted += HandleActionStarted;
+        PlayerActionManager.Instance.OnActionCompleted += HandleActionFinished;
+        PlayerActionManager.Instance.OnActionCancelled += HandleActionFinished;
 
-        // Set fill color if assigned
-        if (fillImage != null)
-        {
-            fillImage.color = fillColor;
-        }
-
-        // Set slider range
-        if (progressBar != null)
-        {
-            progressBar.minValue = 0f;
-            progressBar.maxValue = 1f;
-            progressBar.value = 0f;
-        }
-
-        // Auto-find player if missing
-        if (playerTransform == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                playerTransform = player.transform;
-            }
-        }
+        // เริ่มต้นให้ปิด UI ไว้ก่อน
+        HideUI();
     }
 
-    void OnEnable()
+    void Update()
     {
-        // Subscribe to action manager events
-        if (PlayerActionManager.Instance != null)
+        // 2. อัปเดต Progress Bar ตลอดเวลาที่กำลังทำ Action
+        if (PlayerActionManager.Instance.IsPerformingAction)
         {
-            PlayerActionManager.Instance.OnActionStarted += HandleActionStarted;
-            PlayerActionManager.Instance.OnActionCompleted += HandleActionEnded;
-            PlayerActionManager.Instance.OnActionCancelled += HandleActionEnded;
-        }
-    }
-
-    void OnDisable()
-    {
-        // Clean up subscriptions
-        if (PlayerActionManager.Instance != null)
-        {
-            PlayerActionManager.Instance.OnActionStarted -= HandleActionStarted;
-            PlayerActionManager.Instance.OnActionCompleted -= HandleActionEnded;
-            PlayerActionManager.Instance.OnActionCancelled -= HandleActionEnded;
+            // ActionProgress ใน Manager คือ 0-1 อยู่แล้ว
+            // เราแค่เอามาคูณกับ maxValue ของ Slider
+            progressBar.value = PlayerActionManager.Instance.ActionProgress;
         }
     }
 
     private void HandleActionStarted(ActionType action)
     {
-        if (progressBar != null)
-        {
-            progressBar.value = 0f;
-        }
+        // 3. ตั้งค่า Slider ตามความต้องการ
+        // เนื่องจาก ActionProgress ใน Manager เป็น 0 ถึง 1 
+        // แนะนำให้ตั้ง maxValue เป็น 1 เพื่อความง่ายครับ
+        progressBar.maxValue = 1f;
+        progressBar.value = 0f;
 
-        if (uiContainer != null)
-        {
-            uiContainer.SetActive(true);
-        }
+        ShowUI();
     }
 
-    private void HandleActionEnded(ActionType action)
+    private void HandleActionFinished(ActionType action)
     {
-        if (uiContainer != null)
-        {
-            uiContainer.SetActive(false);
-        }
+        HideUI();
     }
 
-    void Update()
+    private void ShowUI()
     {
-        // Fill the bar based on action progress (0 to 1)
-        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction)
-        {
-            if (progressBar != null)
-            {
-                progressBar.value = PlayerActionManager.Instance.ActionProgress;
-            }
-        }
+        if (playerCanvas != null) playerCanvas.enabled = true;
+        // หรือถ้าอยากใช้ SetActive ก็ได้ครับ
+        // uiContainer.SetActive(true);
     }
 
-    void LateUpdate()
+    private void HideUI()
     {
-        // Continuously position the UI element over the player on the screen
-        if (uiContainer != null && uiContainer.activeSelf && playerTransform != null && mainCam != null && rectTransform != null)
+        if (playerCanvas != null) playerCanvas.enabled = false;
+        // uiContainer.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        // อย่าลืมยกเลิกการติดตามเมื่อสคริปต์ถูกทำลาย เพื่อป้องกัน Memory Leak
+        if (PlayerActionManager.Instance != null)
         {
-            // Convert player's world position (plus offset) into screen space
-            Vector3 screenPos = mainCam.WorldToScreenPoint(playerTransform.position + worldOffset);
-            rectTransform.position = screenPos;
+            PlayerActionManager.Instance.OnActionStarted -= HandleActionStarted;
+            PlayerActionManager.Instance.OnActionCompleted -= HandleActionFinished;
+            PlayerActionManager.Instance.OnActionCancelled -= HandleActionFinished;
         }
     }
 }

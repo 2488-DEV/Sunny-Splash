@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public OverHeatBar overHeatBar;
     public SunSystem sunSystem;
+    public StaminaBar staminaBar;
 
     public float speed = 5f;        // ความเร็วตัวละคร
     public float sprint = 3f;
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
         {
             rb.linearVelocity = moveInput * speed* sprint;
+            staminaBar.slider.value -= 0.1f;
         }
 
         else //เดิน

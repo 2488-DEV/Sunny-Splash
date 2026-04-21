@@ -5,7 +5,6 @@ public class ShovelScript : MonoBehaviour
 {
     public bool IsInRange;
     private PlayerScript player;
-    public TextMeshProUGUI interact;
     private SeedScript seed;
 
     void Start()
@@ -34,7 +33,6 @@ public class ShovelScript : MonoBehaviour
                     IsInRange = true;
                     GetComponent<SpriteRenderer>().sortingOrder = -1;
                     transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-                    interact.enabled = true;
                 });
             }
         }
@@ -51,16 +49,6 @@ public class ShovelScript : MonoBehaviour
                     
                     GetComponent<SpriteRenderer>().sortingOrder = 2;
                     transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
-                    if (seed.IsInRange)
-                    {
-                        interact.enabled = false;
-                        Debug.Log("NoSeed");
-                    }
-                    else
-                    {
-                        interact.enabled = true;
-                        Debug.Log("Seed");
-                    }
                 });
             }
         }
@@ -73,7 +61,6 @@ public class ShovelScript : MonoBehaviour
             IsInRange = true;
             Debug.Log("Enter");
             transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-            interact.enabled = true;
         }
     }
 
@@ -83,7 +70,6 @@ public class ShovelScript : MonoBehaviour
             IsInRange = false;
             Debug.Log("Exit");
             transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
-            interact.enabled = false;
         }
     }
 }

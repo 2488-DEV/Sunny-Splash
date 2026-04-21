@@ -11,13 +11,15 @@ public class PlayerScript : MonoBehaviour
     public Slider waterBar;
     public int seed;
     public TextMeshProUGUI seedCount;
-
+    public TextMeshProUGUI treeCount;
+    public int tree;
     public float timer = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         waterBar.value = water_gauge;
         seedCount.text = "Seed : " + seed.ToString();
+        treeCount.text = "Tree : " + tree.ToString();
     }
 
     // Update is called once per frame
@@ -32,5 +34,9 @@ public class PlayerScript : MonoBehaviour
     public void UpdateSeedCount()
     {
         seedCount.text = "Seed : " + seed.ToString();
+    }
+    public void UpdateTreeCount()
+    {
+        treeCount.text = "Tree : " + tree.ToString();
     }
 }
