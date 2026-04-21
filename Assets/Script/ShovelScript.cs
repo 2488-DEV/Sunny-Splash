@@ -25,31 +25,43 @@ public class ShovelScript : MonoBehaviour
             transform.position = new Vector3(player.transform.position.x , player.transform.position.y , player.transform.position.z);
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                player.IsShovel = false;
-                IsInRange = true;
-                GetComponent<SpriteRenderer>().sortingOrder = -1;
-                transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-                interact.enabled = true;
+                // Block if already performing an action
+                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
+                PlayerActionManager.Instance.TryStartAction(ActionType.DropItem, () =>
+                {
+                    player.IsShovel = false;
+                    IsInRange = true;
+                    GetComponent<SpriteRenderer>().sortingOrder = -1;
+                    transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
+                    interact.enabled = true;
+                });
             }
         }
         if (IsInRange && Input.GetKeyDown(KeyCode.F))
         {
+            // Block if already performing an action
+            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
             if (player != null)
             {
-                player.IsShovel = true;
-                
-                GetComponent<SpriteRenderer>().sortingOrder = 2;
-                transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
-                if (seed.IsInRange)
+                PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
                 {
-                    interact.enabled = false;
-                    Debug.Log("NoSeed");
-                }
-                else
-                {
-                    interact.enabled = true;
-                    Debug.Log("Seed");
-                }
+                    player.IsShovel = true;
+                    
+                    GetComponent<SpriteRenderer>().sortingOrder = 2;
+                    transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
+                    if (seed.IsInRange)
+                    {
+                        interact.enabled = false;
+                        Debug.Log("NoSeed");
+                    }
+                    else
+                    {
+                        interact.enabled = true;
+                        Debug.Log("Seed");
+                    }
+                });
             }
         }
         

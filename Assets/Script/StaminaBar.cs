@@ -23,6 +23,13 @@ public class StaminaBar : MonoBehaviour
 
     void Update()
     {   
+        // Don't drain movement stamina during actions (player is frozen)
+        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction)
+        {
+            timer += Time.deltaTime;
+            return;
+        }
+
         if (player.IsShovel)
         {
             if ((Input.GetAxisRaw("Vertical") != 0) || (Input.GetAxisRaw("Horizontal") != 0))

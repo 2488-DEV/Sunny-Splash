@@ -24,11 +24,17 @@ public class SeedScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                // Block if already performing an action
+                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
                 if (player != null)
                 {
-                    player.seed += 1;
-                    player.UpdateSeedCount();
-                    gameObject.SetActive(false);
+                    PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
+                    {
+                        player.seed += 1;
+                        player.UpdateSeedCount();
+                        gameObject.SetActive(false);
+                    });
                 }
             }
         }

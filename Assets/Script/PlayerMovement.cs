@@ -15,8 +15,23 @@ public class PlayerMovement : MonoBehaviour
     public bool isInShadow = false;
     public bool isInWater = false;
 
+    private PlayerActionManager actionManager;
+
+    void Start()
+    {
+        actionManager = GetComponent<PlayerActionManager>();
+    }
+
     void Update()
     {
+        // Block all movement and input during actions
+        if (actionManager != null && actionManager.IsPerformingAction)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("IsRunning", false);
+            return;
+        }
+
         // รับ input จากปุ่ม WASD หรือ Arrow keys
         moveInput.x = Input.GetAxisRaw("Horizontal"); //รับค่าแกน X
         moveInput.y = Input.GetAxisRaw("Vertical"); //รับค่าแกน Y
