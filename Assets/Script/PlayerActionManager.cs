@@ -146,7 +146,6 @@ public class PlayerActionManager : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetInteger("ActionType", 0);
             animator.SetBool("IsAction", false);
         }
     }

@@ -3265,6 +3265,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 828018143099026181, guid: 2bd629499f3629d49a43be372bd6f881,
         type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 2051437897}
+    - target: {fileID: 828018143099026181, guid: 2bd629499f3629d49a43be372bd6f881,
+        type: 3}
       propertyPath: currentStage
       value: 2
       objectReference: {fileID: 0}
@@ -3587,6 +3592,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1843273894}
     m_Modifications:
+    - target: {fileID: 828018143099026181, guid: 2bd629499f3629d49a43be372bd6f881,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 2051437897}
     - target: {fileID: 828018143099026181, guid: 2bd629499f3629d49a43be372bd6f881,
         type: 3}
       propertyPath: currentStage
@@ -61548,6 +61558,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f056a5a23f85db489e5429217e44656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2051437897 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 256211945695788286, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 355172629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2065936677
 GameObject:
   m_ObjectHideFlags: 0
