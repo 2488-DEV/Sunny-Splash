@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI seedCount;
     public TextMeshProUGUI treeCount;
     public int tree;
+
+    public bool isLeft;
+    public bool isRight;
     public float timer = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +28,19 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (Input.GetAxisRaw("Horizontal") == -1)
+            { 
+                isLeft = true;
+                isRight = false;
+            }
+            else if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                isLeft = false;
+                isRight = true;
+            }
+        }
     }
     public void UpdateWater()
     {
