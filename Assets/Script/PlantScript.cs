@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlantScript : MonoBehaviour
-{   
+{
     public bool IsInRange;
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
@@ -10,10 +10,9 @@ public class PlantScript : MonoBehaviour
     public AudioClip plantSfx;
     public AudioClip wateringSfx;
 
-    
     private PlayerScript player;
-    
     private StaminaBar staminaBar;
+
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -25,11 +24,10 @@ public class PlantScript : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         if (IsInRange && player != null && Input.GetKeyDown(KeyCode.Space) && staminaBar.slider.value >= 10)
         {
-            // Block if already performing an action
-            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) 
+            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction)
             {
                 UpdateVisuals();
                 return;
@@ -63,18 +61,18 @@ public class PlantScript : MonoBehaviour
                 {
                     PlayerActionManager.Instance.TryStartAction(ActionType.Water, () =>
                     {
+                        // 1. จ่ายค่าน้ำและอัปเดต UI
                         player.water_gauge -= 10;
-                        HandlePlantLogic();
                         player.UpdateWater();
-                        if (player.tree > 0)
-                        {
-                            player.tree -= 1;
-                            player.UpdateTreeCount();
-                        }
+
+                        // 2. เปลี่ยนสถานะต้นไม้เป็น Fresh
+                        HandlePlantLogic();
+
+                        // 3. สั่งลดจำนวนต้นไม้ที่เหลือ (เรียกใช้ฟังก์ชันอัปเกรดใน PlayerScript)
+                        player.DecreaseTree();
                     });
                 }
             }
-            
         }
         UpdateVisuals();
     }
@@ -101,26 +99,24 @@ public class PlantScript : MonoBehaviour
 
     void UpdateVisuals()
     {
-        transform.Find("DeadPlant").gameObject.SetActive(currentStage == PlantState.Dead);
-        transform.Find("DehydratedPlant").gameObject.SetActive(currentStage == PlantState.Dehydrated);
-        transform.Find("FreshPlant").gameObject.SetActive(currentStage == PlantState.Fresh);
+        // ใส่ตัวเช็คเพื่อความปลอดภัย (กัน Error: NullReferenceException)
+        Transform dead = transform.Find("DeadPlant");
+        if (dead != null) dead.gameObject.SetActive(currentStage == PlantState.Dead);
+
+        Transform dehydrated = transform.Find("DehydratedPlant");
+        if (dehydrated != null) dehydrated.gameObject.SetActive(currentStage == PlantState.Dehydrated);
+
+        Transform fresh = transform.Find("FreshPlant");
+        if (fresh != null) fresh.gameObject.SetActive(currentStage == PlantState.Fresh);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            IsInRange = true;
-            Debug.Log("Enter");
-        }
-
+        if (collision.gameObject.CompareTag("Player")) IsInRange = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            IsInRange = false;
-            Debug.Log("Exit");
-        }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) IsInRange = false;
     }
 }
