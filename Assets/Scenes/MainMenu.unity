@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 94230389}
-  clickSfx: {fileID: 8300000, guid: 898f7a810a4eddc41a531b071bf67982, type: 3}
+  clickSfx: {fileID: 8300000, guid: 75f50069af224154a9e20950156b65d1, type: 3}
 --- !u!82 &94230389
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5254,8 +5254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -11.225, y: 0}
-  m_SizeDelta: {x: 128.3765, y: 0}
+  m_AnchoredPosition: {x: -10.339508, y: -0.54030037}
+  m_SizeDelta: {x: 158.9107, y: 72.9438}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964872094
 MonoBehaviour:
@@ -5277,7 +5277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1ca4a275fe6be46b2a13d0ebc1503219, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b5af92575b87497ba7bfae8e982b2f2, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5426,6 +5426,7 @@ MonoBehaviour:
   levelSelectPanel: {fileID: 1225202630}
   myMixer: {fileID: 24100000, guid: c72bfb4c4b8c6714aa30bb9358415468, type: 2}
   buttonSoundScript: {fileID: 94230388}
+  bgmSlider: {fileID: 1328233915}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
