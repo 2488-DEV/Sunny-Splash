@@ -2370,3 +2370,5 @@ MonoBehaviour:
     type: 3}
   shadowColler: {fileID: 471318887721724927, guid: 4a948e93051c0a844bec026ea90b9dab,
     type: 3}
+  playerScript: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+    type: 3}
