@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,6 +102,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -109,12 +122,12 @@ TextureImporter:
       name: tree1_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 240
-        width: 239
-        height: 294
+        x: 39
+        y: 243
+        width: 235
+        height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -132,11 +145,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 317
-        y: 241
+        y: 243
         width: 199
-        height: 278
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,9 +169,9 @@ TextureImporter:
         x: 586
         y: 241
         width: 83
-        height: 122
+        height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,11 +184,77 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tree1_3
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 287
+        width: 235
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fc26299d234fa4a9ebb1f8e1a80968
+      internalID: -1613809610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree1_4
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 286
+        width: 199
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8430d23c482aeaf4cac1dc3d079f18ed
+      internalID: 52902432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree1_5
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 266
+        width: 83
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4fd02b0b9034ae4d918a664c61e7050
+      internalID: 488068457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 69b542c3da337b440a6682e9fd142227
     internalID: 0
     vertices: []
     indices: 
@@ -188,6 +267,9 @@ TextureImporter:
       tree1_0: -2541579827414792756
       tree1_1: 7209657227957792324
       tree1_2: 1119105973310806021
+      tree1_3: -1613809610
+      tree1_4: 52902432
+      tree1_5: 488068457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

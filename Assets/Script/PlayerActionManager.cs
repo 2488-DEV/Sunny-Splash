@@ -82,8 +82,6 @@ public class PlayerActionManager : MonoBehaviour
         // Set animator parameter if available
         if (animator != null)
         {
-            animator.SetInteger("ActionType", (int)action);
-            animator.SetBool("IsAction", true);
         }
 
         Debug.Log($"[ActionManager] Started {action} (duration: {duration}s)");
@@ -146,7 +144,6 @@ public class PlayerActionManager : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetBool("IsAction", false);
         }
     }
 
