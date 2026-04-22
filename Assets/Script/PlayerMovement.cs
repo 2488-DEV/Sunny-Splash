@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,15 +9,33 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public OverHeatBar overHeatBar;
     public SunSystem sunSystem;
+    public StaminaBar staminaBar;
 
     public float speed = 5f;        // ความเร็วตัวละคร
     public float sprint = 3f;
 
     public bool isInShadow = false;
     public bool isInWater = false;
+    public bool WaterWalking = false;
+    public bool isPlayerRunning = false;
+
+    private PlayerActionManager actionManager;
+
+    void Start()
+    {
+        actionManager = GetComponent<PlayerActionManager>();
+    }
 
     void Update()
     {
+        // Block all movement and input during actions
+        if (actionManager != null && actionManager.IsPerformingAction)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("IsRunning", false);
+            return;
+        }
+
         // รับ input จากปุ่ม WASD หรือ Arrow keys
         moveInput.x = Input.GetAxisRaw("Horizontal"); //รับค่าแกน X
         moveInput.y = Input.GetAxisRaw("Vertical"); //รับค่าแกน Y
@@ -24,24 +43,29 @@ public class PlayerMovement : MonoBehaviour
         // ป้องกันเดินเร็วขึ้นตอนเฉียง
         moveInput = moveInput.normalized;
         
-        if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
+        if (Input.GetKey(KeyCode.LeftShift) && staminaBar.slider.value >= 1f) //วิ่ง
         {
             rb.linearVelocity = moveInput * speed* sprint;
+            staminaBar.slider.value -= 0.1f;
+            isPlayerRunning = true;
         }
 
         else //เดิน
         {
             rb.linearVelocity = moveInput * speed;
+            isPlayerRunning = false;
         }
 
         if (moveInput != Vector2.zero) //animation วิ่ง
         {
             animator.SetBool("IsRunning",true);
+            WaterWalking = true;
         }
 
         else //animation เดิน
         {
             animator.SetBool("IsRunning",false);
+            WaterWalking = false;
         }
 
         if (moveInput.x != 0) //flip
@@ -49,11 +73,22 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer.flipX = moveInput.x < 0;
         }
 
-        animator.SetBool("IsSwim", isInWater); //animation ว่ายน้ำ
-
         if (isInWater)
         {
-            rb.linearVelocity = moveInput * (speed * 0.75f);
+            animator.SetBool("IsSwim", isInWater);
+            animator.SetBool("IsSwiming", WaterWalking);
+            rb.linearVelocity = moveInput * (speed * 0.25f);
+
+            if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
+            {
+                rb.linearVelocity = moveInput * speed* sprint *0.4f;
+            }
+        }
+
+        else
+        {
+            animator.SetBool("IsSwim", false);
+            animator.SetBool("IsSwiming", false);
         }
     }
 }

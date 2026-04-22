@@ -5,6 +5,7 @@ public class WaterColler : MonoBehaviour
     public OverHeatBar overHeatBar;
     public PlayerMovement playerMovement;
     public ShadowColler shadowColler;
+    public PlayerScript playerScript;
 
     private float timer = 0f;
 
@@ -16,6 +17,7 @@ public class WaterColler : MonoBehaviour
         {
             isPlayerInside = true;
             playerMovement.isInWater = true;
+            playerScript.water_gauge +=30;
         }
     }
 
@@ -38,7 +40,7 @@ public class WaterColler : MonoBehaviour
 
             if (timer >= 1f)
             {
-                overHeatBar.slider.value -= 2f; // ลดทีละ 2
+                overHeatBar.slider.value -= 1f; // ลดทีละ 2
                 timer = 0f;
             }
         }

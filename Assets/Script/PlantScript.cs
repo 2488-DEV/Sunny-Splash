@@ -5,11 +5,15 @@ public class PlantScript : MonoBehaviour
     public bool IsInRange;
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
+    public AudioSource source;
+    public AudioClip digSfx;
+    public AudioClip plantSfx;
+    public AudioClip wateringSfx;
 
+    
     private PlayerScript player;
     
     private StaminaBar staminaBar;
-
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -24,36 +28,50 @@ public class PlantScript : MonoBehaviour
     {   
         if (IsInRange && player != null && Input.GetKeyDown(KeyCode.Space) && staminaBar.slider.value >= 10)
         {
+            // Block if already performing an action
+            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) 
+            {
+                UpdateVisuals();
+                return;
+            }
+
             if (currentStage == PlantState.Dead)
             {
                 if (player.IsShovel)
                 {
-                    HandlePlantLogic();
+                    PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () =>
+                    {
+                        HandlePlantLogic();
+                    });
                 }
             }
             else if (currentStage == PlantState.Empty)
             {
                 if (!player.IsShovel && player.seed >= 1)
                 {
-                    player.seed -= 1;
-                    player.UpdateSeedCount();
-                    HandlePlantLogic();
+                    PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () =>
+                    {
+                        player.seed -= 1;
+                        player.UpdateSeedCount();
+                        HandlePlantLogic();
+                    });
                 }
             }
             else if (currentStage == PlantState.Dehydrated)
             {
                 if (!player.IsShovel && player.water_gauge >= 10)
                 {
-                    player.water_gauge -= 10;
-                    HandlePlantLogic();
-                    player.UpdateWater();
-                }
-            }
-            else if (currentStage == PlantState.Fresh)
-            {
-                if (!player.IsShovel)
-                {
-                    HandlePlantLogic();
+                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () =>
+                    {
+                        player.water_gauge -= 10;
+                        HandlePlantLogic();
+                        player.UpdateWater();
+                        if (player.tree > 0)
+                        {
+                            player.tree -= 1;
+                            player.UpdateTreeCount();
+                        }
+                    });
                 }
             }
             
@@ -64,11 +82,20 @@ public class PlantScript : MonoBehaviour
     void HandlePlantLogic()
     {
         if (currentStage == PlantState.Dead)
+        {
             currentStage = PlantState.Empty;
+            source.PlayOneShot(digSfx);
+        }
         else if (currentStage == PlantState.Empty)
+        {
             currentStage = PlantState.Dehydrated;
+            source.PlayOneShot(plantSfx);
+        }
         else if (currentStage == PlantState.Dehydrated)
+        {
             currentStage = PlantState.Fresh;
+            source.PlayOneShot(wateringSfx);
+        }
         staminaBar.slider.value -= 10;
     }
 
