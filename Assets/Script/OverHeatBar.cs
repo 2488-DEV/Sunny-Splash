@@ -7,6 +7,7 @@ public class OverHeatBar : MonoBehaviour
     public WaterColler waterColler;
     public PlayerMovement playerMovement;
     public SunSystem sunSystem;
+    public BurningZone burningZone;
 
     public Slider slider;
     public Image fillImage;
@@ -32,6 +33,10 @@ public class OverHeatBar : MonoBehaviour
             if (playerMovement.isInWater)
             {
             slider.value -= 3f; // น้ำลดเร็ว
+            }
+            else if (burningZone.inBuring == true) //แดดโซน
+            {
+            slider.value += 10f; 
             }
             else if (playerMovement.isInShadow)
             {
