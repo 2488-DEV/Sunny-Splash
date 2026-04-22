@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI; // เพิ่มตัวนี้มาเพื่อคุม Slider
 
 public class MainMenuControl : MonoBehaviour
 {
@@ -12,6 +13,17 @@ public class MainMenuControl : MonoBehaviour
     [Header("Audio")]
     public AudioMixer myMixer;
     public ButtonSound buttonSoundScript;
+    public Slider bgmSlider; // เพิ่มตัวนี้เพื่อตั้งค่าเริ่มต้นตอนเปิดเกม
+
+    void Start()
+    {
+        // โหลดค่าจาก "BGMVolume" (ชื่อเดียวกับใน PauseManager)
+        float savedVolume = PlayerPrefs.GetFloat("BGMVolume", 0.75f);
+
+        if (bgmSlider != null) bgmSlider.value = savedVolume;
+
+        SetVolume(savedVolume); // สั่งให้ Mixer ปรับตามค่าที่โหลดมา
+    }
 
     void Update()
     {
@@ -19,16 +31,14 @@ public class MainMenuControl : MonoBehaviour
         {
             if (buttonSoundScript != null) buttonSoundScript.PlayClick();
 
-            // 1. ถ้าหน้า Setting เปิดอยู่แล้ว -> ให้ปิดทุกอย่าง (รวมถึงตัวเอง)
             if (settingPanel.activeSelf)
             {
                 CloseAllPanels();
             }
-            // 2. ถ้าหน้าอื่น (Level/Info/HowTo) เปิดอยู่ หรือไม่มีอะไรเปิดเลย -> ให้ปิดหน้าอื่นแล้วเปิด Setting ทันที
             else
             {
-                CloseAllPanels(); // เคลียร์หน้าอื่นทิ้งก่อน
-                OpenSetting();    // เปิด Setting ขึ้นมา
+                CloseAllPanels();
+                OpenSetting();
             }
         }
     }
@@ -55,7 +65,15 @@ public class MainMenuControl : MonoBehaviour
 
     public void SetVolume(float sliderValue)
     {
-        if (sliderValue <= 0) sliderValue = 0.0001f;
+        if (sliderValue <= 0.0001f) sliderValue = 0.0001f;
+
+        // 1. ปรับที่ Mixer (สำหรับใน Main Menu)
         myMixer.SetFloat("MusicVol", Mathf.Log10(sliderValue) * 20);
+
+        // 2. ปรับที่ AudioListener (เพื่อให้ PauseManager ใน Scene อื่นๆ ทำงานตรงกัน)
+        AudioListener.volume = sliderValue;
+
+        // 3. บันทึกค่าลงเครื่องโดยใช้ชื่อ "BGMVolume" (ชื่อเดียวกับใน PauseManager)
+        PlayerPrefs.SetFloat("BGMVolume", sliderValue);
     }
 }
