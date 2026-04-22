@@ -313,6 +313,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8290381526628737200, guid: 29bf3beb68489444c8ed7b5928244157,
+        type: 3}
+      propertyPath: burningZone
+      value: 
+      objectReference: {fileID: 7844149545447007038, guid: bd3f8ae8edbcc5d488aefdc262af4960,
+        type: 3}
+    - target: {fileID: 8585500392340950116, guid: 29bf3beb68489444c8ed7b5928244157,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585500392340950116, guid: 29bf3beb68489444c8ed7b5928244157,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8585500392340950116, guid: 29bf3beb68489444c8ed7b5928244157,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -605,6 +621,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6126940088365771841}
     m_Modifications:
+    - target: {fileID: 418825320362371632, guid: d0f623ecdac949943849b9479b9f772a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418825320362371632, guid: d0f623ecdac949943849b9479b9f772a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1414291076046362309, guid: d0f623ecdac949943849b9479b9f772a,
         type: 3}
       propertyPath: m_Name

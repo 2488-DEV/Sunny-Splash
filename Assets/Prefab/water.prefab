@@ -2364,6 +2364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f2e1641a768fd4f960afd8d0f1f339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overHeatBar: {fileID: 0}
-  playerMovement: {fileID: 0}
-  shadowColler: {fileID: 0}
+  overHeatBar: {fileID: 8290381526628737200, guid: 29bf3beb68489444c8ed7b5928244157,
+    type: 3}
+  playerMovement: {fileID: 2304357174661198791, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+    type: 3}
+  shadowColler: {fileID: 471318887721724927, guid: 4a948e93051c0a844bec026ea90b9dab,
+    type: 3}

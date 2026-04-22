@@ -102,12 +102,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7634cec474832d944bc4850a1c5ad8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterColler: {fileID: 0}
-  playerMovement: {fileID: 0}
-  sunSystem: {fileID: 0}
+  waterColler: {fileID: 7391076094074793340, guid: 4f10e4ce3dd0be449b608aea8d346015,
+    type: 3}
+  playerMovement: {fileID: 2304357174661198791, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+    type: 3}
+  sunSystem: {fileID: 1875578503568760510, guid: b54ac8b829afc2648b9817452b69c7cd,
+    type: 3}
+  burningZone: {fileID: 7844149545447007038, guid: bd3f8ae8edbcc5d488aefdc262af4960,
+    type: 3}
   slider: {fileID: 8849485739830261973}
   fillImage: {fileID: 4557566034855663366}
-  player: {fileID: 0}
+  player: {fileID: 2223876694551831306, guid: 66a9e58eb54c5c84eb0e7445388757e6, type: 3}
   maxValue: 100
   timer: 0
 --- !u!1 &2982697649633125270
