@@ -190,7 +190,8 @@ MonoBehaviour:
     type: 3}
   sunSystem: {fileID: 1875578503568760510, guid: b54ac8b829afc2648b9817452b69c7cd,
     type: 3}
-  staminaBar: {fileID: 0}
+  staminaBar: {fileID: 6118169575208517400, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+    type: 3}
   speed: 5
   sprint: 3
   isInShadow: 0

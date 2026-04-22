@@ -352,6 +352,11 @@ PrefabInstance:
       propertyPath: treeCount
       value: 
       objectReference: {fileID: 632011255}
+    - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+        type: 3}
+      propertyPath: water_gauge
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6757852922189398890, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: m_LocalPosition.x

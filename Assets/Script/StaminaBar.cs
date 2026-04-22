@@ -7,7 +7,8 @@ public class StaminaBar : MonoBehaviour
     public Slider slider;
     public float maxValue = 100f;
     public float timer = 0f;
-    private PlayerScript player; 
+    private PlayerScript player;
+    public PlayerMovement playerMovement;
 
     void Start()
     {
@@ -37,9 +38,9 @@ public class StaminaBar : MonoBehaviour
                 slider.value -= 0.025f;
             }
         }
-        else if (timer >= 1f)
+        else if (timer >= 2f && !playerMovement.isPlayerRunning)
         {
-            slider.value += 2f;
+            slider.value += 1.5f;
             timer = 0f;
         }
         

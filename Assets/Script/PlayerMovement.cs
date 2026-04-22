@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isInShadow = false;
     public bool isInWater = false;
     public bool WaterWalking = false;
+    public bool isPlayerRunning = false;
 
     private PlayerActionManager actionManager;
 
@@ -42,15 +43,17 @@ public class PlayerMovement : MonoBehaviour
         // ป้องกันเดินเร็วขึ้นตอนเฉียง
         moveInput = moveInput.normalized;
         
-        if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
+        if (Input.GetKey(KeyCode.LeftShift) && staminaBar.slider.value >= 1f) //วิ่ง
         {
             rb.linearVelocity = moveInput * speed* sprint;
             staminaBar.slider.value -= 0.1f;
+            isPlayerRunning = true;
         }
 
         else //เดิน
         {
             rb.linearVelocity = moveInput * speed;
+            isPlayerRunning = false;
         }
 
         if (moveInput != Vector2.zero) //animation วิ่ง
