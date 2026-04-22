@@ -5,6 +5,7 @@ public class WaterColler : MonoBehaviour
     public OverHeatBar overHeatBar;
     public PlayerMovement playerMovement;
     public ShadowColler shadowColler;
+    public PlayerScript playerScript;
 
     private float timer = 0f;
 
@@ -16,6 +17,7 @@ public class WaterColler : MonoBehaviour
         {
             isPlayerInside = true;
             playerMovement.isInWater = true;
+            playerScript.water_gauge +=30;
         }
     }
 
