@@ -20,20 +20,25 @@ public class ShovelScript : MonoBehaviour
     void Update()
     {   
         if (player.IsShovel)
-        {
-            transform.position = new Vector3(player.transform.position.x , player.transform.position.y , player.transform.position.z);
+        {   
+            if (player.isLeft)
+            {
+                transform.position = new Vector3(player.transform.position.x - 0.8f , player.transform.position.y - 0.475f , player.transform.position.z);
+                transform.rotation = Quaternion.Euler(0, 0, -19f);
+            }
+            else if (player.isRight)
+            {
+                transform.position = new Vector3(player.transform.position.x + 0.8f , player.transform.position.y - 0.475f , player.transform.position.z);
+                transform.rotation = Quaternion.Euler(0, 0, 100f);
+            }
+            
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                // Block if already performing an action
-                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
 
-                PlayerActionManager.Instance.TryStartAction(ActionType.DropItem, () =>
-                {
-                    player.IsShovel = false;
-                    IsInRange = true;
-                    GetComponent<SpriteRenderer>().sortingOrder = -1;
-                    transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-                });
+                player.IsShovel = false;
+                IsInRange = true;
+                GetComponent<SpriteRenderer>().sortingOrder = 0;
+                transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
             }
         }
         if (IsInRange && Input.GetKeyDown(KeyCode.F))
@@ -41,12 +46,11 @@ public class ShovelScript : MonoBehaviour
             // Block if already performing an action
             if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
 
-            if (player != null)
+            if (player != null && !player.IsShovel)
             {
                 PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
                 {
                     player.IsShovel = true;
-                    
                     GetComponent<SpriteRenderer>().sortingOrder = 2;
                     transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
                 });
