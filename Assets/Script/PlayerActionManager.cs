@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+// --- 1. ประกาศประเภท Action ไว้ตรงนี้ (Enum) ---
 public enum ActionType
 {
     None,
@@ -10,112 +11,75 @@ public enum ActionType
     Water,
     Harvest,
     PickUpItem,
-    DropItem
+    DropItem,
+    RefillWater // ตัวที่เราเพิ่มเพื่อดูดน้ำกวัก!
 }
 
+// --- 2. ตัวจัดการ Action (Class) ---
 public class PlayerActionManager : MonoBehaviour
 {
     public static PlayerActionManager Instance { get; private set; }
 
-    // Current action state (read-only from outside)
     public ActionType CurrentAction { get; private set; } = ActionType.None;
     public bool IsPerformingAction => CurrentAction != ActionType.None;
-
-    // Progress (0 to 1) of the current action, useful for UI progress bars
     public float ActionProgress { get; private set; } = 0f;
 
-    // Duration settings (editable in Inspector)
-    [Header("Action Durations (seconds)")]
+    [Header("Action Durations (Seconds)")]
     public float digDuration = 1.5f;
     public float plantSeedDuration = 1.0f;
     public float waterDuration = 1.0f;
     public float harvestDuration = 1.2f;
-    public float pickUpDuration = 0.5f;
-    public float dropDuration = 0.5f;
+    public float refillWaterDuration = 1.2f;
 
-    // Events for external systems (UI, audio, animation)
     public event Action<ActionType> OnActionStarted;
     public event Action<ActionType> OnActionCompleted;
     public event Action<ActionType> OnActionCancelled;
 
-    // Reference to animator for action animation triggers
     private Animator animator;
     private Coroutine activeCoroutine;
 
     void Awake()
     {
-        // Singleton pattern
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
-
         animator = GetComponent<Animator>();
     }
 
-    /// <summary>
-    /// Attempt to start an action. Returns false if already performing another action.
-    /// The onComplete callback fires ONLY when the action finishes successfully (not cancelled).
-    /// </summary>
     public bool TryStartAction(ActionType action, Action onComplete = null)
     {
-        // Reject if already busy
-        if (IsPerformingAction)
-        {
-            Debug.Log($"[ActionManager] Rejected {action} — already performing {CurrentAction}");
-            return false;
-        }
-
-        // Reject None action
-        if (action == ActionType.None)
-        {
-            Debug.LogWarning("[ActionManager] Cannot start ActionType.None");
-            return false;
-        }
+        if (IsPerformingAction || action == ActionType.None) return false;
 
         float duration = GetDuration(action);
         CurrentAction = action;
         ActionProgress = 0f;
 
-        // Set animator parameter if available
+        // ส่ง Trigger ไปที่ Animator อัตโนมัติ (ชื่อต้องตรงกับใน Enum นะนาย)
         if (animator != null)
         {
+            animator.SetTrigger(action.ToString());
         }
 
-        Debug.Log($"[ActionManager] Started {action} (duration: {duration}s)");
         OnActionStarted?.Invoke(action);
-
         activeCoroutine = StartCoroutine(PerformAction(duration, action, onComplete));
         return true;
     }
 
-    /// <summary>
-    /// Cancel the current action immediately. The onComplete callback will NOT fire.
-    /// </summary>
-    public void CancelAction()
+    public void CancelCurrentAction()
     {
-        if (!IsPerformingAction) return;
-
-        ActionType cancelled = CurrentAction;
-
         if (activeCoroutine != null)
         {
             StopCoroutine(activeCoroutine);
             activeCoroutine = null;
+            ActionType cancelledAction = CurrentAction;
+            ResetState();
+            OnActionCancelled?.Invoke(cancelledAction);
+            Debug.Log("Action " + cancelledAction + " ถูกยกเลิกกวัก!");
         }
-
-        ResetState();
-
-        Debug.Log($"[ActionManager] Cancelled {cancelled}");
-        OnActionCancelled?.Invoke(cancelled);
     }
 
     private IEnumerator PerformAction(float duration, ActionType action, Action onComplete)
     {
         float elapsed = 0f;
-
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -123,17 +87,9 @@ public class PlayerActionManager : MonoBehaviour
             yield return null;
         }
 
-        // Action completed successfully
-        ActionProgress = 1f;
         activeCoroutine = null;
-
-        // Fire the completion callback BEFORE resetting state
-        // so the callback can still read CurrentAction if needed
         onComplete?.Invoke();
-
-        Debug.Log($"[ActionManager] Completed {action}");
         OnActionCompleted?.Invoke(action);
-
         ResetState();
     }
 
@@ -141,23 +97,18 @@ public class PlayerActionManager : MonoBehaviour
     {
         CurrentAction = ActionType.None;
         ActionProgress = 0f;
-
-        if (animator != null)
-        {
-        }
     }
 
     private float GetDuration(ActionType action)
     {
         switch (action)
         {
-            case ActionType.Dig:         return digDuration;
-            case ActionType.PlantSeed:   return plantSeedDuration;
-            case ActionType.Water:       return waterDuration;
-            case ActionType.Harvest:     return harvestDuration;
-            case ActionType.PickUpItem:  return pickUpDuration;
-            case ActionType.DropItem:    return dropDuration;
-            default:                     return 0f;
+            case ActionType.Dig: return digDuration;
+            case ActionType.PlantSeed: return plantSeedDuration;
+            case ActionType.Water: return waterDuration;
+            case ActionType.Harvest: return harvestDuration;
+            case ActionType.RefillWater: return refillWaterDuration;
+            default: return 0.5f;
         }
     }
 }

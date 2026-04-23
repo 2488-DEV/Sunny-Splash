@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public SunSystem sunSystem;
     public StaminaBar staminaBar;
 
-    public float speed = 5f;        // ความเร็วตัวละคร
+    public float speed = 5f;
     public float sprint = 3f;
 
     public bool isInShadow = false;
@@ -28,63 +27,60 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Block all movement and input during actions
         if (actionManager != null && actionManager.IsPerformingAction)
         {
             rb.linearVelocity = Vector2.zero;
             animator.SetBool("IsRunning", false);
+            isPlayerRunning = false; // หยุดวิ่งทันทีเมื่อทำ Action
             return;
         }
 
-        // รับ input จากปุ่ม WASD หรือ Arrow keys
-        moveInput.x = Input.GetAxisRaw("Horizontal"); //รับค่าแกน X
-        moveInput.y = Input.GetAxisRaw("Vertical"); //รับค่าแกน Y
-
-        // ป้องกันเดินเร็วขึ้นตอนเฉียง
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput = moveInput.normalized;
-        
-        if (Input.GetKey(KeyCode.LeftShift) && staminaBar.slider.value >= 1f) //วิ่ง
-        {
-            rb.linearVelocity = moveInput * speed* sprint;
-            staminaBar.slider.value -= 0.1f;
-            isPlayerRunning = true;
-        }
 
-        else //เดิน
+        // --- ส่วนที่ปรับปรุง: เช็ควิ่งและ Stamina ---
+        // เปลี่ยนมาเช็ค currentStamina แทน slider.value เพื่อความเป๊ะกวัก!
+        bool hasStamina = (staminaBar != null && staminaBar.currentStamina >= 1f);
+
+        if (Input.GetKey(KeyCode.LeftShift) && hasStamina && moveInput != Vector2.zero)
+        {
+            rb.linearVelocity = moveInput * speed * sprint;
+            isPlayerRunning = true;
+            // เราลบบรรทัดหักค่าตรงนี้ออก เพราะเราจะไปหักใน StaminaBar.cs แทนเพื่อให้หลอดนิ่มกวัก!
+        }
+        else
         {
             rb.linearVelocity = moveInput * speed;
             isPlayerRunning = false;
         }
 
-        if (moveInput != Vector2.zero) //animation วิ่ง
+        // Animation Logic
+        if (moveInput != Vector2.zero)
         {
-            animator.SetBool("IsRunning",true);
+            animator.SetBool("IsRunning", true);
             WaterWalking = true;
         }
-
-        else //animation เดิน
+        else
         {
-            animator.SetBool("IsRunning",false);
+            animator.SetBool("IsRunning", false);
             WaterWalking = false;
         }
 
-        if (moveInput.x != 0) //flip
+        if (moveInput.x != 0)
         {
-        spriteRenderer.flipX = moveInput.x < 0;
+            spriteRenderer.flipX = moveInput.x < 0;
         }
 
+        // Water Logic
         if (isInWater)
         {
-            animator.SetBool("IsSwim", isInWater);
+            animator.SetBool("IsSwim", true);
             animator.SetBool("IsSwiming", WaterWalking);
-            rb.linearVelocity = moveInput * (speed * 0.25f);
 
-            if (Input.GetKey(KeyCode.LeftShift)) //วิ่ง
-            {
-                rb.linearVelocity = moveInput * speed* sprint *0.4f;
-            }
+            float waterSpeedMult = isPlayerRunning ? 0.4f : 0.25f;
+            rb.linearVelocity = moveInput * (speed * (isPlayerRunning ? sprint : 1f)) * waterSpeedMult;
         }
-
         else
         {
             animator.SetBool("IsSwim", false);

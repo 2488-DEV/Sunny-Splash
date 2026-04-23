@@ -12,6 +12,7 @@ public class PlantScript : MonoBehaviour
 
     private PlayerScript player;
     private StaminaBar staminaBar;
+    private WaterRefillSystem waterSystem;
 
     void Start()
     {
@@ -19,104 +20,107 @@ public class PlantScript : MonoBehaviour
         if (playerObj != null)
         {
             player = playerObj.GetComponent<PlayerScript>();
+            waterSystem = playerObj.GetComponent<WaterRefillSystem>();
         }
         staminaBar = FindFirstObjectByType<StaminaBar>();
     }
 
     void Update()
     {
-        if (IsInRange && player != null && Input.GetKeyDown(KeyCode.Space) && staminaBar.slider.value >= 10)
+        if (!IsInRange || player == null || PlayerActionManager.Instance.IsPerformingAction)
         {
-            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction)
+            UpdateVisuals();
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // --- แก้จุดเช็ค Stamina ให้เช็คจากตัวแปร currentStamina แทนกวัก ---
+            if (staminaBar != null && staminaBar.currentStamina < 10f)
             {
-                UpdateVisuals();
+                Debug.Log("เหนื่อยแล้วกวัก! พักแป๊บนาย");
                 return;
             }
 
-            if (currentStage == PlantState.Dead)
+            if (currentStage == PlantState.Dead && player.IsShovel)
             {
-                if (player.IsShovel)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () =>
-                    {
-                        HandlePlantLogic();
-                    });
-                }
+                PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
+                    HandlePlantLogic(ActionType.Dig);
+                });
             }
-            else if (currentStage == PlantState.Empty)
+            else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
             {
-                if (!player.IsShovel && player.seed >= 1)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () =>
-                    {
-                        player.seed -= 1;
-                        player.UpdateSeedCount();
-                        HandlePlantLogic();
-                    });
-                }
+                PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () => {
+                    player.seed -= 1;
+                    player.UpdateSeedCount();
+                    HandlePlantLogic(ActionType.PlantSeed);
+                });
             }
-            else if (currentStage == PlantState.Dehydrated)
+            else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
             {
-                if (!player.IsShovel && player.water_gauge >= 10)
+                if (waterSystem != null && waterSystem.currentWater >= 33f)
                 {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () =>
-                    {
-                        // 1. จ่ายค่าน้ำและอัปเดต UI
-                        player.water_gauge -= 10;
-                        player.UpdateWater();
-
-                        // 2. เปลี่ยนสถานะต้นไม้เป็น Fresh
-                        HandlePlantLogic();
-
-                        // 3. สั่งลดจำนวนต้นไม้ที่เหลือ (เรียกใช้ฟังก์ชันอัปเกรดใน PlayerScript)
+                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () => {
+                        waterSystem.UseWaterForPlanting();
+                        HandlePlantLogic(ActionType.Water);
                         player.DecreaseTree();
                     });
+                }
+                else
+                {
+                    Debug.Log("น้ำไม่พอรดแล้วนาย! ไปเติมน้ำด่วนกวัก!");
                 }
             }
         }
         UpdateVisuals();
     }
 
-    void HandlePlantLogic()
+    void HandlePlantLogic(ActionType action)
     {
-        if (currentStage == PlantState.Dead)
+        switch (action)
         {
-            currentStage = PlantState.Empty;
-            source.PlayOneShot(digSfx);
+            case ActionType.Dig:
+                currentStage = PlantState.Empty;
+                source.PlayOneShot(digSfx);
+                break;
+            case ActionType.PlantSeed:
+                currentStage = PlantState.Dehydrated;
+                source.PlayOneShot(plantSfx);
+                break;
+            case ActionType.Water:
+                currentStage = PlantState.Fresh;
+                source.PlayOneShot(wateringSfx);
+                break;
         }
-        else if (currentStage == PlantState.Empty)
+
+        // --- จุดสำคัญ: เปลี่ยนจากหัก slider.value มาเป็นหัก currentStamina ---
+        // วิธีนี้จะทำให้หลอดค่อยๆ วิ่งลดลงอย่างนิ่มนวล ไม่วาร์ปกวัก!
+        if (staminaBar != null)
         {
-            currentStage = PlantState.Dehydrated;
-            source.PlayOneShot(plantSfx);
+            staminaBar.currentStamina -= 10f;
         }
-        else if (currentStage == PlantState.Dehydrated)
-        {
-            currentStage = PlantState.Fresh;
-            source.PlayOneShot(wateringSfx);
-        }
-        staminaBar.slider.value -= 10;
     }
 
     void UpdateVisuals()
     {
-        // ใส่ตัวเช็คเพื่อความปลอดภัย (กัน Error: NullReferenceException)
-        Transform dead = transform.Find("DeadPlant");
-        if (dead != null) dead.gameObject.SetActive(currentStage == PlantState.Dead);
+        SetPlantActive("DeadPlant", currentStage == PlantState.Dead);
+        SetPlantActive("DehydratedPlant", currentStage == PlantState.Dehydrated);
+        SetPlantActive("FreshPlant", currentStage == PlantState.Fresh);
+    }
 
-        Transform dehydrated = transform.Find("DehydratedPlant");
-        if (dehydrated != null) dehydrated.gameObject.SetActive(currentStage == PlantState.Dehydrated);
-
-        Transform fresh = transform.Find("FreshPlant");
-        if (fresh != null) fresh.gameObject.SetActive(currentStage == PlantState.Fresh);
+    void SetPlantActive(string name, bool isActive)
+    {
+        Transform t = transform.Find(name);
+        if (t != null) t.gameObject.SetActive(isActive);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) IsInRange = true;
+        if (collision.CompareTag("Player")) IsInRange = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) IsInRange = false;
+        if (collision.CompareTag("Player")) IsInRange = false;
     }
 }

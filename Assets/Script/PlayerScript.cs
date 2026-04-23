@@ -7,9 +7,7 @@ public class PlayerScript : MonoBehaviour
     public bool IsShovel;
 
     [Header("Status Settings")]
-    public int water_gauge = 100;
-    public Slider waterBar;
-
+    // เราจะไม่ใช้ water_gauge ตรงๆ ในนี้แล้ว แต่จะอ้างอิงไปที่ WaterRefillSystem แทน
     public int seed;
     public TextMeshProUGUI seedCount;
 
@@ -17,16 +15,18 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI treeCount;
 
     [Header("Victory Settings")]
-    public GameObject victoryPanel; // ลาก VictoryPanel มาใส่ในช่องนี้ที่ Inspector
+    public GameObject victoryPanel;
 
     [Header("Movement State")]
     public bool isLeft;
     public bool isRight;
-    public float timer = 0f;
+
+    private WaterRefillSystem waterSystem; // ตัวแปรอ้างอิงระบบน้ำใหม่
 
     void Start()
     {
-        // ตรวจสอบว่าลืมเปิดทิ้งไว้หรือไม่ ถ้าลืมให้สั่งปิดก่อนเริ่มเกม
+        waterSystem = GetComponent<WaterRefillSystem>();
+
         if (victoryPanel != null)
         {
             victoryPanel.SetActive(false);
@@ -63,27 +63,18 @@ public class PlayerScript : MonoBehaviour
     {
         if (victoryPanel != null)
         {
-            victoryPanel.SetActive(true); // สั่งเปิดหน้าต่าง Victory
-
-            // ปลดล็อคเมาส์ให้กดปุ่มได้ (ถ้าเกมมีการล็อคเมาส์ไว้)
+            victoryPanel.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-
-            // หยุดเวลาในเกมเพื่อให้ผู้เล่นขยับตัวไม่ได้ (ทางเลือก)
-            // Time.timeScale = 0f; 
+            // Time.timeScale = 0f; // ถ้าอยากให้เกมหยุดนิ่งตอนชนะ ให้ติ๊กออกครับ
         }
     }
 
     public void RefreshAllUI()
     {
-        UpdateWater();
         UpdateSeedCount();
         UpdateTreeCount();
-    }
-
-    public void UpdateWater()
-    {
-        if (waterBar != null) waterBar.value = water_gauge;
+        // ส่วนของ Water จะถูกจัดการโดยอัตโนมัติในสคริปต์ WaterRefillSystem
     }
 
     public void UpdateSeedCount()
@@ -95,4 +86,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (treeCount != null) treeCount.text = "Remaining : " + tree;
     }
+
+    // ลบ UpdateWater() เก่าออก เพราะเราใช้ระบบ Smooth ใน WaterRefillSystem แล้วครับ
 }
