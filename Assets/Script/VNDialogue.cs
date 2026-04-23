@@ -18,25 +18,47 @@ public class VNDialogue : MonoBehaviour
     public string[] sentences;
     public float typingSpeed = 0.04f;
 
+    [Header("Trigger Settings")]
+    public bool playOnStart = false;
+    private bool hasPlayed = false;
+    private Coroutine typingCoroutine;
+
     private int index;
     private bool isTyping;
 
     void Start()
     {
+        dialogueBox.SetActive(false);
+        isTyping = false;
+        index = 0;
+
+        if (playOnStart)
+        {
+            StartConversation();
+        }
+    }
+
+    // --- ฟังก์ชันใหม่สำหรับรับข้อมูลจากสคริปต์ DialogueTrigger (บ่อน้ำ) ---
+    public void StartTriggerDialogue(string name, string[] newSentences)
+    {
+        nameText.text = name;
+        sentences = newSentences;
+
+        hasPlayed = true;
+        index = 0;
         dialogueBox.SetActive(true);
-        StartCoroutine(TypeText(sentences[index]));
+
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        typingCoroutine = StartCoroutine(TypeText(sentences[index]));
     }
 
     void Update()
     {
-        // แก้ไขตรงนี้: ลบ Input.GetMouseButtonDown(0) ออก เหลือแค่ Space
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (dialogueBox.activeInHierarchy && Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
             {
-                StopAllCoroutines();
-                contentText.text = sentences[index];
-                isTyping = false;
+                FinishLineImmediately();
             }
             else
             {
@@ -49,27 +71,56 @@ public class VNDialogue : MonoBehaviour
         }
     }
 
+    // ใช้สำหรับ Trigger ภายในตัวเอง (ถ้ามี)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !hasPlayed && !dialogueBox.activeInHierarchy)
+        {
+            StartConversation();
+            if (GetComponent<BoxCollider2D>() != null)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
+    }
+
+    void StartConversation()
+    {
+        hasPlayed = true;
+        index = 0;
+        dialogueBox.SetActive(true);
+
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        typingCoroutine = StartCoroutine(TypeText(sentences[index]));
+    }
+
     IEnumerator TypeText(string line)
     {
         isTyping = true;
         contentText.text = "";
 
-        for (int i = 0; i < line.Length; i++)
+        foreach (char letter in line.ToCharArray())
         {
-            contentText.text += line[i];
+            if (!dialogueBox.activeInHierarchy) yield break;
 
-            if (line[i] != ' ' && typingSound != null && audioSource != null)
+            contentText.text += letter;
+
+            if (letter != ' ' && typingSound != null && audioSource != null)
             {
-                if (i % 2 == 0 && !audioSource.isPlaying)
+                if (!audioSource.isPlaying)
                 {
-                    audioSource.clip = typingSound;
-                    audioSource.Play();
+                    audioSource.PlayOneShot(typingSound);
                 }
             }
-
             yield return new WaitForSeconds(typingSpeed);
         }
+        isTyping = false;
+    }
 
+    void FinishLineImmediately()
+    {
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        contentText.text = sentences[index];
         isTyping = false;
     }
 
@@ -78,7 +129,8 @@ public class VNDialogue : MonoBehaviour
         if (index < sentences.Length - 1)
         {
             index++;
-            StartCoroutine(TypeText(sentences[index]));
+            if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+            typingCoroutine = StartCoroutine(TypeText(sentences[index]));
         }
         else
         {

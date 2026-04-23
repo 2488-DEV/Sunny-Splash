@@ -1,4 +1,3 @@
-using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,51 +6,86 @@ public class PlayerScript : MonoBehaviour
 {
     public bool IsShovel;
 
-    public int water_gauge = 100;
-    public Slider waterBar;
+    [Header("Status Settings")]
+    // เราจะไม่ใช้ water_gauge ตรงๆ ในนี้แล้ว แต่จะอ้างอิงไปที่ WaterRefillSystem แทน
     public int seed;
     public TextMeshProUGUI seedCount;
-    public TextMeshProUGUI treeCount;
-    public int tree;
 
+    public int tree;
+    public TextMeshProUGUI treeCount;
+
+    [Header("Victory Settings")]
+    public GameObject victoryPanel;
+
+    [Header("Movement State")]
     public bool isLeft;
     public bool isRight;
-    public float timer = 0f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private WaterRefillSystem waterSystem; // ตัวแปรอ้างอิงระบบน้ำใหม่
+
     void Start()
     {
-        waterBar.value = water_gauge;
-        seedCount.text = "Seed : " + seed.ToString();
-        treeCount.text = "Tree : " + tree.ToString();
+        waterSystem = GetComponent<WaterRefillSystem>();
+
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(false);
+        }
+
+        RefreshAllUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        float move = Input.GetAxisRaw("Horizontal");
+        if (move != 0)
         {
-            if (Input.GetAxisRaw("Horizontal") == -1)
-            { 
-                isLeft = true;
-                isRight = false;
-            }
-            else if (Input.GetAxisRaw("Horizontal") == 1)
+            isLeft = (move == -1);
+            isRight = (move == 1);
+        }
+    }
+
+    public void DecreaseTree()
+    {
+        if (tree > 0)
+        {
+            tree -= 1;
+            UpdateTreeCount();
+
+            if (tree <= 0)
             {
-                isLeft = false;
-                isRight = true;
+                WinGame();
             }
         }
     }
-    public void UpdateWater()
+
+    void WinGame()
     {
-        waterBar.value = water_gauge;
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            // Time.timeScale = 0f; // ถ้าอยากให้เกมหยุดนิ่งตอนชนะ ให้ติ๊กออกครับ
+        }
     }
+
+    public void RefreshAllUI()
+    {
+        UpdateSeedCount();
+        UpdateTreeCount();
+        // ส่วนของ Water จะถูกจัดการโดยอัตโนมัติในสคริปต์ WaterRefillSystem
+    }
+
     public void UpdateSeedCount()
     {
-        seedCount.text = "Seed : " + seed.ToString();
+        if (seedCount != null) seedCount.text = "Seed : " + seed;
     }
+
     public void UpdateTreeCount()
     {
-        treeCount.text = "Tree : " + tree.ToString();
+        if (treeCount != null) treeCount.text = "Remaining : " + tree;
     }
+
+    // ลบ UpdateWater() เก่าออก เพราะเราใช้ระบบ Smooth ใน WaterRefillSystem แล้วครับ
 }

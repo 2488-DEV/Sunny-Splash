@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlantScript : MonoBehaviour
-{   
+{
     public bool IsInRange;
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
@@ -10,117 +10,117 @@ public class PlantScript : MonoBehaviour
     public AudioClip plantSfx;
     public AudioClip wateringSfx;
 
-    
     private PlayerScript player;
-    
     private StaminaBar staminaBar;
+    private WaterRefillSystem waterSystem;
+
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.GetComponent<PlayerScript>();
+            waterSystem = playerObj.GetComponent<WaterRefillSystem>();
         }
         staminaBar = FindFirstObjectByType<StaminaBar>();
     }
 
     void Update()
-    {   
-        if (IsInRange && player != null && Input.GetKeyDown(KeyCode.Space) && staminaBar.slider.value >= 10)
+    {
+        if (!IsInRange || player == null || PlayerActionManager.Instance.IsPerformingAction)
         {
-            // Block if already performing an action
-            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) 
+            UpdateVisuals();
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // --- แก้จุดเช็ค Stamina ให้เช็คจากตัวแปร currentStamina แทนกวัก ---
+            if (staminaBar != null && staminaBar.currentStamina < 10f)
             {
-                UpdateVisuals();
+                Debug.Log("เหนื่อยแล้วกวัก! พักแป๊บนาย");
                 return;
             }
 
-            if (currentStage == PlantState.Dead)
+            if (currentStage == PlantState.Dead && player.IsShovel)
             {
-                if (player.IsShovel)
+                PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
+                    HandlePlantLogic(ActionType.Dig);
+                });
+            }
+            else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
+            {
+                PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () => {
+                    player.seed -= 1;
+                    player.UpdateSeedCount();
+                    HandlePlantLogic(ActionType.PlantSeed);
+                });
+            }
+            else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
+            {
+                if (waterSystem != null && waterSystem.currentWater >= 33f)
                 {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () =>
-                    {
-                        HandlePlantLogic();
+                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () => {
+                        waterSystem.UseWaterForPlanting();
+                        HandlePlantLogic(ActionType.Water);
+                        player.DecreaseTree();
                     });
                 }
-            }
-            else if (currentStage == PlantState.Empty)
-            {
-                if (!player.IsShovel && player.seed >= 1)
+                else
                 {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () =>
-                    {
-                        player.seed -= 1;
-                        player.UpdateSeedCount();
-                        HandlePlantLogic();
-                    });
+                    Debug.Log("น้ำไม่พอรดแล้วนาย! ไปเติมน้ำด่วนกวัก!");
                 }
             }
-            else if (currentStage == PlantState.Dehydrated)
-            {
-                if (!player.IsShovel && player.water_gauge >= 10)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () =>
-                    {
-                        player.water_gauge -= 10;
-                        HandlePlantLogic();
-                        player.UpdateWater();
-                        if (player.tree > 0)
-                        {
-                            player.tree -= 1;
-                            player.UpdateTreeCount();
-                        }
-                    });
-                }
-            }
-            
         }
         UpdateVisuals();
     }
 
-    void HandlePlantLogic()
+    void HandlePlantLogic(ActionType action)
     {
-        if (currentStage == PlantState.Dead)
+        switch (action)
         {
-            currentStage = PlantState.Empty;
-            source.PlayOneShot(digSfx);
+            case ActionType.Dig:
+                currentStage = PlantState.Empty;
+                source.PlayOneShot(digSfx);
+                break;
+            case ActionType.PlantSeed:
+                currentStage = PlantState.Dehydrated;
+                source.PlayOneShot(plantSfx);
+                break;
+            case ActionType.Water:
+                currentStage = PlantState.Fresh;
+                source.PlayOneShot(wateringSfx);
+                break;
         }
-        else if (currentStage == PlantState.Empty)
+
+        // --- จุดสำคัญ: เปลี่ยนจากหัก slider.value มาเป็นหัก currentStamina ---
+        // วิธีนี้จะทำให้หลอดค่อยๆ วิ่งลดลงอย่างนิ่มนวล ไม่วาร์ปกวัก!
+        if (staminaBar != null)
         {
-            currentStage = PlantState.Dehydrated;
-            source.PlayOneShot(plantSfx);
+            staminaBar.currentStamina -= 10f;
         }
-        else if (currentStage == PlantState.Dehydrated)
-        {
-            currentStage = PlantState.Fresh;
-            source.PlayOneShot(wateringSfx);
-        }
-        staminaBar.slider.value -= 10;
     }
 
     void UpdateVisuals()
     {
-        transform.Find("DeadPlant").gameObject.SetActive(currentStage == PlantState.Dead);
-        transform.Find("DehydratedPlant").gameObject.SetActive(currentStage == PlantState.Dehydrated);
-        transform.Find("FreshPlant").gameObject.SetActive(currentStage == PlantState.Fresh);
+        SetPlantActive("DeadPlant", currentStage == PlantState.Dead);
+        SetPlantActive("DehydratedPlant", currentStage == PlantState.Dehydrated);
+        SetPlantActive("FreshPlant", currentStage == PlantState.Fresh);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    void SetPlantActive(string name, bool isActive)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            IsInRange = true;
-            Debug.Log("Enter");
-        }
-
+        Transform t = transform.Find(name);
+        if (t != null) t.gameObject.SetActive(isActive);
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            IsInRange = false;
-            Debug.Log("Exit");
-        }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) IsInRange = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) IsInRange = false;
     }
 }
