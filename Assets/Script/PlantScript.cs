@@ -108,6 +108,7 @@ public class PlantScript : MonoBehaviour
         SetPlantActive("DehydratedPlant (upper)", currentStage == PlantState.Dehydrated);
         SetPlantActive("FreshPlant (lower)", currentStage == PlantState.Fresh);
         SetPlantActive("FreshPlant (upper)", currentStage == PlantState.Fresh);
+        SetPlantActive("Hitbox", currentStage == PlantState.Fresh);
     }
 
     void SetPlantActive(string name, bool isActive)
