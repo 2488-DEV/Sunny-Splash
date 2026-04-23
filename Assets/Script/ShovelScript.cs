@@ -34,7 +34,7 @@ public class ShovelScript : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.Q))
             {
-
+                transform.rotation = Quaternion.Euler(0, 0, 130f);
                 player.IsShovel = false;
                 IsInRange = true;
                 GetComponent<SpriteRenderer>().sortingOrder = 0;
