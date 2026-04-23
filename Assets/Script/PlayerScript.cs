@@ -7,7 +7,6 @@ public class PlayerScript : MonoBehaviour
     public bool IsShovel;
 
     [Header("Status Settings")]
-    // เราจะไม่ใช้ water_gauge ตรงๆ ในนี้แล้ว แต่จะอ้างอิงไปที่ WaterRefillSystem แทน
     public int seed;
     public TextMeshProUGUI seedCount;
 
@@ -21,12 +20,13 @@ public class PlayerScript : MonoBehaviour
     public bool isLeft;
     public bool isRight;
 
-    private WaterRefillSystem waterSystem; // ตัวแปรอ้างอิงระบบน้ำใหม่
+    private WaterRefillSystem waterSystem;
 
     void Start()
     {
         waterSystem = GetComponent<WaterRefillSystem>();
 
+        // ปิด Victory Panel ไว้ก่อนเริ่มเกมกวัก
         if (victoryPanel != null)
         {
             victoryPanel.SetActive(false);
@@ -52,6 +52,7 @@ public class PlayerScript : MonoBehaviour
             tree -= 1;
             UpdateTreeCount();
 
+            // เมื่อรดน้ำจนเหลือ 0 ต้นกวัก!
             if (tree <= 0)
             {
                 WinGame();
@@ -63,10 +64,16 @@ public class PlayerScript : MonoBehaviour
     {
         if (victoryPanel != null)
         {
+            // 1. เปิดหน้าต่างชนะกวัก
             victoryPanel.SetActive(true);
+
+            // 2. ปลดล็อกเมาส์ให้กดปุ่มได้
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            // Time.timeScale = 0f; // ถ้าอยากให้เกมหยุดนิ่งตอนชนะ ให้ติ๊กออกครับ
+
+            // 3. --- แก้ไขตามสั่ง: ปลดล็อกบรรทัดนี้แล้วกวัก! ---
+            // หยุดเวลาเกมทั้งหมด แดดจะหยุดเผา เป็ดจะปลอดภัยกวัก!
+            Time.timeScale = 0f;
         }
     }
 
@@ -74,7 +81,6 @@ public class PlayerScript : MonoBehaviour
     {
         UpdateSeedCount();
         UpdateTreeCount();
-        // ส่วนของ Water จะถูกจัดการโดยอัตโนมัติในสคริปต์ WaterRefillSystem
     }
 
     public void UpdateSeedCount()
@@ -84,8 +90,7 @@ public class PlayerScript : MonoBehaviour
 
     public void UpdateTreeCount()
     {
+        // อัปเดตข้อความจำนวนต้นไม้ที่เหลือ
         if (treeCount != null) treeCount.text = "Remaining : " + tree;
     }
-
-    // ลบ UpdateWater() เก่าออก เพราะเราใช้ระบบ Smooth ใน WaterRefillSystem แล้วครับ
 }

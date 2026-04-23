@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-// --- 1. ประกาศประเภท Action ไว้ตรงนี้ (Enum) ---
+// --- 1. ต้องมีก้อนนี้อยู่นอก Class บัคแดงถึงจะหายกวัก! ---
 public enum ActionType
 {
     None,
@@ -12,10 +12,10 @@ public enum ActionType
     Harvest,
     PickUpItem,
     DropItem,
-    RefillWater // ตัวที่เราเพิ่มเพื่อดูดน้ำกวัก!
+    RefillWater
 }
 
-// --- 2. ตัวจัดการ Action (Class) ---
+// --- 2. ตัว Class หลัก ---
 public class PlayerActionManager : MonoBehaviour
 {
     public static PlayerActionManager Instance { get; private set; }
@@ -37,12 +37,14 @@ public class PlayerActionManager : MonoBehaviour
 
     private Animator animator;
     private Coroutine activeCoroutine;
+    private PlayerSound playerSound;
 
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
         animator = GetComponent<Animator>();
+        playerSound = GetComponent<PlayerSound>();
     }
 
     public bool TryStartAction(ActionType action, Action onComplete = null)
@@ -53,7 +55,6 @@ public class PlayerActionManager : MonoBehaviour
         CurrentAction = action;
         ActionProgress = 0f;
 
-        // ส่ง Trigger ไปที่ Animator อัตโนมัติ (ชื่อต้องตรงกับใน Enum นะนาย)
         if (animator != null)
         {
             animator.SetTrigger(action.ToString());
@@ -85,6 +86,12 @@ public class PlayerActionManager : MonoBehaviour
             elapsed += Time.deltaTime;
             ActionProgress = Mathf.Clamp01(elapsed / duration);
             yield return null;
+        }
+
+        // --- เล่นเสียง Success เมื่อหลอดเต็มกวัก! ---
+        if (playerSound != null)
+        {
+            playerSound.PlayActionSound("Success");
         }
 
         activeCoroutine = null;

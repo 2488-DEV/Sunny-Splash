@@ -1,27 +1,66 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using System.Collections; // ต้องมีตัวนี้เพิ่มมาเพื่อให้ใช้ Coroutine ได้
+using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
+    [Header("UI Panels")]
     public GameObject settingsPanel;
+    public GameObject victoryPanel;
+
+    [Header("Audio Settings (Mixer)")]
+    public AudioMixer myMixer;
     public Slider bgmSlider;
+    public Slider sfxSlider; // ช่องสำหรับลาก Slider SFX ในหน้า Pause กวัก!
+
+    [Header("Audio Settings (Source)")]
+    public AudioSource bgmSource;
     private bool isPaused = false;
+    private float maxBgmVolume = 0.5f;
 
     void Start()
     {
-        float savedVolume = PlayerPrefs.GetFloat("BGMVolume", 0.75f);
+        // --- 1. ดึงค่าเสียงที่บันทึกไว้ข้าม Scene ---
+        float savedBgm = PlayerPrefs.GetFloat("BGMVolume", 0.5f);
+        float savedSfx = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
+
+        // --- 2. สั่งให้ Mixer ในฉากนี้เปลี่ยนตามค่าที่เซฟไว้ทันที ---
+        if (myMixer != null)
+        {
+            myMixer.SetFloat("MusicVol", Mathf.Log10(Mathf.Clamp(savedBgm, 0.0001f, 1f)) * 20);
+            myMixer.SetFloat("SFXVol", Mathf.Log10(Mathf.Clamp(savedSfx, 0.0001f, 1f)) * 20);
+        }
+
+        // --- 3. ตั้งค่า UI Slider ให้ตรงกับค่าที่โหลดมา ---
         if (bgmSlider != null)
         {
-            bgmSlider.value = savedVolume;
+            bgmSlider.value = savedBgm / maxBgmVolume;
             bgmSlider.onValueChanged.AddListener(SetVolume);
         }
-        AudioListener.volume = savedVolume;
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = savedSfx;
+            sfxSlider.onValueChanged.AddListener(SetSFXVolume); // เชื่อมฟังก์ชันใหม่กวัก!
+        }
+
+        if (bgmSource != null)
+        {
+            bgmSource.volume = savedBgm;
+        }
+
+        AudioListener.volume = 1.0f;
+
+        if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (victoryPanel != null) victoryPanel.SetActive(false);
     }
 
     void Update()
     {
+        if (victoryPanel != null && victoryPanel.activeSelf) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused) ResumeGame();
@@ -43,27 +82,36 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
     }
 
+    // คุมเสียงเพลง (Music)
     public void SetVolume(float volume)
     {
-        AudioListener.volume = volume;
-        PlayerPrefs.SetFloat("BGMVolume", volume);
+        float finalVolume = volume * maxBgmVolume;
+        if (myMixer != null)
+        {
+            myMixer.SetFloat("MusicVol", Mathf.Log10(Mathf.Clamp(finalVolume, 0.0001f, 1f)) * 20);
+        }
+        if (bgmSource != null) bgmSource.volume = finalVolume;
+        PlayerPrefs.SetFloat("BGMVolume", finalVolume);
     }
 
-    // ฟังก์ชันสำหรับปุ่มกด (เรียก Coroutine อีกที)
-    public void GoToMainMenu()
+    // คุมเสียงเอฟเฟกต์ (SFX) กวัก!
+    public void SetSFXVolume(float volume)
     {
-        StartCoroutine(WaitAndLoad());
+        if (myMixer != null)
+        {
+            myMixer.SetFloat("SFXVol", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20);
+        }
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
-    IEnumerator WaitAndLoad()
+    public void GoToMainMenu() { StartCoroutine(WaitAndLoad("MainMenu")); }
+    public void NextLevel(string sceneName) { StartCoroutine(WaitAndLoad(sceneName)); }
+    public void RestartLevel() { StartCoroutine(WaitAndLoad(SceneManager.GetActiveScene().name)); }
+
+    IEnumerator WaitAndLoad(string sceneName)
     {
-        // 1. คืนค่าเวลาเป็นปกติก่อน (ถ้าไม่คืนค่า เวลาจะเป็น 0 และ WaitForSeconds จะไม่ทำงาน)
         Time.timeScale = 1f;
-
-        // 2. รอ 1 วินาที (ใช้ WaitForSecondsRealtime จะชัวร์กว่าในกรณีที่เกมหยุดเวลาอยู่)
         yield return new WaitForSecondsRealtime(1f);
-
-        // 3. ย้าย Scene
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(sceneName);
     }
 }

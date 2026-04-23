@@ -5,14 +5,11 @@ public class PlantScript : MonoBehaviour
     public bool IsInRange;
     public enum PlantState { Empty, Dead, Dehydrated, Fresh }
     public PlantState currentStage;
-    public AudioSource source;
-    public AudioClip digSfx;
-    public AudioClip plantSfx;
-    public AudioClip wateringSfx;
 
     private PlayerScript player;
     private StaminaBar staminaBar;
     private WaterRefillSystem waterSystem;
+    private PlayerSound playerSound; // คุมเสียงผ่านตัวเป็ดอย่างเดียวกวัก
 
     void Start()
     {
@@ -21,6 +18,7 @@ public class PlantScript : MonoBehaviour
         {
             player = playerObj.GetComponent<PlayerScript>();
             waterSystem = playerObj.GetComponent<WaterRefillSystem>();
+            playerSound = playerObj.GetComponent<PlayerSound>();
         }
         staminaBar = FindFirstObjectByType<StaminaBar>();
     }
@@ -35,17 +33,14 @@ public class PlantScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // --- แก้จุดเช็ค Stamina ให้เช็คจากตัวแปร currentStamina แทนกวัก ---
-            if (staminaBar != null && staminaBar.currentStamina < 10f)
-            {
-                Debug.Log("เหนื่อยแล้วกวัก! พักแป๊บนาย");
-                return;
-            }
+            if (staminaBar != null && staminaBar.currentStamina < 10f) return;
 
             if (currentStage == PlantState.Dead && player.IsShovel)
             {
                 PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
                     HandlePlantLogic(ActionType.Dig);
+                    // สั่งเสียงผ่านตัวเป็ดกวัก!
+                    if (playerSound != null) playerSound.PlayActionSound("Dig");
                 });
             }
             else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
@@ -54,6 +49,7 @@ public class PlantScript : MonoBehaviour
                     player.seed -= 1;
                     player.UpdateSeedCount();
                     HandlePlantLogic(ActionType.PlantSeed);
+                    if (playerSound != null) playerSound.PlayActionSound("Plant");
                 });
             }
             else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
@@ -64,11 +60,8 @@ public class PlantScript : MonoBehaviour
                         waterSystem.UseWaterForPlanting();
                         HandlePlantLogic(ActionType.Water);
                         player.DecreaseTree();
+                        if (playerSound != null) playerSound.PlayActionSound("Water");
                     });
-                }
-                else
-                {
-                    Debug.Log("น้ำไม่พอรดแล้วนาย! ไปเติมน้ำด่วนกวัก!");
                 }
             }
         }
@@ -81,20 +74,15 @@ public class PlantScript : MonoBehaviour
         {
             case ActionType.Dig:
                 currentStage = PlantState.Empty;
-                source.PlayOneShot(digSfx);
                 break;
             case ActionType.PlantSeed:
                 currentStage = PlantState.Dehydrated;
-                source.PlayOneShot(plantSfx);
                 break;
             case ActionType.Water:
                 currentStage = PlantState.Fresh;
-                source.PlayOneShot(wateringSfx);
                 break;
         }
 
-        // --- จุดสำคัญ: เปลี่ยนจากหัก slider.value มาเป็นหัก currentStamina ---
-        // วิธีนี้จะทำให้หลอดค่อยๆ วิ่งลดลงอย่างนิ่มนวล ไม่วาร์ปกวัก!
         if (staminaBar != null)
         {
             staminaBar.currentStamina -= 10f;
