@@ -8,10 +8,10 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Status Settings")]
     public int seed;
-    public TextMeshProUGUI seedCount;
+    public TextMeshProUGUI seedCount; // ลาก Text ที่เขียนว่า Seed : มาใส่กวัก
 
-    public int tree;
-    public TextMeshProUGUI treeCount;
+    public int tree; // จำนวนต้นไม้ที่ต้องปลูก/รดน้ำในด่านนี้
+    public TextMeshProUGUI treeCount; // ลาก Text ที่เขียนว่า Remaining : มาใส่กวัก
 
     [Header("Victory Settings")]
     public GameObject victoryPanel;
@@ -26,12 +26,12 @@ public class PlayerScript : MonoBehaviour
     {
         waterSystem = GetComponent<WaterRefillSystem>();
 
-        // ปิด Victory Panel ไว้ก่อนเริ่มเกมกวัก
         if (victoryPanel != null)
         {
             victoryPanel.SetActive(false);
         }
 
+        // รีเฟรชค่าเริ่มต้นทั้งหมดกวัก!
         RefreshAllUI();
     }
 
@@ -45,6 +45,23 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // --- ระบบเมล็ด (Seed) ---
+    public void UpdateSeedCount()
+    {
+        if (seedCount != null)
+            seedCount.text = "Seed : " + seed; // โชว์จำนวนเมล็ดที่ถืออยู่กวัก
+    }
+
+    public void UseSeed()
+    {
+        if (seed > 0)
+        {
+            seed--;
+            UpdateSeedCount();
+        }
+    }
+
+    // --- ระบบต้นไม้ (Tree) ---
     public void DecreaseTree()
     {
         if (tree > 0)
@@ -52,7 +69,7 @@ public class PlayerScript : MonoBehaviour
             tree -= 1;
             UpdateTreeCount();
 
-            // เมื่อรดน้ำจนเหลือ 0 ต้นกวัก!
+            // เงื่อนไขชัยชนะ: เมื่อปลูก/รดน้ำครบกวัก!
             if (tree <= 0)
             {
                 WinGame();
@@ -60,21 +77,10 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void WinGame()
+    public void UpdateTreeCount()
     {
-        if (victoryPanel != null)
-        {
-            // 1. เปิดหน้าต่างชนะกวัก
-            victoryPanel.SetActive(true);
-
-            // 2. ปลดล็อกเมาส์ให้กดปุ่มได้
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-
-            // 3. --- แก้ไขตามสั่ง: ปลดล็อกบรรทัดนี้แล้วกวัก! ---
-            // หยุดเวลาเกมทั้งหมด แดดจะหยุดเผา เป็ดจะปลอดภัยกวัก!
-            Time.timeScale = 0f;
-        }
+        if (treeCount != null)
+            treeCount.text = "Remaining : " + tree; // โชว์จำนวนที่เหลือให้ปลูกกวัก
     }
 
     public void RefreshAllUI()
@@ -83,14 +89,19 @@ public class PlayerScript : MonoBehaviour
         UpdateTreeCount();
     }
 
-    public void UpdateSeedCount()
+    // --- ระบบจบเกม ---
+    void WinGame()
     {
-        if (seedCount != null) seedCount.text = "Seed : " + seed;
-    }
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(true);
 
-    public void UpdateTreeCount()
-    {
-        // อัปเดตข้อความจำนวนต้นไม้ที่เหลือ
-        if (treeCount != null) treeCount.text = "Remaining : " + tree;
+            // ปลดล็อกเมาส์ให้กดปุ่ม Restart/Next ในหน้า Victory กวัก
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            // หยุดทุกอย่าง: แดดไม่เผา เป็ดไม่ขยับกวัก!
+            Time.timeScale = 0f;
+        }
     }
 }

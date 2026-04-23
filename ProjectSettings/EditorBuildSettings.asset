@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InGame_Lv1.unity
     guid: c3051613dd261ec4e8fb4d8282e4de0c
+  - enabled: 1
+    path: Assets/Scenes/InGame_Lv2.unity
+    guid: adac6a8e1030a4b4ebbe8de8bbf47880
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
