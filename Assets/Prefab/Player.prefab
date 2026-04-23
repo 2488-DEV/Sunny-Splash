@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3053355427948106707}
   - component: {fileID: 1488836387799990732}
   - component: {fileID: 256211945695788286}
+  - component: {fileID: 6084939335786896183}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -187,12 +188,9 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   spriteRenderer: {fileID: 8010691839546482517}
   animator: {fileID: 7215789026620862646}
-  overHeatBar: {fileID: 8290381526628737200, guid: 29bf3beb68489444c8ed7b5928244157,
-    type: 3}
-  sunSystem: {fileID: 1875578503568760510, guid: b54ac8b829afc2648b9817452b69c7cd,
-    type: 3}
-  staminaBar: {fileID: 6118169575208517400, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
-    type: 3}
+  overHeatBar: {fileID: 0}
+  sunSystem: {fileID: 0}
+  staminaBar: {fileID: 0}
   speed: 3
   sprint: 2
   isInShadow: 0
@@ -234,18 +232,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShovel: 0
-  water_gauge: 60
-  waterBar: {fileID: 7012443435012233094, guid: b5200b802a983434b9546a764c532e85,
-    type: 3}
   seed: 0
   seedCount: {fileID: 573500588331750230, guid: ca072a20dbdba4144abc0ed97368692d,
     type: 3}
-  treeCount: {fileID: 4137762373018923003, guid: 73f8e438bb347c347bba7f11ad96e1d8,
-    type: 3}
-  tree: 5
+  tree: 10
+  treeCount: {fileID: 0}
+  victoryPanel: {fileID: 0}
   isLeft: 0
   isRight: 0
-  timer: 0
 --- !u!114 &3053355427948106707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,8 +256,7 @@ MonoBehaviour:
   plantSeedDuration: 1
   waterDuration: 1
   harvestDuration: 1.2
-  pickUpDuration: 0.5
-  dropDuration: 0.5
+  refillWaterDuration: 1.2
 --- !u!114 &1488836387799990732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +368,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6084939335786896183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223876694551831306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307e3b9abb75e7e42bff70b02558a19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWater: 0
+  maxWater: 100
+  waterBar: {fileID: 0}
+  smoothSpeed: 5
 --- !u!1 &2369560448588321896
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7160496346553659819}
   - component: {fileID: 3394563520673062671}
+  - component: {fileID: 3681909573069522538}
   m_Layer: 5
   m_Name: ActionBar
   m_TagString: Untagged
@@ -566,6 +576,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!210 &3681909573069522538
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591409876864152052}
+  m_Enabled: 1
+  m_SortingLayerID: 110201621
+  m_SortingLayer: 3
+  m_SortingOrder: 100
+  m_SortAtRoot: 0
 --- !u!1 &7780421964238857520
 GameObject:
   m_ObjectHideFlags: 0

@@ -104,8 +104,11 @@ public class PlantScript : MonoBehaviour
     void UpdateVisuals()
     {
         SetPlantActive("DeadPlant", currentStage == PlantState.Dead);
-        SetPlantActive("DehydratedPlant", currentStage == PlantState.Dehydrated);
-        SetPlantActive("FreshPlant", currentStage == PlantState.Fresh);
+        SetPlantActive("DehydratedPlant (lower)", currentStage == PlantState.Dehydrated);
+        SetPlantActive("DehydratedPlant (upper)", currentStage == PlantState.Dehydrated);
+        SetPlantActive("FreshPlant (lower)", currentStage == PlantState.Fresh);
+        SetPlantActive("FreshPlant (upper)", currentStage == PlantState.Fresh);
+        SetPlantActive("Hitbox", currentStage == PlantState.Fresh);
     }
 
     void SetPlantActive(string name, bool isActive)
