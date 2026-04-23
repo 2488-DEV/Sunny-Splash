@@ -8,6 +8,7 @@ public class OverHeatBar : MonoBehaviour
     public PlayerMovement playerMovement;
     public SunSystem sunSystem;
     public BurningZone burningZone;
+    public DeadZone deadZone;
 
     public Slider slider;
     public Image fillImage;
@@ -20,6 +21,7 @@ public class OverHeatBar : MonoBehaviour
     public float shadowCoolingSpeed = 8f;  // ความเร็วตอนเข้าร่ม (เย็นสบาย)
     public float sunHeatingSpeed = 5f;     // ความเร็วตอนโดนแดดปกติ
     public float burningHeatingSpeed = 25f; // ความเร็วตอนโซนร้อน (อันตราย!)
+    public float deadBurnigSpeed = 50f; //ตายแน่ไอ้อ้วนควยโง่ อ่านหาพ่อง
 
     void Start()
     {
@@ -45,6 +47,11 @@ public class OverHeatBar : MonoBehaviour
         {
             // เข้าร่ม: ลดแบบทันใจ
             slider.value -= shadowCoolingSpeed * Time.deltaTime;
+        }
+        else if (deadZone.isInDead)
+        {
+            // โซนชิปหาย ตายหยังเขียด
+            slider.value += deadBurnigSpeed * Time.deltaTime;
         }
         else if (sunSystem.isSunActive)
         {
