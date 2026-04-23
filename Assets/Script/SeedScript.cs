@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro;
 
 public class SeedScript : MonoBehaviour
 {
     public bool IsInRange;
     private PlayerScript player;
     private ShovelScript shovel;
+    private GameObject highlight;
 
     void Start()
     {
@@ -14,16 +14,21 @@ public class SeedScript : MonoBehaviour
         {
             player = playerObj.GetComponent<PlayerScript>();
         }
+
         shovel = FindFirstObjectByType<ShovelScript>();
+
+        // เก็บอ้างอิง Highlight ไว้จะได้ไม่โหลดบ่อยกวัก
+        Transform h = transform.Find("Highlight");
+        if (h != null) highlight = h.gameObject;
     }
 
     void Update()
-    {   
-        if (IsInRange && !shovel.IsInRange)
+    {
+        // เช็คว่าอยู่ในระยะ และพลั่วไม่ได้ถูกใช้งานอยู่ (กันปุ่มซ้อน)
+        if (IsInRange && (shovel == null || !shovel.IsInRange))
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                // Block if already performing an action
                 if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
 
                 if (player != null)
@@ -31,31 +36,29 @@ public class SeedScript : MonoBehaviour
                     PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
                     {
                         player.seed += 1;
-                        player.UpdateSeedCount();
+                        player.UpdateSeedCount(); // อัปเดตตัวเลขบนจอทันทีกวัก!
                         gameObject.SetActive(false);
                     });
                 }
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision) 
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             IsInRange = true;
-            Debug.Log("Enter");
-            transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-
+            if (highlight != null) highlight.GetComponent<Renderer>().enabled = true;
         }
-
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player"))
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
             IsInRange = false;
-            Debug.Log("Exit");
-            transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
+            if (highlight != null) highlight.GetComponent<Renderer>().enabled = false;
         }
     }
 }

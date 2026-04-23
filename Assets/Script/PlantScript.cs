@@ -9,7 +9,7 @@ public class PlantScript : MonoBehaviour
     private PlayerScript player;
     private StaminaBar staminaBar;
     private WaterRefillSystem waterSystem;
-    private PlayerSound playerSound; // คุมเสียงผ่านตัวเป็ดอย่างเดียวกวัก
+    private PlayerSound playerSound;
 
     void Start()
     {
@@ -35,23 +35,25 @@ public class PlantScript : MonoBehaviour
         {
             if (staminaBar != null && staminaBar.currentStamina < 10f) return;
 
+            // 1. ขุดซากกองเถ้า (ต้องถือพลั่ว)
             if (currentStage == PlantState.Dead && player.IsShovel)
             {
                 PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
                     HandlePlantLogic(ActionType.Dig);
-                    // สั่งเสียงผ่านตัวเป็ดกวัก!
                     if (playerSound != null) playerSound.PlayActionSound("Dig");
                 });
             }
+            // 2. ปลูกเมล็ด (ห้ามถือพลั่ว + ต้องมีเมล็ดอย่างน้อย 1)
             else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
             {
                 PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () => {
-                    player.seed -= 1;
-                    player.UpdateSeedCount();
+                    // ใช้ฟังก์ชัน UseSeed เพื่อตัดยอดและอัปเดต UI ทันทีกวัก!
+                    player.UseSeed();
                     HandlePlantLogic(ActionType.PlantSeed);
                     if (playerSound != null) playerSound.PlayActionSound("Plant");
                 });
             }
+            // 3. รดน้ำ (ห้ามถือพลั่ว + ต้องมีน้ำพอ)
             else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
             {
                 if (waterSystem != null && waterSystem.currentWater >= 33f)
@@ -59,7 +61,10 @@ public class PlantScript : MonoBehaviour
                     PlayerActionManager.Instance.TryStartAction(ActionType.Water, () => {
                         waterSystem.UseWaterForPlanting();
                         HandlePlantLogic(ActionType.Water);
+
+                        // ปลูกสำเร็จจน Fresh แล้ว ให้ลดจำนวนต้นไม้ที่เหลือในด่านกวัก!
                         player.DecreaseTree();
+
                         if (playerSound != null) playerSound.PlayActionSound("Water");
                     });
                 }
@@ -89,6 +94,7 @@ public class PlantScript : MonoBehaviour
         }
     }
 
+    // --- Visuals เหมือนเดิมเป๊ะ ไม่พังแน่นอนกวัก ---
     void UpdateVisuals()
     {
         SetPlantActive("DeadPlant", currentStage == PlantState.Dead);
