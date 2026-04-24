@@ -9,6 +9,7 @@ public class OverHeatBar : MonoBehaviour
     public PlayerMovement playerMovement;
     public SunSystem sunSystem;
     public BurningZone burningZone;
+    public DeadZone deadZone; // ตัวเชื่อมกับสคริปต์พื้นที่ใหม่กวัก!
 
     public Slider slider;
     public Image fillImage;
@@ -19,12 +20,14 @@ public class OverHeatBar : MonoBehaviour
 
     public float maxValue = 100f;
     [HideInInspector] public bool isInBurningZone;
+    [HideInInspector] public bool isInDeadZone; // เช็คว่าอยู่ในเขตมรณะไหมกวัก
 
     [Header("Settings")]
     public float waterCoolingSpeed = 15f;
     public float shadowCoolingSpeed = 8f;
     public float sunHeatingSpeed = 5f;
     public float burningHeatingSpeed = 25f;
+    public float deadZoneHeatingSpeed = 40f; // ค่าความร้อนใหม่สำหรับ DeadZone กวัก!
 
     void Start()
     {
@@ -35,22 +38,20 @@ public class OverHeatBar : MonoBehaviour
 
     void Update()
     {
+        // --- อัปเดตสถานะจากโซนต่างๆ กวัก ---
         if (burningZone != null) isInBurningZone = burningZone.inBuring;
+        if (deadZone != null) isInDeadZone = deadZone.isInDead;
 
-        // --- ระบบดับร้อนอัปเกรดใหม่ แยกประเภทน้ำกวัก! ---
+        // --- 1. ระบบลดความร้อน (น้ำ/ร่ม) ---
         if (playerMovement.isInWater)
         {
-            // เช็คว่าตำแหน่งที่เป็ดอยู่นั้นคือ Tag อะไรกวัก
             Collider2D waterCheck = Physics2D.OverlapPoint(player.transform.position);
-
             if (waterCheck != null && waterCheck.CompareTag("ContaminatedWater"))
             {
-                // ถ้าน้ำปนเปื้อน: ลดความร้อนแค่ครึ่งเดียว (หรือตั้งค่าใหม่ตามใจนายกวัก)
                 slider.value -= (waterCoolingSpeed * 0.5f) * Time.deltaTime;
             }
             else
             {
-                // ถ้าน้ำปกติ: ลดความร้อนเต็มสปีด
                 slider.value -= waterCoolingSpeed * Time.deltaTime;
             }
         }
@@ -58,17 +59,24 @@ public class OverHeatBar : MonoBehaviour
         {
             slider.value -= shadowCoolingSpeed * Time.deltaTime;
         }
+        // --- 2. ระบบเพิ่มความร้อน (เรียงลำดับความแรงกวัก!) ---
         else
         {
-            // ส่วนเพิ่มความร้อนกลางแดด (ที่นายบอกว่าใช้ได้แล้วกวัก!)
             float currentHeatSpeed = 0f;
 
-            if (isInBurningZone)
+            if (isInDeadZone)
             {
+                // แรงที่สุด! ร้อนแบบไม่สนความแรงแดดกวัก
+                currentHeatSpeed = deadZoneHeatingSpeed;
+            }
+            else if (isInBurningZone)
+            {
+                // ร้อนรองลงมาและคูณกับความแรงแดด
                 currentHeatSpeed = burningHeatingSpeed * sunSystem.sunIntensity;
             }
             else if (sunSystem.isSunActive)
             {
+                // ร้อนแดดปกติ
                 currentHeatSpeed = sunHeatingSpeed * sunSystem.sunIntensity;
             }
 
