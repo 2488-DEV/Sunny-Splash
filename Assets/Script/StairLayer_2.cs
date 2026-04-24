@@ -1,30 +1,31 @@
 using UnityEngine;
 
-public class StairLayer_2 : MonoBehaviour
+public class SimpleLayerTrigger : MonoBehaviour
 {
-    public string layerUp = "Layer 3";     // ตอนขึ้น
-    public string layerDown = "Layer 2";   // ตอนลง
+    public string layerWhenEnter = "Layer3"; // ตอนเข้า (ขึ้น)
+    public string layerWhenExit = "Layer2";  // ตอนออก (ลง)
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ถ้า player อยู่ "สูงกว่า" trigger = ขึ้น
-            if (collision.transform.position.y > transform.position.y)
-            {
-                SetSortingLayer(collision.gameObject, layerUp);
-            }
-            else // อยู่ต่ำกว่า = ลง
-            {
-                SetSortingLayer(collision.gameObject, layerDown);
-            }
+            SetLayer(collision.gameObject, layerWhenEnter);
         }
     }
 
-    void SetSortingLayer(GameObject obj, string layerName)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-        if (sr != null)
+        if (collision.CompareTag("Player"))
+        {
+            SetLayer(collision.gameObject, layerWhenExit);
+        }
+    }
+
+    void SetLayer(GameObject obj, string layerName)
+    {
+        SpriteRenderer[] srs = obj.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sr in srs)
         {
             sr.sortingLayerName = layerName;
         }

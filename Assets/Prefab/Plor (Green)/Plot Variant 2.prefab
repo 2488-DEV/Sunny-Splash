@@ -279,17 +279,17 @@ PrefabInstance:
     - target: {fileID: 1260968495357293631, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1260968495357293631, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1260968495357293631, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayerID
-      value: 1316169585
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925028758801974059, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
@@ -334,17 +334,17 @@ PrefabInstance:
     - target: {fileID: 4143563317652501439, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4143563317652501439, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4143563317652501439, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayerID
-      value: 1316169585
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5166243137603812863, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
@@ -445,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 8615847775386841728, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8615847775386841728, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
@@ -455,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 8615847775386841728, guid: 96204f731f39d3743b79e71fc7c2f764,
         type: 3}
       propertyPath: m_SortingLayerID
-      value: 1316169585
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
