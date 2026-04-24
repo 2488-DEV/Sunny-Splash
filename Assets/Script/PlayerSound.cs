@@ -42,11 +42,19 @@ public class PlayerSound : MonoBehaviour
             case "Plant": clipToPlay = plantSound; break;
             case "Water": clipToPlay = waterSound; break;
             case "Success": clipToPlay = actionSuccess; break;
-            case "MissionComplete": clipToPlay = missionComplete; break;
+
+            case "MissionComplete":
+                if (missionComplete != null)
+                {
+                    // --- อัปเกรด: เล่นที่ตำแหน่งกล้องเพื่อให้ดังที่สุดและชัดที่สุดเหมือน Genshin กวัก! ---
+                    AudioSource.PlayClipAtPoint(missionComplete, Camera.main.transform.position, 1.0f);
+                }
+                return; // ออกจากฟังก์ชันทันทีเพราะสั่งเล่นแบบ AtPoint ไปแล้วกวัก
+
             case "Die":
                 if (dieSound != null)
                 {
-                    // --- เล่นครั้งเดียว แต่เล่นที่ตำแหน่งกล้องเพื่อให้ดังที่สุดกวัก! ---
+                    // เล่นที่ตำแหน่งกล้องเพื่อให้ดังที่สุดกวัก!
                     AudioSource.PlayClipAtPoint(dieSound, Camera.main.transform.position, dieVolume);
                 }
                 return;
@@ -75,6 +83,7 @@ public class PlayerSound : MonoBehaviour
             wasInWater = false;
         }
 
+        // ใช้ linearVelocity เพื่อเช็คความเร็วของเป็ดกวัก
         float speed = (playerMovement.rb != null) ? playerMovement.rb.linearVelocity.magnitude : 0f;
         bool isMoving = speed > 0.1f;
 
