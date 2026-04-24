@@ -37,7 +37,7 @@ public class ShovelScript : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 130f);
                 player.IsShovel = false;
                 IsInRange = true;
-                GetComponent<SpriteRenderer>().sortingOrder = 0;
+                GetComponent<SpriteRenderer>().sortingOrder = 1;
                 transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
             }
         }
