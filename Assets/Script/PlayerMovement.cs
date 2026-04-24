@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             animator.SetBool("IsRunning", false);
-            isPlayerRunning = false; // หยุดวิ่งทันทีเมื่อทำ Action
+            isPlayerRunning = false;
             return;
         }
 
@@ -39,15 +39,12 @@ public class PlayerMovement : MonoBehaviour
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput = moveInput.normalized;
 
-        // --- ส่วนที่ปรับปรุง: เช็ควิ่งและ Stamina ---
-        // เปลี่ยนมาเช็ค currentStamina แทน slider.value เพื่อความเป๊ะกวัก!
         bool hasStamina = (staminaBar != null && staminaBar.currentStamina >= 1f);
 
         if (Input.GetKey(KeyCode.LeftShift) && hasStamina && moveInput != Vector2.zero)
         {
             rb.linearVelocity = moveInput * speed * sprint;
             isPlayerRunning = true;
-            // เราลบบรรทัดหักค่าตรงนี้ออก เพราะเราจะไปหักใน StaminaBar.cs แทนเพื่อให้หลอดนิ่มกวัก!
         }
         else
         {
@@ -55,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
             isPlayerRunning = false;
         }
 
-        // Animation Logic
         if (moveInput != Vector2.zero)
         {
             animator.SetBool("IsRunning", true);
@@ -72,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = moveInput.x < 0;
         }
 
-        // Water Logic
         if (isInWater)
         {
             animator.SetBool("IsSwim", true);
@@ -85,6 +80,25 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsSwim", false);
             animator.SetBool("IsSwiming", false);
+        }
+    }
+
+    // --- ส่วนอัปเกรด: รองรับทั้งน้ำสะอาด (WaterSource) และน้ำเสีย (ContaminatedWater) กวัก! ---
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // ตรวจสอบ Tag ให้ตรงกับใน Unity Inspector ของนายกวัก!
+        if (other.CompareTag("WaterSource") || other.CompareTag("ContaminatedWater") || other.CompareTag("Water"))
+        {
+            isInWater = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // เมื่อเดินออกจากน้ำทุกประเภท ให้ยกเลิกสถานะว่ายน้ำกวัก
+        if (other.CompareTag("WaterSource") || other.CompareTag("ContaminatedWater") || other.CompareTag("Water"))
+        {
+            isInWater = false;
         }
     }
 }

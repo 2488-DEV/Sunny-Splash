@@ -24,13 +24,12 @@ public class WaterRefillSystem : MonoBehaviour
 
     void Update()
     {
-        // ทำให้หลอดลื่นไหล (Smooth Slider)
         if (waterBar != null)
         {
             waterBar.value = Mathf.MoveTowards(waterBar.value, currentWater, smoothSpeed * 100f * Time.deltaTime);
         }
 
-        // ระบบเติมน้ำด้วย Spacebar (Refill)
+        // ระบบเติมน้ำ: เช็ค canRefill (ต้องยืนในบ่อ WaterSource เท่านั้นถึงจะตักได้กวัก!)
         if (canRefill && Input.GetKeyDown(KeyCode.Space) && !PlayerActionManager.Instance.IsPerformingAction)
         {
             StartRefilling();
@@ -43,28 +42,32 @@ public class WaterRefillSystem : MonoBehaviour
 
         PlayerActionManager.Instance.TryStartAction(ActionType.RefillWater, () =>
         {
-            currentWater = maxWater; // เติมน้ำเต็ม
-            Debug.Log("เติมน้ำฉ่ำๆ เรียบร้อย! กวัก!");
+            currentWater = maxWater;
+            Debug.Log("เติมน้ำสะอาดเรียบร้อย! กวัก!");
         });
     }
 
-    // --- ฟังก์ชันอัปเกรด: รดน้ำ 3 ทีหมดแบบเป๊ะๆ ---
     public void UseWaterForPlanting()
     {
-        // หักออกทีละ 33.4 เพื่อให้รดครบ 3 ครั้งแล้วน้ำ "ติดลบ" หรือ "เป็น 0" แน่นอน
-        // (33.4 * 3 = 100.2) จะไม่มีเศษน้ำเหลือไปรดต้นที่ 4 กวัก!
         currentWater = Mathf.Max(0, currentWater - 33.4f);
-
-        Debug.Log("รดน้ำไปแล้ว! น้ำคงเหลือจริง: " + currentWater);
+        Debug.Log("รดน้ำไปแล้ว! น้ำคงเหลือ: " + currentWater);
     }
 
+    // --- ส่วนแก้ไขเพื่อลบ Error สีแดงกวัก! ---
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("WaterSource")) canRefill = true;
+        // เช็คเฉพาะ Tag ที่เรามีใน Tag Manager เท่านั้นกวัก
+        if (collision.CompareTag("WaterSource"))
+        {
+            canRefill = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("WaterSource")) canRefill = false;
+        if (collision.CompareTag("WaterSource"))
+        {
+            canRefill = false;
+        }
     }
 }

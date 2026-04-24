@@ -37,10 +37,22 @@ public class OverHeatBar : MonoBehaviour
     {
         if (burningZone != null) isInBurningZone = burningZone.inBuring;
 
-        // --- ระบบคำนวณความร้อนใหม่ตามความแรงแดดกวัก! ---
+        // --- ระบบดับร้อนอัปเกรดใหม่ แยกประเภทน้ำกวัก! ---
         if (playerMovement.isInWater)
         {
-            slider.value -= waterCoolingSpeed * Time.deltaTime;
+            // เช็คว่าตำแหน่งที่เป็ดอยู่นั้นคือ Tag อะไรกวัก
+            Collider2D waterCheck = Physics2D.OverlapPoint(player.transform.position);
+
+            if (waterCheck != null && waterCheck.CompareTag("ContaminatedWater"))
+            {
+                // ถ้าน้ำปนเปื้อน: ลดความร้อนแค่ครึ่งเดียว (หรือตั้งค่าใหม่ตามใจนายกวัก)
+                slider.value -= (waterCoolingSpeed * 0.5f) * Time.deltaTime;
+            }
+            else
+            {
+                // ถ้าน้ำปกติ: ลดความร้อนเต็มสปีด
+                slider.value -= waterCoolingSpeed * Time.deltaTime;
+            }
         }
         else if (playerMovement.isInShadow)
         {
@@ -48,17 +60,15 @@ public class OverHeatBar : MonoBehaviour
         }
         else
         {
+            // ส่วนเพิ่มความร้อนกลางแดด (ที่นายบอกว่าใช้ได้แล้วกวัก!)
             float currentHeatSpeed = 0f;
 
             if (isInBurningZone)
             {
-                // ความร้อนในโซนร้อนจะคูณตามความเข้มแดด (sunIntensity) 
-                // ถ้าเมฆบังมิด ค่าจะค่อยๆ กลายเป็น 0 กวัก!
                 currentHeatSpeed = burningHeatingSpeed * sunSystem.sunIntensity;
             }
             else if (sunSystem.isSunActive)
             {
-                // ความร้อนปกติกลางแจ้งคูณตามความเข้มแดดเช่นกัน
                 currentHeatSpeed = sunHeatingSpeed * sunSystem.sunIntensity;
             }
 
@@ -81,7 +91,6 @@ public class OverHeatBar : MonoBehaviour
         else fillImage.color = new Color32(255, 113, 0, 255);
     }
 
-    // --- ระบบเปลี่ยน Scene ---
     public void TryAgain()
     {
         StartCoroutine(DelayLoadScene(SceneManager.GetActiveScene().name));

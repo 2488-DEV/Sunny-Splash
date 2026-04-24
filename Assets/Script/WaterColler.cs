@@ -15,9 +15,6 @@ public class WaterColler : MonoBehaviour
         {
             isPlayerInside = true;
             playerMovement.isInWater = true;
-
-            // --- ลบส่วนที่เติมน้ำ +30 ออกแล้วกวัก ---
-            // ตอนนี้เดินเข้าบ่อจะไม่มีน้ำเพิ่มเองแล้ว ต้องกดดูดเอาเท่านั้น
         }
     }
 
@@ -27,6 +24,7 @@ public class WaterColler : MonoBehaviour
         {
             isPlayerInside = false;
             playerMovement.isInWater = false;
+            timer = 0f;
         }
     }
 
@@ -38,10 +36,12 @@ public class WaterColler : MonoBehaviour
 
             if (timer >= 1f)
             {
-                // ลดความร้อนเมื่อแช่น้ำ (Cooling System)
-                if (overHeatBar != null && overHeatBar.slider != null)
+                // ไม่ว่าจะเป็นน้ำ Tag ไหน (WaterSource หรือ ContaminatedWater)
+                // ก็จะลดความร้อน 1.0f เท่ากันหมดกวัก!
+                if (overHeatBar != null)
                 {
                     overHeatBar.slider.value -= 1f;
+                    Debug.Log("แช่น้ำดับร้อน... เย็นเท่ากันทุกบ่อกวัก!");
                 }
                 timer = 0f;
             }

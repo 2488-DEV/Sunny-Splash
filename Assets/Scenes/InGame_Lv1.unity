@@ -3693,6 +3693,11 @@ PrefabInstance:
       propertyPath: victoryPanel
       value: 
       objectReference: {fileID: 1163956040}
+    - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+        type: 3}
+      propertyPath: currentLevelIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6084939335786896183, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: waterBar
