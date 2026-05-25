@@ -69,4 +69,36 @@ public class LevelSelector : MonoBehaviour
         PlayerPrefs.DeleteKey("levelReached");
         Debug.Log("ล้างข้อมูลการเล่นเรียบร้อยกวัก!");
     }
+    // --- ฟังก์ชัน Cheat สำหรับปุ่มล่องหน เอาไว้ทดสอบเกมกวัก! ---
+public void CheatToggleLevels()
+{
+    // 1. ดึงค่าด่านปัจจุบันจาก PlayerPrefs (ถ้าไม่มีให้เริ่มที่ 1)
+    int currentLevelReached = PlayerPrefs.GetInt("levelReached", 1);
+    
+    // n คือจำนวนด่านทั้งหมดในเกม (นับจากจำนวนปุ่มที่ลากใส่ไว้)
+    int maxLevels = levelButtons.Length; 
+
+    // 2. คำนวณด่านถัดไป
+    int nextLevel = currentLevelReached + 1;
+
+    // 3. ถ้าค่าด่านถัดไปเกินจำนวนด่านทั้งหมด (กดเกิน n ครั้ง) ให้วนกลับไปล็อกเหลือแค่ด่าน 1
+    if (nextLevel > maxLevels)
+    {
+        PlayerPrefs.SetInt("levelReached", 1);
+        Debug.Log("Cheat: รีเซ็ตกลับไปล็อกเหลือแค่ด่าน 1 กวัก!");
+    }
+    else
+    {
+        // ปลดล็อกด่านถัดไปเรื่อยๆ
+        PlayerPrefs.SetInt("levelReached", nextLevel);
+        Debug.Log("Cheat: ปลดล็อกถึงด่าน " + nextLevel + " แล้วกวัก!");
+    }
+
+    // 4. บันทึกข้อมูลลงเครื่องทันที
+    PlayerPrefs.Save();
+
+    // 5. สั่งให้โค้ดคำนวณหน้าจอ UI ใหม่ทันทีโดยไม่ต้องเปิด-ปิดหน้าต่างใหม่
+    OnEnable(); 
+}
+
 }
