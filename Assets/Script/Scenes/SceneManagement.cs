@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
 
-public class LevelSelect : MonoBehaviour
+public class SceneManagement : MonoBehaviour
 {
     [Header("Level Buttons")]
     public Button[] levelButtons; // ลากปุ่ม Level 1, 2, 3, 4 มาใส่ตามลำดับ
@@ -91,5 +91,23 @@ public class LevelSelect : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log("ล้างข้อมูลการเล่นเรียบร้อย!");
         RefreshUI();
+    }
+
+    public void Exit()
+    {
+        {
+        StartCoroutine(DelayedQuit());
+        }
+
+    IEnumerator DelayedQuit()
+    {
+        yield return new WaitForSeconds(1f); // หน่วงเวลา 1 วินาที
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
     }
 }

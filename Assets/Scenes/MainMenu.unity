@@ -1093,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &206943274
 Transform:
   m_ObjectHideFlags: 0
@@ -1895,6 +1895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResDropDown: {fileID: 1767334722}
   FullscreenToggle: {fileID: 699667496}
+  FPSToggle: {fileID: 1392894891}
 --- !u!1 &403880272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,7 +3362,7 @@ GameObject:
   - component: {fileID: 869231804}
   - component: {fileID: 869231803}
   - component: {fileID: 869231802}
-  - component: {fileID: 869231801}
+  - component: {fileID: 869231805}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -3388,18 +3389,6 @@ RectTransform:
   m_AnchoredPosition: {x: -80.5, y: -48.5}
   m_SizeDelta: {x: 74, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &869231801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869231799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678b93000b69de34094ec7d0c41c66a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &869231802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3456,8 +3445,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 869231801}
-        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
+      - m_Target: {fileID: 869231805}
+        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -3506,6 +3495,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869231799}
   m_CullTransparentMesh: 1
+--- !u!114 &869231805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869231799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9530b9d66b3894cb7f745be9252d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelButtons: []
+  lockIcons: []
 --- !u!1 &894815919
 GameObject:
   m_ObjectHideFlags: 0
@@ -6059,10 +6062,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 206943273}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 0
+      - m_Target: {fileID: 378593257}
+        m_TargetAssemblyTypeName: SettingMenuManger, Assembly-CSharp
+        m_MethodName: ChangeFPSVisibility
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -7,6 +7,7 @@ public class SettingMenuManger : MonoBehaviour
 {
     public TMP_Dropdown ResDropDown;
     public Toggle FullscreenToggle;
+    public Toggle FPSToggle; // ลากปุ่มติ๊กถูกเปิดปิด FPS ในหน้า Setting มาใส่ช่องนี้
 
     Resolution[] AllResolution;
     bool IsFullScreen;
@@ -16,6 +17,9 @@ public class SettingMenuManger : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // ตรวจสอบว่าในเครื่องเซฟไว้ให้เปิดหรือปิด FPS แล้วปรับหัวข้อติ๊กถูกให้ตรงตามนั้น
+        FPSToggle.isOn = PlayerPrefs.GetInt("ShowFPS", 0) == 1;
+
         IsFullScreen = true;
         AllResolution = Screen.resolutions;
 
@@ -72,6 +76,16 @@ public class SettingMenuManger : MonoBehaviour
     {
         IsFullScreen = FullscreenToggle.isOn;
         Screen.SetResolution(SelectResolutionList[SelectResolution].width, SelectResolutionList[SelectResolution].height, IsFullScreen);
+    }
+    // ฟังก์ชันเมื่อผู้เล่นกดติ๊กถูกเข้าๆ ออกๆ ที่หน้าเมนูตั้งค่า
+
+    public void ChangeFPSVisibility()
+    {
+        // สั่งการข้ามฉากไปยังสคริปต์ FPSDisplay ตัวจริงที่เป็นอมตะอยู่ทันทีผ่านคำว่า instance
+        if (FPSDisplay.instance != null)
+        {
+            FPSDisplay.instance.SetFPSVisibility(FPSToggle.isOn);
+        }
     }
 
     // Update is called once per frame
