@@ -17,8 +17,11 @@ GameObject:
   - component: {fileID: 3798479514213425096}
   - component: {fileID: 3053355427948106707}
   - component: {fileID: 1488836387799990732}
-  - component: {fileID: 256211945695788286}
   - component: {fileID: 6084939335786896183}
+  - component: {fileID: 1632318573471512055}
+  - component: {fileID: 7073722270050202280}
+  - component: {fileID: 386378396708374859}
+  - component: {fileID: 8784550006459636183}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -232,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShovel: 0
+  currentLevelIndex: 1
   seed: 0
   seedCount: {fileID: 573500588331750230, guid: ca072a20dbdba4144abc0ed97368692d,
     type: 3}
@@ -271,7 +275,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 3394563520673062671}
   uiContainer: {fileID: 2369560448588321896}
---- !u!82 &256211945695788286
+--- !u!114 &6084939335786896183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223876694551831306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307e3b9abb75e7e42bff70b02558a19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWater: 0
+  maxWater: 100
+  waterBar: {fileID: 0}
+  smoothSpeed: 5
+--- !u!82 &1632318573471512055
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,11 +300,145 @@ AudioSource:
   m_GameObject: {fileID: 2223876694551831306}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4387414216398966515, guid: ab7a559dfddbaa744b23b64f801b422a,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.125
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7073722270050202280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223876694551831306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69d74b58f22c434f99287c556b56579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSource: {fileID: 1632318573471512055}
+  actionSource: {fileID: 386378396708374859}
+  QuackSource: {fileID: 386378396708374859}
+  playerMovement: {fileID: 2304357174661198791}
+  footstepVolume: 0.3
+  actionVolume: 0.8
+  dieVolume: 0.8
+  quackVolume: 0.3
+  walkSound: {fileID: 8300000, guid: e78781cdc8583e545a3a2fd05fe65662, type: 3}
+  swimSound: {fileID: 8300000, guid: a4821e1c639ae094094c34b726ce7e62, type: 3}
+  enterWaterSound: {fileID: 8300000, guid: 0951659d38373244586a41ff5945239b, type: 3}
+  exitWaterSound: {fileID: 8300000, guid: 0456912bdd4fb4a4b879f6284f896e2e, type: 3}
+  digSound: {fileID: 8300000, guid: 55642bf9a04984548b3fea58e4de8255, type: 3}
+  plantSound: {fileID: 8300000, guid: d837114c54022e94daf49df9c07a1a69, type: 3}
+  waterSound: {fileID: 8300000, guid: 67f8a3edfee8b494cbc4458a0c170343, type: 3}
+  actionSuccess: {fileID: 8300000, guid: 9bda4204048401a4a93bb5541c9472c3, type: 3}
+  missionComplete: {fileID: 8300000, guid: 37489597574d2bf4f9cb3f87383d9763, type: 3}
+  dieSound: {fileID: 8300000, guid: fd479b6f1194e4c46af22ce9753bb11a, type: 3}
+  QuackSound: {fileID: 8300000, guid: 3501afefe3add7840a4b41b6ec36ed61, type: 3}
+  walkPitch: 1
+  runPitch: 1.1
+  FloatingText: {fileID: 3910852728274928531, guid: 2aa34cf0ba18df14b83b6cbebfcc682d,
+    type: 3}
+--- !u!82 &386378396708374859
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223876694551831306}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4387414216398966515, guid: ab7a559dfddbaa744b23b64f801b422a,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -368,22 +522,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6084939335786896183
+--- !u!114 &8784550006459636183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2223876694551831306}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 307e3b9abb75e7e42bff70b02558a19a, type: 3}
+  m_Script: {fileID: 11500000, guid: aa75b3ddfc4c27448bb23c61ef01ebe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWater: 0
-  maxWater: 100
-  waterBar: {fileID: 0}
-  smoothSpeed: 5
+  cheatSpeedMultiplier: 5
 --- !u!1 &2369560448588321896
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +736,7 @@ SortingGroup:
   m_GameObject: {fileID: 6591409876864152052}
   m_Enabled: 1
   m_SortingLayerID: 110201621
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 100
   m_SortAtRoot: 0
 --- !u!1 &7780421964238857520

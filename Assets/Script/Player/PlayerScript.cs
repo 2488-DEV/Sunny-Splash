@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections; // จำเป็นต้องมีเพื่อใช้ Coroutine กวัก!
+using System.Collections;
+using UnityEngine.InputSystem; // จำเป็นต้องมีเพื่อใช้ Coroutine กวัก!
 
 public class PlayerScript : MonoBehaviour
 {

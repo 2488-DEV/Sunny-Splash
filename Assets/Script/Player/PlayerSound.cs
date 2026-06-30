@@ -5,12 +5,14 @@ public class PlayerSound : MonoBehaviour
     [Header("Audio Settings")]
     public AudioSource footstepSource;
     public AudioSource actionSource;
+    public AudioSource QuackSource;
     public PlayerMovement playerMovement;
 
     [Header("Volume Controls")]
     [Range(0f, 1f)] public float footstepVolume = 0.2f;
     [Range(0f, 1f)] public float actionVolume = 0.8f;
     [Range(0f, 1f)] public float dieVolume = 1.0f;
+    [Range(0f, 1f)] public float quackVolume = 0.8f;
 
     [Header("Movement Clips")]
     public AudioClip walkSound;
@@ -25,10 +27,14 @@ public class PlayerSound : MonoBehaviour
     public AudioClip actionSuccess;
     public AudioClip missionComplete;
     public AudioClip dieSound;
+    public AudioClip QuackSound;
 
     [Header("Pitch Settings")]
     public float walkPitch = 1.0f;
     public float runPitch = 1.6f;
+
+    [Header("Quack Text")]
+    public GameObject FloatingText;
 
     private bool wasInWater = false;
 
@@ -68,6 +74,23 @@ public class PlayerSound : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (QuackSound != null)
+            {   
+                ShowFloatingText();
+                // แนะนำให้เล่นผ่าน QuackSource หรือ actionSource เพื่อให้เสียงขยับตามตัวเป็ด
+                if (QuackSource != null)
+                {
+                    QuackSource.PlayOneShot(QuackSound, quackVolume);
+                }
+                else if (actionSource != null)
+                {
+                    actionSource.PlayOneShot(QuackSound, quackVolume);
+                }
+            }
+        }
+
         if (playerMovement == null || footstepSource == null) return;
 
         footstepSource.volume = footstepVolume;
@@ -102,5 +125,10 @@ public class PlayerSound : MonoBehaviour
         {
             if (footstepSource.isPlaying) footstepSource.Stop();
         }
+    }
+
+    void ShowFloatingText()
+    {
+        Instantiate(FloatingText,transform.position,Quaternion.identity,transform);
     }
 }
