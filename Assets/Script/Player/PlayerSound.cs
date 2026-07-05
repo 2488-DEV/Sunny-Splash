@@ -35,6 +35,7 @@ public class PlayerSound : MonoBehaviour
 
     [Header("Quack Text")]
     public GameObject FloatingText;
+    bool isQuack = false;
 
     private bool wasInWater = false;
 
@@ -78,6 +79,7 @@ public class PlayerSound : MonoBehaviour
         {
             if (QuackSound != null)
             {   
+                isQuack = true;
                 ShowFloatingText();
                 // แนะนำให้เล่นผ่าน QuackSource หรือ actionSource เพื่อให้เสียงขยับตามตัวเป็ด
                 if (QuackSource != null)
@@ -129,6 +131,9 @@ public class PlayerSound : MonoBehaviour
 
     void ShowFloatingText()
     {
+        if (isQuack!=false){
         Instantiate(FloatingText,transform.position,Quaternion.identity,transform);
+        isQuack = false;
+        }
     }
 }

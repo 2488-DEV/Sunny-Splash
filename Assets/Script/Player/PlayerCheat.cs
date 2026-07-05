@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCheat : MonoBehaviour
 {
-    [Header("Cheat Settings")]
+    [Header("Cheat Settings Press Right Control To Activate")]
     [Tooltip("ใส่ความเร็วที่ต้องการให้วิ่งเร็วขึ้นตอนเปิดสูตรโกง")]
     public float cheatSpeedMultiplier = 2.5f; 
 

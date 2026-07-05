@@ -235,11 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShovel: 0
-  currentLevelIndex: 1
+  currentLevelIndex: 3
   seed: 0
-  seedCount: {fileID: 573500588331750230, guid: ca072a20dbdba4144abc0ed97368692d,
-    type: 3}
-  tree: 10
+  seedCount: {fileID: 0}
+  tree: 1
   treeCount: {fileID: 0}
   victoryPanel: {fileID: 0}
   isLeft: 0
@@ -529,7 +528,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2223876694551831306}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa75b3ddfc4c27448bb23c61ef01ebe6, type: 3}
   m_Name: 
