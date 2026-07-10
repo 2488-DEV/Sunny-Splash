@@ -8,6 +8,7 @@ TagManager:
   - WaterSource
   - ContaminatedWater
   - Water
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Wall
+  - Enemy
+  - Player
   - 
   - 
   - 

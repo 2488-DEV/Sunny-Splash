@@ -37,6 +37,14 @@ public class PlayerSound : MonoBehaviour
     public GameObject FloatingText;
     bool isQuack = false;
 
+    // ===== [ส่วนที่ 1: เพิ่มตัวแปรสำหรับระบบเรียกศัตรู] =====
+    [Header("Enemy Alert Settings")]
+    [Tooltip("ระยะทางที่ศัตรูจะได้ยินเสียงร้อง")]
+    public float quackSoundRadius = 15f; 
+    [Tooltip("เลือก Layer ของศัตรู (เช่น Enemy)")]
+    public LayerMask enemyLayer; 
+    // ==================================================
+
     private bool wasInWater = false;
 
     public void PlayActionSound(string actionName)
@@ -53,15 +61,13 @@ public class PlayerSound : MonoBehaviour
             case "MissionComplete":
                 if (missionComplete != null)
                 {
-                    // --- อัปเกรด: เล่นที่ตำแหน่งกล้องเพื่อให้ดังที่สุดและชัดที่สุดเหมือน Genshin กวัก! ---
                     AudioSource.PlayClipAtPoint(missionComplete, Camera.main.transform.position, 1.0f);
                 }
-                return; // ออกจากฟังก์ชันทันทีเพราะสั่งเล่นแบบ AtPoint ไปแล้วกวัก
+                return; 
 
             case "Die":
                 if (dieSound != null)
                 {
-                    // เล่นที่ตำแหน่งกล้องเพื่อให้ดังที่สุดกวัก!
                     AudioSource.PlayClipAtPoint(dieSound, Camera.main.transform.position, dieVolume);
                 }
                 return;
@@ -81,7 +87,7 @@ public class PlayerSound : MonoBehaviour
             {   
                 isQuack = true;
                 ShowFloatingText();
-                // แนะนำให้เล่นผ่าน QuackSource หรือ actionSource เพื่อให้เสียงขยับตามตัวเป็ด
+                
                 if (QuackSource != null)
                 {
                     QuackSource.PlayOneShot(QuackSound, quackVolume);
@@ -90,6 +96,10 @@ public class PlayerSound : MonoBehaviour
                 {
                     actionSource.PlayOneShot(QuackSound, quackVolume);
                 }
+
+                // ===== [ส่วนที่ 2: เพิ่มคำสั่งเรียกศัตรูเมื่อกด R] =====
+                AlertNearbyEnemies();
+                // ===================================================
             }
         }
 
@@ -108,7 +118,6 @@ public class PlayerSound : MonoBehaviour
             wasInWater = false;
         }
 
-        // ใช้ linearVelocity เพื่อเช็คความเร็วของเป็ดกวัก
         float speed = (playerMovement.rb != null) ? playerMovement.rb.linearVelocity.magnitude : 0f;
         bool isMoving = speed > 0.1f;
 
@@ -131,9 +140,46 @@ public class PlayerSound : MonoBehaviour
 
     void ShowFloatingText()
     {
-        if (isQuack!=false){
-        Instantiate(FloatingText,transform.position,Quaternion.identity,transform);
-        isQuack = false;
+        if (isQuack != false){
+            Instantiate(FloatingText, transform.position, Quaternion.identity, transform);
+            isQuack = false;
         }
     }
+
+    // ===== [ส่วนที่ 3: เพิ่มฟังก์ชันค้นหาและสั่งการศัตรู] =====
+    void AlertNearbyEnemies()
+{
+    // เปลี่ยนเป็น Physics2D.OverlapCircle และใช้ Collider2D
+    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, quackSoundRadius, enemyLayer);
+    
+    Debug.Log("เจอวัตถุในเลเยอร์ศัตรู (2D) ทั้งหมด: " + hitColliders.Length + " ตัว");
+
+    foreach (var enemyCollider in hitColliders)
+    {
+        SmartEnemyAI enemy = enemyCollider.GetComponent<SmartEnemyAI>();
+        
+        if (enemy != null)
+        {
+            Debug.Log("ส่งสัญญาณเสียงไปให้ศัตรูชื่อ: " + enemyCollider.name);
+            enemy.ListenToSound(transform.position); 
+        }
+        else
+        {
+            Debug.LogWarning("เจอวัตถุ " + enemyCollider.name + " แต่ในตัวไม่มีสคริปต์ SmartEnemyAI!");
+        }
+    }
+}
+
+    // เปิดให้แสดงวงกลมรัศมีเสียงในหน้า Scene View ของ Unity (ช่วยให้ปรับแต่งง่ายขึ้น)
+    void OnDrawGizmosSelected()
+{
+    Gizmos.color = Color.yellow;
+    // วาดเส้นวงกลมแบบแบนราบสไตล์ 2D
+    Matrix4x4 oldMatrix = Gizmos.matrix;
+    Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.identity, new Vector3(1, 1, 0));
+    Gizmos.DrawWireSphere(Vector3.zero, quackSoundRadius);
+    Gizmos.matrix = oldMatrix;
+}
+    // ===================================================
+
 }
