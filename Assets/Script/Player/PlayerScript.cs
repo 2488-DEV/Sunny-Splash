@@ -64,10 +64,10 @@ public class PlayerScript : MonoBehaviour
 
             if (tree <= 0)
             {
-                // ถ้าเป็นด่าน 3 และยังไม่ได้เริ่มรอ ให้เริ่มรอ 15 วิกวัก!
-                if (currentLevelIndex == 3 && !isWaitingForVictory)
+                // ถ้าเป็นด่าน 3 และยังไม่ได้เริ่มรอ ให้เริ่มรอ 10 วิกวัก!
+                if (currentLevelIndex == 4 && !isWaitingForVictory)
                 {
-                    StartCoroutine(WaitBeforeWin(15f));
+                    StartCoroutine(WaitBeforeWin(10f));
                 }
                 else if (currentLevelIndex != 3)
                 {
