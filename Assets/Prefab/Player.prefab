@@ -235,10 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShovel: 0
-  currentLevelIndex: 3
+  currentLevelIndex: 1
   seed: 0
   seedCount: {fileID: 0}
-  tree: 1
+  tree: 10
   treeCount: {fileID: 0}
   victoryPanel: {fileID: 0}
   isLeft: 0
@@ -423,6 +423,10 @@ MonoBehaviour:
   runPitch: 1.1
   FloatingText: {fileID: 3910852728274928531, guid: 2aa34cf0ba18df14b83b6cbebfcc682d,
     type: 3}
+  quackSoundRadius: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &386378396708374859
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Unity C# project",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "Assembly-CSharp.csproj"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Clean Unity C# project",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "Assembly-CSharp.csproj"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Open Unity Editor",
+      "type": "shell",
+      "command": "\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.70f1\\Editor\\Unity.exe\"",
+      "args": [
+        "-projectPath",
+        "${workspaceFolder}"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

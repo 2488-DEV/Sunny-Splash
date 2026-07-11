@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSunActive: 1
+  sunIntensity: 1
   sunMin: 30
   sunMax: 50
   cloudMin: 3
   cloudMax: 7
+  transitionSpeed: 1.5
   darkOverlay: {fileID: 0}
