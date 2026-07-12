@@ -10,23 +10,31 @@ public class Patrol : MonoBehaviour
     public Transform[] patrolPoints;   // ลากจุดทั้ง 8 จุดมาใส่ในนี้
 
     private int currentPointIndex = 0; // ลำดับจุดปัจจุบันที่กำลังเดินไป
+    private SmartEnemyAI ai;
+
+    void Start()
+{
+    ai = GetComponent<SmartEnemyAI>();
+}
 
     void Update()
+{
+    if (ai != null && ai.currentState != SmartEnemyAI.State.Idle)
+        return;
+
+    if (patrolPoints == null || patrolPoints.Length == 0)
+        return;
+
+    Transform targetPoint = patrolPoints[currentPointIndex];
+
+    transform.position = Vector2.MoveTowards(
+        transform.position,
+        targetPoint.position,
+        speed * Time.deltaTime);
+
+    if (Vector2.Distance(transform.position, targetPoint.position) < reachDistance)
     {
-        // 1. เช็คก่อนว่ามีจุดใน Array ไหมเพื่อกัน Error
-        if (patrolPoints == null || patrolPoints.Length == 0) return;
-
-        // 2. หาตำแหน่งของจุดเป้าหมายปัจจุบัน
-        Transform targetPoint = patrolPoints[currentPointIndex];
-
-        // 3. สั่งให้ศัตรูเดินยิงตรงไปที่จุดเป้าหมาย
-        transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, speed * Time.deltaTime);
-
-        // 4. เช็คว่าเดินไปถึงจุดเป้าหมายหรือยัง
-        if (Vector2.Distance(transform.position, targetPoint.position) < reachDistance)
-        {
-            // เปลี่ยนไปจุดถัดไป (ถ้าถึงจุดสุดท้ายที่ 8 มันจะวนกลับมาจุดที่ 0 เอง)
-            currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
-        }
+        currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
     }
+}
 }

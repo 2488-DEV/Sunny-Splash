@@ -26,6 +26,14 @@ public class PlayerScript : MonoBehaviour
     public bool isLeft;
     public bool isRight;
 
+    [Header("Player Health")]
+    public int playerHp;
+    public int playerMaxHp = 3;
+    public GameObject deathPanel;
+    public PlayerSound playerSound;
+    public GameObject player;
+    public GameObject enemy; // ตัวเชื่อมกับศัตรูเพื่อปิดเมื่อผู้เล่นตาย
+
     private WaterRefillSystem waterSystem;
     private bool isWaitingForVictory = false; // ป้องกันการเรียก Coroutine ซ้ำกวัก
 
@@ -33,6 +41,8 @@ public class PlayerScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         waterSystem = GetComponent<WaterRefillSystem>();
+        player = GameObject.FindWithTag("Player");
+        playerHp = playerMaxHp;
 
         if (victoryPanel != null)
         {
@@ -110,5 +120,21 @@ public class PlayerScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        playerHp -= damage;
+
+        Debug.Log(playerHp);
+
+        if (playerHp <= 0)
+        {
+            if (playerSound != null) playerSound.PlayActionSound("Die");
+                deathPanel.SetActive(true);
+                player.SetActive(false);
+                enemy.SetActive(false);
+        }
+        Debug.Log("Player took " + damage + " damage!");
     }
 }
