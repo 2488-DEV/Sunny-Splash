@@ -54,7 +54,7 @@ public class VNDialogue : MonoBehaviour
 
     void Update()
     {
-        if (dialogueBox.activeInHierarchy && Input.GetKeyDown(KeyCode.Space))
+        if (dialogueBox.activeInHierarchy && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             if (isTyping)
             {
