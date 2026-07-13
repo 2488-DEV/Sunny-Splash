@@ -5560,6 +5560,7 @@ MonoBehaviour:
     growing. \nWe have to do something about this, quack!\""
   typingSpeed: 0.04
   playOnStart: 1
+  isDialogue: 0
 --- !u!4 &316937213
 Transform:
   m_ObjectHideFlags: 0
@@ -11173,6 +11174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2304357174661198791, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 316937212}
+    - target: {fileID: 2304357174661198791, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+        type: 3}
       propertyPath: sunSystem
       value: 
       objectReference: {fileID: 799418348}
@@ -11186,6 +11192,11 @@ PrefabInstance:
       propertyPath: overHeatBar
       value: 
       objectReference: {fileID: 1292786156}
+    - target: {fileID: 2304357174661198791, guid: 66a9e58eb54c5c84eb0e7445388757e6,
+        type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 316937212}
     - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: seed
@@ -39122,6 +39133,11 @@ PrefabInstance:
       objectReference: {fileID: 2051437893}
     - target: {fileID: 7728185517027127251, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 316937212}
+    - target: {fileID: 7728185517027127251, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+        type: 3}
       propertyPath: burningHeatingSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -39183,10 +39199,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
       insertIndex: 4
-      addedObject: {fileID: 1204239521}
-    - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
-        type: 3}
-      insertIndex: 5
       addedObject: {fileID: 293876900}
     - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
@@ -39204,6 +39216,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 433142574}
+    - targetCorrespondingSourceObject: {fileID: 7653246168840089921, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204239521}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc, type: 3}
 --- !u!224 &1051732608 stripped
@@ -41464,7 +41480,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1051732608}
+    m_TransformParent: {fileID: 2049062573}
     m_Modifications:
     - target: {fileID: 222698202030932707, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
@@ -41564,27 +41580,27 @@ PrefabInstance:
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 295.2
+      value: 278.8994
       objectReference: {fileID: 0}
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -943.2
+      value: -214.48468
       objectReference: {fileID: 0}
     - target: {fileID: 2976026439271441405, guid: b5200b802a983434b9546a764c532e85,
         type: 3}
@@ -184143,6 +184159,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4800845c2c4caa84eb6194552ae9c841, type: 3}
+--- !u!224 &2049062573 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7653246168840089921, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1051732607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2051437891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2223876694551831306, guid: 66a9e58eb54c5c84eb0e7445388757e6,

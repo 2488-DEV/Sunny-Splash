@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class SeedScript : MonoBehaviour
+public class FoodScript : MonoBehaviour
 {
     public bool IsInRange;
     private PlayerScript player;
     private ShovelScript shovel;
-    private FoodScript food;
+    private SeedScript seed;
     private GameObject highlight;
 
     void Start()
@@ -17,17 +17,17 @@ public class SeedScript : MonoBehaviour
         }
 
         shovel = FindFirstObjectByType<ShovelScript>();
-        food = FindFirstObjectByType<FoodScript>();
+        seed = FindFirstObjectByType<SeedScript>();
 
-        // เก็บอ้างอิง Highlight ไว้จะได้ไม่โหลดบ่อยกวัก
         Transform h = transform.Find("Highlight");
         if (h != null) highlight = h.gameObject;
     }
 
+    // Update is called once per frame
     void Update()
     {
         // เช็คว่าอยู่ในระยะ และพลั่วไม่ได้ถูกใช้งานอยู่ (กันปุ่มซ้อน)
-        if (IsInRange && (shovel == null || !shovel.IsInRange))
+        if (IsInRange && (shovel == null || !shovel.IsInRange) && (seed == null || !seed.IsInRange))
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -37,8 +37,9 @@ public class SeedScript : MonoBehaviour
                 {
                     PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
                     {
-                        player.seed += 1;
-                        player.UpdateSeedCount(); // อัปเดตตัวเลขบนจอทันทีกวัก!
+                        player.playerHp += 1;
+                        player.egg += 1;
+                        player.UpdateEggCount();
                         gameObject.SetActive(false);
                     });
                 }
