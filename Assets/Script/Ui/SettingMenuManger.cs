@@ -87,10 +87,4 @@ public class SettingMenuManger : MonoBehaviour
             FPSDisplay.instance.SetFPSVisibility(FPSToggle.isOn);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
