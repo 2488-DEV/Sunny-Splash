@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     public bool IsShovel;
     public bool isEgg;
     private VNDialogue dialogueManager;
+    [SerializeField] private LayerMask targetLayer;
 
     [Header("Level Settings")]
     [Tooltip("ใส่เลขด่านปัจจุบัน เช่น ด่าน 1 ใส่เลข 1 กวัก")]
@@ -193,11 +194,22 @@ public class PlayerScript : MonoBehaviour
                         rb.angularVelocity = -500f;
                     }
 
-                    RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+                    Vector2 mousePos2D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                    if (hit.collider != null && hit.collider.CompareTag("LockedArea"))
+                    RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, targetLayer);
+
+                    if (hit.collider != null)
                     {
-                        Debug.Log("คลิกโดนพื้นที่กำหนดไว้แล้ว!");
+                        Debug.Log($"[2D Hit] ชนวัตถุชื่อ: {hit.collider.name} | Tag: {hit.collider.tag}");
+
+                        if (hit.collider.CompareTag("Enemy"))
+                        {
+                            Debug.Log("[SUCCESS] 2D Player เจอ Enemy Area แล้ว!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("[Failed 2D] เมาส์จิ้มลงไปในความว่างเปล่า ไม่โดน Collider 2D ตัวไหนใน Layer ที่กำหนดเลย");
                     }
 
                     egg--;
