@@ -137,7 +137,7 @@ public class SmartEnemyAI : MonoBehaviour
 
     // ลูปคำนวณหาไทล์ดักทางเมื่อผู้เล่นเดินหลบมุมตึก
     IEnumerator TileLOSLogicLoop()
-    {
+    {   
         while (true)
         {
             yield return new WaitForSeconds(0.2f); // หน่วงเวลา 0.2 วินาทีตามคลิป
