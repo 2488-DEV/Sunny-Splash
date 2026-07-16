@@ -25,7 +25,6 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI eggCount;
     private Vector3 originalPosition;
     public GameObject eggBullet;
-    public Transform firePoint;
 
     [Header("Victory Settings")]
     public GameObject victoryPanel;
@@ -189,7 +188,7 @@ public class PlayerScript : MonoBehaviour
                     Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
                     if (rb != null)
                     {
-                        rb.velocity = direction * 20f;
+                        rb.linearVelocity = direction * 20f;
                         rb.angularVelocity = -500f;
                     }
 

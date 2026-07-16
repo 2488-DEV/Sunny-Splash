@@ -5736,7 +5736,7 @@ Transform:
   m_GameObject: {fileID: 61240796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.20483208, y: 21.932302, z: -10.1}
+  m_LocalPosition: {x: -0.19177341, y: 21.932314, z: -10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10775,7 +10775,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cursorTexture
       value: 
-      objectReference: {fileID: 2800000, guid: c2f596a0bc7683b47a61ca4cd66b01d9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: currentLevelIndex
