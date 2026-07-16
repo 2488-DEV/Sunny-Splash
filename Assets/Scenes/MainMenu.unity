@@ -2561,7 +2561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 299, y: 136}
+  m_AnchoredPosition: {x: 481, y: 236}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &371028885
@@ -3738,8 +3738,8 @@ RectTransform:
   m_GameObject: {fileID: 717415052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.51, y: 1.51, z: 1.51}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1925506704}
   m_Father: {fileID: 1044135897}
@@ -6079,7 +6079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1044135897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7092,9 +7092,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1349.61}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.00006866455, y: -18.251562}
+  m_SizeDelta: {x: -0.77814, y: 0}
+  m_Pivot: {x: 0.020128725, y: 0.9638625}
 --- !u!114 &1184940516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7912,10 +7912,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1184940515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 341.39, y: -649.805}
-  m_SizeDelta: {x: 652.78, y: 1299.61}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339979698
 MonoBehaviour:
@@ -7937,56 +7937,41 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Information
-
-    General Details
-
-    Title: Sunny Splash: Forest
-    Revival
-
-
-    Developer: Pedrimtare Team
-
-
-    Version: 0.1 (Alpha)
-
-
-    Story
-
-    In
-    a world facing extreme drought, the lush green forests have withered away. Join
-    "Maple," a brave little duck, on a mission to bring life back to nature. Use
-    your water to refresh the dying trees, manage your "Overheat" levels, and restore
-    the forest to its former glory. Every drop counts in this refreshing journey!
-
-
-    Credits
-    & Assets
-
-    Art & Environment: Cainos, Violet Theme UI, MiMU STUDIO, devnik,
-    Black Hammer, Hippo, LAYERLAB, maanetorn, Pixel Frog
-
-
-    Contact & Community
-
-    Discord:
-
-
-    -
-    starlight_456
-
-
-    - 2488_leab
-
-
-    - jamekungtv
-
-
-    - _ham_s
-
-
-    Thank
-    you for playing and supporting our green mission!'
+  m_text: "\u0E02\u0E49\u0E2D\u0E15\u0E01\u0E25\u0E07\u0E43\u0E19\u0E01\u0E32\u0E23\u0E43\u0E0A\u0E49\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\n\r\n         
+    \u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\u0E19\u0E35\u0E49\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E25\u0E07\u0E32\u0E19\u0E17\u0E35\u0E48\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E02\u0E36\u0E49\u0E19\u0E42\u0E14\u0E22
+    \u0E19\u0E32\u0E22\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E15\u0E19\u0E4C \u0E41\u0E2A\u0E19\u0E17\u0E27\u0E35\u0E2A\u0E38\u0E02
+    , \u0E19\u0E32\u0E22\u0E27\u0E07\u0E28\u0E18\u0E23 \u0E28\u0E34\u0E23\u0E34\u0E2A\u0E21\u0E1A\u0E31\u0E15\u0E34
+    \u0E41\u0E25\u0E30\r\n\u0E19\u0E32\u0E22\u0E18\u0E35\u0E23\u0E13\u0E31\u0E0F\u0E10\u0E4C
+    \u0E2B\u0E19\u0E39\u0E23\u0E2D\u0E14 \u0E08\u0E32\u0E01\u0E42\u0E23\u0E07\u0E40\u0E23\u0E35\u0E22\u0E19\u0E19\u0E27\u0E21\u0E34\u0E19\u0E17\u0E23\u0E32\u0E02\u0E34\u0E19\u0E39\u0E17\u0E34\u0E28
+    \u0E2A\u0E15\u0E23\u0E35\u0E27\u0E34\u0E17\u0E22\u0E32 \u0E52 \u0E20\u0E32\u0E22\u0E43\u0E15\u0E49\u0E01\u0E32\u0E23\u0E14\u0E39\u0E41\u0E25\u0E02\u0E2D\u0E07\u0E19\u0E32\u0E07\u0E27\u0E23\u0E31\u0E0D\u0E0D\u0E32
+    \u0E22\u0E2D\u0E14\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19 \u0E20\u0E32\u0E22\u0E43\u0E15\u0E49\u0E42\u0E04\u0E23\u0E07\u0E01\u0E32\u0E23\u0E0B\u0E31\u0E19\u0E19\u0E35\u0E48
+    \u0E2A\u0E41\u0E1B\u0E25\u0E0A : \u0E1F\u0E37\u0E49\u0E19\u0E1F\u0E39\u0E1C\u0E37\u0E19\u0E1B\u0E48\u0E32
+    \u0E0B\u0E36\u0E48\u0E07\u0E2A\u0E19\u0E31\u0E1A\u0E2A\u0E19\u0E38\u0E19\u0E42\u0E14\u0E22\u0E2A\u0E33\u0E19\u0E31\u0E01\u0E07\u0E32\u0E19\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E27\u0E34\u0E17\u0E22\u0E32\u0E28\u0E32\u0E2A\u0E15\u0E23\u0E4C\u0E41\u0E25\u0E30\u0E40\u0E17\u0E04\u0E42\u0E19\u0E42\u0E25\u0E22\u0E35\u0E41\u0E2B\u0E48\u0E07\u0E0A\u0E32\u0E15\u0E34
+    \u0E42\u0E14\u0E22\u0E21\u0E35\u0E27\u0E31\u0E15\u0E16\u0E38\u0E1B\u0E23\u0E30\u0E2A\u0E07\u0E04\u0E4C\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2A\u0E48\u0E07\u0E40\u0E2A\u0E23\u0E34\u0E21\u0E43\u0E2B\u0E49\u0E19\u0E31\u0E01\u0E40\u0E23\u0E35\u0E22\u0E19\u0E41\u0E25\u0E30\u0E19\u0E31\u0E01\u0E28\u0E36\u0E01\u0E29\u0E32\u0E44\u0E14\u0E49\u0E40\u0E23\u0E35\u0E22\u0E19\u0E23\u0E39\u0E49\u0E41\u0E25\u0E30\u0E1D\u0E36\u0E01\u0E17\u0E31\u0E01\u0E29\u0E30\u0E43\u0E19\u0E01\u0E32\u0E23\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C
+    \u0E25\u0E34\u0E02\u0E2A\u0E34\u0E17\u0E18\u0E34\u0E4C\u0E02\u0E2D\u0E07\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\u0E19\u0E35\u0E49\u0E08\u0E36\u0E07\u0E40\u0E1B\u0E47\u0E19\u0E02\u0E2D\u0E07\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E12\u0E19\u0E32
+    \u0E0B\u0E36\u0E48\u0E07\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E44\u0E14\u0E49\u0E2D\u0E19\u0E38\u0E0D\u0E32\u0E15\u0E43\u0E2B\u0E49\u0E2A\u0E33\u0E19\u0E31\u0E01\u0E07\u0E32\u0E19\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E27\u0E34\u0E17\u0E22\u0E32\u0E28\u0E32\u0E2A\u0E15\u0E23\u0E4C\u0E41\u0E25\u0E30\u0E40\u0E17\u0E04\u0E42\u0E19\u0E42\u0E25\u0E22\u0E35\u0E41\u0E2B\u0E48\u0E07\u0E0A\u0E32\u0E15\u0E34\u0E40\u0E1C\u0E22\u0E41\u0E1E\u0E23\u0E48\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\u0E19\u0E35\u0E49\u0E15\u0E32\u0E21
+    \u201C\u0E15\u0E49\u0E19\u0E09\u0E1A\u0E31\u0E1A\u201D \u0E42\u0E14\u0E22\u0E44\u0E21\u0E48\u0E21\u0E35\u0E01\u0E32\u0E23\u0E41\u0E01\u0E49\u0E44\u0E02\u0E14\u0E31\u0E14\u0E41\u0E1B\u0E25\u0E07\u0E43\u0E14
+    \u0E46 \u0E17\u0E31\u0E49\u0E07\u0E2A\u0E34\u0E49\u0E19 \u0E43\u0E2B\u0E49\u0E41\u0E01\u0E48\u0E1A\u0E38\u0E04\u0E04\u0E25\u0E17\u0E31\u0E48\u0E27\u0E44\u0E1B\u0E44\u0E14\u0E49\u0E43\u0E0A\u0E49\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1B\u0E23\u0E30\u0E42\u0E22\u0E0A\u0E19\u0E4C\u0E2A\u0E48\u0E27\u0E19\u0E1A\u0E38\u0E04\u0E04\u0E25\u0E2B\u0E23\u0E37\u0E2D\u0E1B\u0E23\u0E30\u0E42\u0E22\u0E0A\u0E19\u0E4C\u0E17\u0E32\u0E07\u0E01\u0E32\u0E23\u0E28\u0E36\u0E01\u0E29\u0E32\u0E17\u0E35\u0E48\u0E44\u0E21\u0E48\u0E21\u0E35\u0E27\u0E31\u0E15\u0E16\u0E38\u0E1B\u0E23\u0E30\u0E2A\u0E07\u0E04\u0E4C\u0E43\u0E19\u0E40\u0E0A\u0E34\u0E07\u0E1E\u0E32\u0E13\u0E34\u0E0A\u0E22\u0E4C\r\n\u0E42\u0E14\u0E22\u0E44\u0E21\u0E48\u0E04\u0E34\u0E14\u0E04\u0E48\u0E32\u0E15\u0E2D\u0E1A\u0E41\u0E17\u0E19\u0E01\u0E32\u0E23\u0E43\u0E0A\u0E49\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C
+    \u0E14\u0E31\u0E07\u0E19\u0E31\u0E49\u0E19 \u0E2A\u0E33\u0E19\u0E31\u0E01\u0E07\u0E32\u0E19\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E27\u0E34\u0E17\u0E22\u0E32\u0E28\u0E32\u0E2A\u0E15\u0E23\u0E4C\u0E41\u0E25\u0E30\u0E40\u0E17\u0E04\u0E42\u0E19\u0E42\u0E25\u0E22\u0E35\u0E41\u0E2B\u0E48\u0E07\u0E0A\u0E32\u0E15\u0E34
+    \u0E08\u0E36\u0E07\u0E44\u0E21\u0E48\u0E21\u0E35\u0E2B\u0E19\u0E49\u0E32\u0E17\u0E35\u0E48\u0E43\u0E19\u0E01\u0E32\u0E23\u0E14\u0E39\u0E41\u0E25\u0E1A\u0E33\u0E23\u0E38\u0E07\u0E23\u0E31\u0E01\u0E29\u0E32
+    \u0E08\u0E31\u0E14\u0E01\u0E32\u0E23\u0E2D\u0E1A\u0E23\u0E21\u0E01\u0E32\u0E23\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19
+    \u0E2B\u0E23\u0E37\u0E2D\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E1B\u0E23\u0E30\u0E2A\u0E34\u0E17\u0E18\u0E34\u0E20\u0E32\u0E1E\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\u0E23\u0E27\u0E21\u0E17\u0E31\u0E49\u0E07\u0E44\u0E21\u0E48\u0E23\u0E31\u0E1A\u0E23\u0E2D\u0E07\u0E04\u0E27\u0E32\u0E21\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07\u0E2B\u0E23\u0E37\u0E2D\u0E1B\u0E23\u0E30\u0E2A\u0E34\u0E17\u0E18\u0E34\u0E20\u0E32\u0E1E\u0E01\u0E32\u0E23\u0E17\u0E33\u0E07\u0E32\u0E19\u0E02\u0E2D\u0E07\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C
+    \u0E15\u0E25\u0E2D\u0E14\u0E08\u0E19\u0E44\u0E21\u0E48\u0E23\u0E31\u0E1A\u0E1B\u0E23\u0E30\u0E01\u0E31\u0E19\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22\u0E15\u0E48\u0E32\u0E07
+    \u0E46 \u0E2D\u0E31\u0E19\u0E40\u0E01\u0E34\u0E14\u0E08\u0E32\u0E01\u0E01\u0E32\u0E23\u0E43\u0E0A\u0E49\u0E0B\u0E2D\u0E1F\u0E15\u0E4C\u0E41\u0E27\u0E23\u0E4C\u0E19\u0E35\u0E49\u0E17\u0E31\u0E49\u0E07\u0E2A\u0E34\u0E49\u0E19\r\n\r\nLicense
+    Agreement\n\r\n          This software is a work developed by Panuwat Santaveesuk
+    , Wongsathorn Sirisombat\r\n and Wongsathorn Sirisombat from NAWAMINTHARACHINUTHIT
+    SATRIWITTAYA 2 SCHOOL under the provision of Waranya Yoddamnern under SUNNY SPLASH
+    : FOREST REVIVAL, which has been supported by the National Science and Technology
+    Development Agency (NSTDA), in order to encourage pupils and students to learn
+    and practice their skills in developing software. Therefore, the intellectual
+    property of this software shall belong to the developer and the developer gives
+    NSTDA a permission to distribute this software as an \u201Cas is\u201D and non-modified
+    software for a temporary and non-exclusive use without remuneration to anyone
+    for his or her own purpose or academic purpose, which are not commercial purposes.
+    In this connection, NSTDA shall not be responsible to the user for taking care,
+    maintaining, training, or developing the efficiency of this software. Moreover,
+    NSTDA shall not be liable for any error, software efficiency and damages in connection
+    with or arising out of\r\nthe use of the software.\u201D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 513786701a3dbab41b61abeb9f4871ca, type: 2}
   m_sharedMaterial: {fileID: -7112804500418676620, guid: 513786701a3dbab41b61abeb9f4871ca,
@@ -8014,8 +7999,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8837,8 +8822,8 @@ RectTransform:
   m_GameObject: {fileID: 1458708323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1044135897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11007,8 +10992,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -17}
+  m_AnchoredPosition: {x: 14.982, y: -16.23}
+  m_SizeDelta: {x: -36.206, y: -33.23}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1925506705
 MonoBehaviour:
