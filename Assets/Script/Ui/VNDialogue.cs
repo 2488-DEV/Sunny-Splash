@@ -25,6 +25,7 @@ public class VNDialogue : MonoBehaviour
 
     private int index;
     private bool isTyping;
+    public bool isDialogue;
 
     void Start()
     {
@@ -54,7 +55,7 @@ public class VNDialogue : MonoBehaviour
 
     void Update()
     {
-        if (dialogueBox.activeInHierarchy && Input.GetKeyDown(KeyCode.Space))
+        if (dialogueBox.activeInHierarchy && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             if (isTyping)
             {
@@ -86,6 +87,7 @@ public class VNDialogue : MonoBehaviour
 
     void StartConversation()
     {
+        isDialogue = true;
         hasPlayed = true;
         index = 0;
         dialogueBox.SetActive(true);
@@ -135,6 +137,7 @@ public class VNDialogue : MonoBehaviour
         else
         {
             dialogueBox.SetActive(false);
+            isDialogue = false;
         }
     }
 }

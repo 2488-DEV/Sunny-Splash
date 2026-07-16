@@ -7,6 +7,9 @@ public class PlayerCheat : MonoBehaviour
     [Tooltip("ใส่ความเร็วที่ต้องการให้วิ่งเร็วขึ้นตอนเปิดสูตรโกง")]
     public float cheatSpeedMultiplier = 2.5f; 
 
+    public OverHeatBar overHeatBar;
+    public StaminaBar staminaBar;
+    public PlayerScript player;
     private PlayerMovement playerMovement;
     private float originalSpeed;
     private bool isCheatActive = false; // ตัวแปรเช็คสถานะ เปิด/ปิด
@@ -31,6 +34,14 @@ public class PlayerCheat : MonoBehaviour
     {
         if (playerMovement == null) return;
 
+        if (isCheatActive)
+            {
+                overHeatBar.slider.value = 0;
+                player.playerHp = 3;
+                staminaBar.currentStamina = 100;
+
+            }
+
         // เปลี่ยนมาใช้ GetKeyDown เพื่อตรวจจับการกดปุ่ม "ครั้งเดียว" (ไม่นับตอนกดค้าง)
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
@@ -42,6 +53,7 @@ public class PlayerCheat : MonoBehaviour
                 // เปิด Cheat: คูณความเร็ว
                 playerMovement.speed = originalSpeed * cheatSpeedMultiplier;
                 Debug.Log("💥 Cheat ON: เปิดโหมดวิ่งเร็วทะลุนรกกวัก!");
+                overHeatBar.slider.value = 0;
             }
             else
             {

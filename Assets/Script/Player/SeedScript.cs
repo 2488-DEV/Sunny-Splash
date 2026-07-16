@@ -5,6 +5,7 @@ public class SeedScript : MonoBehaviour
     public bool IsInRange;
     private PlayerScript player;
     private ShovelScript shovel;
+    private FoodScript food;
     private GameObject highlight;
 
     void Start()
@@ -16,6 +17,7 @@ public class SeedScript : MonoBehaviour
         }
 
         shovel = FindFirstObjectByType<ShovelScript>();
+        food = FindFirstObjectByType<FoodScript>();
 
         // เก็บอ้างอิง Highlight ไว้จะได้ไม่โหลดบ่อยกวัก
         Transform h = transform.Find("Highlight");

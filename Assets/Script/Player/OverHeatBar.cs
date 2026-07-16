@@ -10,6 +10,7 @@ public class OverHeatBar : MonoBehaviour
     public SunSystem sunSystem;
     public BurningZone burningZone;
     public DeadZone deadZone; // ตัวเชื่อมกับสคริปต์พื้นที่ใหม่กวัก!
+    public VNDialogue dialogueManager;
 
     public Slider slider;
     public Image fillImage;
@@ -41,6 +42,8 @@ public class OverHeatBar : MonoBehaviour
         // --- อัปเดตสถานะจากโซนต่างๆ กวัก ---
         if (burningZone != null) isInBurningZone = burningZone.inBuring;
         if (deadZone != null) isInDeadZone = deadZone.isInDead;
+
+        if (dialogueManager.isDialogue) return;
 
         // --- 1. ระบบลดความร้อน (น้ำ/ร่ม) ---
         if (playerMovement.isInWater)

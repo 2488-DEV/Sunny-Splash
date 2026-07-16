@@ -6,6 +6,7 @@ public class ShovelScript : MonoBehaviour
     public bool IsInRange;
     private PlayerScript player;
     private SeedScript seed;
+    private FoodScript food;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class ShovelScript : MonoBehaviour
             player = playerObj.GetComponent<PlayerScript>();
         }
         seed = FindFirstObjectByType<SeedScript>();
+        food = FindFirstObjectByType<FoodScript>();
     }
 
     void Update()

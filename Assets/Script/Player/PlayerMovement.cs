@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public OverHeatBar overHeatBar;
     public SunSystem sunSystem;
     public StaminaBar staminaBar;
+    public VNDialogue dialogueManager;
 
     public float speed = 5f;
     public float sprint = 3f;
@@ -27,6 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (dialogueManager.isDialogue) 
+        {
+            animator.SetBool("IsRunning", false);
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (actionManager != null && actionManager.IsPerformingAction)
         {
             rb.linearVelocity = Vector2.zero;

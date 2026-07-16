@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SmartEnemyAI : MonoBehaviour
 {
+    public VNDialogue dialogueManager;
     // กำหนดสถานะ (States) ของ AI ตามเดฟล็อก
     public enum State { Idle, Pursuing, Attacking }
     [Header("AI State")]
@@ -11,11 +12,19 @@ public class SmartEnemyAI : MonoBehaviour
     [Header("Movement & Ranges")]
     public float speed = 3.5f;
     public float targetRange = 6f;   // รัศมีเริ่มไล่ล่า
-    public float attackRange = 1.2f; // รัศมีเข้าโจมตี
+    public float attackRange = 1.2f;
+    public float stopAttackRange = 1.6f; // รัศมีเข้าโจมตี
     public float tileSize = 1f;      // ขนาดของ Grid ไทล์ในเกม
+    public float slowTimer = 0f;
 
     [Header("Layer Setup")]
     public LayerMask obstacleLayer;  // เลือก Layer กำแพงใน Inspector
+
+    [Header("Combat")]
+    public float attackWindup = 0.45f;    // เวลาง้างก่อนตี
+    public float attackCooldown = 1.6f;    // เวลาพักหลังตี
+
+    public PlayerScript playerScript;
 
     private Transform player;
     private Rigidbody2D rb;
@@ -31,6 +40,7 @@ public class SmartEnemyAI : MonoBehaviour
         if (playerObj != null)
         {
             player = playerObj.transform;
+            playerScript = playerObj.GetComponent<PlayerScript>();
         }
 
         targetDestination = transform.position;
@@ -42,6 +52,21 @@ public class SmartEnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         if (player == null) return;
+
+        if (dialogueManager.isDialogue) 
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (slowTimer > 0f)
+        {
+            speed = 2.0f;
+            slowTimer -= Time.deltaTime;
+        }
+        else if (slowTimer <= 0f) {
+            speed = 3.5f;
+        }
 
         switch (currentState)
         {
@@ -56,14 +81,17 @@ public class SmartEnemyAI : MonoBehaviour
                 break;
 
             case State.Pursuing:
-                // เคลื่อนที่ไปหาจุดหมาย (ตัวผู้เล่น หรือ ไทล์ที่คำนวณได้)
-                Vector2 direction = (targetDestination - (Vector2)transform.position).normalized;
-                rb.linearVelocity = direction * speed;
 
+                if (HasLineOfSight(player.position)){
+                targetDestination = player.position;
+                }
+
+                MoveToTarget();
                 float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
                 // เงื่อนไข: เข้าใกล้ระยะโจมตี + สายตาเคลียร์มองเห็นผู้เล่นโดยตรง -> โจมตี
-                if (distanceToPlayer <= attackRange && HasLineOfSight(player.position))
+                // Attacking
+                if(distanceToPlayer <= attackRange)
                 {
                     currentState = State.Attacking;
                 }
@@ -75,12 +103,22 @@ public class SmartEnemyAI : MonoBehaviour
                 break;
 
             case State.Attacking:
-                rb.linearVelocity = Vector2.zero;
-                if (!isAttacking)
-                {
-                    StartCoroutine(PerformAttackRoutine());
-                }
+
+            rb.linearVelocity = Vector2.zero;
+
+            // ถ้าผู้เล่นหนีออกไปแล้ว
+            if (Vector2.Distance(transform.position, player.position) > attackRange)
+            {
+                currentState = State.Pursuing;
                 break;
+            }
+
+            if (!isAttacking)
+            {
+                StartCoroutine(PerformAttackRoutine());
+            }
+
+            break;
         }
     }
 
@@ -99,19 +137,12 @@ public class SmartEnemyAI : MonoBehaviour
 
     // ลูปคำนวณหาไทล์ดักทางเมื่อผู้เล่นเดินหลบมุมตึก
     IEnumerator TileLOSLogicLoop()
-    {
+    {   
         while (true)
         {
             yield return new WaitForSeconds(0.2f); // หน่วงเวลา 0.2 วินาทีตามคลิป
 
             if (player == null || currentState != State.Pursuing) continue;
-
-            // 1. ถ้าศัตรูยังมองเห็นตัวผู้เล่นตรงๆ -> วิ่งล็อกเป้าไปที่ตัวผู้เล่นเลย
-            if (HasLineOfSight(player.position))
-            {
-                targetDestination = player.position;
-                continue;
-            }
 
             // 2. ถ้าหลุดสายตา (LOS False): ค้นหาไทล์ดักทางรอบๆ ตัวผู้เล่น
             Vector2 bestTile = targetDestination;
@@ -156,13 +187,37 @@ public class SmartEnemyAI : MonoBehaviour
     IEnumerator PerformAttackRoutine()
     {
         isAttacking = true;
-        Debug.Log("ศัตรูใช้ท่าพุ่งชน / โจมตีผู้เล่น!");
 
-        // ตรงนี้สามารถใส่โค้ดเปิดเปิดกล่อง Hitbox หรือสั่งเล่นอนิเมชันโจมตีได้
-        yield return new WaitForSeconds(1.0f); // คูลดาวน์สถานะโจมตี 1 วินาที
+        rb.linearVelocity = Vector2.Lerp( rb.linearVelocity, Vector2.zero, 15f * Time.fixedDeltaTime );
+
+        Debug.Log("Attack!");
+
+        // รอจังหวะอนิเมชันฟัน
+        yield return new WaitForSeconds(attackWindup);
+
+        // ถ้ายังอยู่ในระยะค่อยทำดาเมจ
+        if (player != null &&
+            Vector2.Distance(transform.position, player.position) <= attackRange)
+        {
+            playerScript.TakeDamage(1);
+        }
+
+        // คูลดาวน์
+        yield return new WaitForSeconds(attackCooldown);
 
         isAttacking = false;
-        currentState = State.Pursuing; // โจมตีเสร็จกลับไปสถานะไล่ล่าต่อ
+
+        // ถ้าผู้เล่นยังอยู่ใกล้ ให้โจมตีต่อ
+        if (player != null &&
+            Vector2.Distance(transform.position, player.position) <= attackRange &&
+            HasLineOfSight(player.position))
+        {
+            currentState = State.Attacking;
+        }
+        else
+        {
+            currentState = State.Pursuing;
+        }
     }
 
     // วาดเส้นสีในหน้า Scene เพื่อให้ง่ายต่อการดีบั๊กเช็คสายตาของศัตรู
@@ -188,4 +243,15 @@ public class SmartEnemyAI : MonoBehaviour
             currentState = State.Pursuing;
         }
     }
+
+    void MoveToTarget()
+    {
+    Vector2 direction = (targetDestination - (Vector2)transform.position).normalized;
+
+    rb.linearVelocity = Vector2.MoveTowards(
+    rb.linearVelocity,
+    direction * speed,
+    20f * Time.fixedDeltaTime
+    );
+}
 }
