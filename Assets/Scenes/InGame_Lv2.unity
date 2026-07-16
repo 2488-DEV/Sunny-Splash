@@ -9648,8 +9648,8 @@ Transform:
   m_GameObject: {fileID: 390367992}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93.392, y: -64.5934, z: 0.074167415}
-  m_LocalScale: {x: 106.40731, y: 2.6055582, z: 1}
+  m_LocalPosition: {x: 78.892, y: -58.0934, z: 0.074167415}
+  m_LocalScale: {x: 77.41132, y: 3.6059613, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 650337045}
@@ -37116,7 +37116,7 @@ PrefabInstance:
     - target: {fileID: 2055102311959635375, guid: 7277dd75e907b27448ec1de08238d0bb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.830002
+      value: -10.34
       objectReference: {fileID: 0}
     - target: {fileID: 2055102311959635375, guid: 7277dd75e907b27448ec1de08238d0bb,
         type: 3}
@@ -42485,7 +42485,7 @@ Transform:
   m_GameObject: {fileID: 1293148671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146.1783, y: -15.2575, z: 0.074167415}
+  m_LocalPosition: {x: 120.19351, y: -15.2575, z: 0.074167415}
   m_LocalScale: {x: 4.5647855, y: 101.27955, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128641,7 +128641,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 1
   m_CompositeOrder: 0
-  m_Offset: {x: 103, y: 0.9841256}
+  m_Offset: {x: 89.5, y: 0.98412514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -128651,7 +128651,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 219, y: 20.003109}
+  m_Size: {x: 192, y: 20.003109}
   m_EdgeRadius: 0
 --- !u!4 &1610902935
 Transform:
@@ -128729,7 +128729,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 1
   m_CompositeOrder: 0
-  m_Offset: {x: 163, y: -46.240387}
+  m_Offset: {x: 148, y: -40.740387}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -128739,7 +128739,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 99, y: 75.480774}
+  m_Size: {x: 69, y: 64.480774}
   m_EdgeRadius: 0
 --- !u!66 &1610902938
 CompositeCollider2D:
@@ -128782,32 +128782,34 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1610902937}
     m_ColliderPaths:
-    - - X: 2124999936
+    - - X: 1824999936
         Y: -85000000
       - X: 1135000064
         Y: -85000000
       - X: 1135000064
-        Y: -839807744
-      - X: 2124999936
-        Y: -839807744
+        Y: -729807744
+      - X: 1824999936
+        Y: -729807744
   - m_Collider: {fileID: 1610902934}
     m_ColliderPaths:
-    - - X: 2124999936
+    - - X: 1855000064
         Y: 109856800
       - X: -65000000
         Y: 109856800
       - X: -65000000
         Y: -90174296
-      - X: 2124999936
+      - X: 1855000064
         Y: -90174296
   m_CompositePaths:
     m_Paths:
-    - - {x: 212.49997, y: -83.980774}
-      - {x: 212.49997, y: 10.985681}
+    - - {x: 182.49997, y: -72.980774}
+      - {x: 182.50002, y: -9.017429}
+      - {x: 185.50002, y: -9.0174}
+      - {x: 185.49998, y: 10.985681}
       - {x: -6.5, y: 10.98565}
       - {x: -6.499971, y: -9.017429}
       - {x: 113.50001, y: -9.017459}
-      - {x: 113.50003, y: -83.980774}
+      - {x: 113.50003, y: -72.980774}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -153796,8 +153798,8 @@ Transform:
   m_GameObject: {fileID: 1899239602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.4373, y: 33.56, z: 0.074167415}
-  m_LocalScale: {x: 225.39793, y: 3.6424687, z: 1}
+  m_LocalPosition: {x: 21.437302, y: 33.56, z: 0.074167415}
+  m_LocalScale: {x: 193.39142, y: 3.6424687, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 650337045}
