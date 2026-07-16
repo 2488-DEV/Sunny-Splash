@@ -18,6 +18,7 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.CompareTag("Player") && !hasPlayed && dialogueManager != null)
         {
             hasPlayed = true;
+            dialogueManager.isDialogue = true;
 
             // ส่งข้อมูลไปให้ตัวหลักสั่งทำงาน
             dialogueManager.StartTriggerDialogue(speakerName, sentences);

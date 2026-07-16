@@ -9,6 +9,7 @@ TagManager:
   - ContaminatedWater
   - Water
   - Enemy
+  - LockedArea
   layers:
   - Default
   - TransparentFX

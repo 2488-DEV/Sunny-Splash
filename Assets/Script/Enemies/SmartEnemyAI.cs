@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SmartEnemyAI : MonoBehaviour
 {
+    public VNDialogue dialogueManager;
     // กำหนดสถานะ (States) ของ AI ตามเดฟล็อก
     public enum State { Idle, Pursuing, Attacking }
     [Header("AI State")]
@@ -14,6 +15,7 @@ public class SmartEnemyAI : MonoBehaviour
     public float attackRange = 1.2f;
     public float stopAttackRange = 1.6f; // รัศมีเข้าโจมตี
     public float tileSize = 1f;      // ขนาดของ Grid ไทล์ในเกม
+    public float slowTimer = 0f;
 
     [Header("Layer Setup")]
     public LayerMask obstacleLayer;  // เลือก Layer กำแพงใน Inspector
@@ -50,6 +52,21 @@ public class SmartEnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         if (player == null) return;
+
+        if (dialogueManager.isDialogue) 
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (slowTimer > 0f)
+        {
+            speed = 2.0f;
+            slowTimer -= Time.deltaTime;
+        }
+        else if (slowTimer <= 0f) {
+            speed = 3.5f;
+        }
 
         switch (currentState)
         {
@@ -120,7 +137,7 @@ public class SmartEnemyAI : MonoBehaviour
 
     // ลูปคำนวณหาไทล์ดักทางเมื่อผู้เล่นเดินหลบมุมตึก
     IEnumerator TileLOSLogicLoop()
-    {
+    {   
         while (true)
         {
             yield return new WaitForSeconds(0.2f); // หน่วงเวลา 0.2 วินาทีตามคลิป

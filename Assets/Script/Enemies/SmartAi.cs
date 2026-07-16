@@ -216,7 +216,6 @@ public class SmartEnemyAIWithPatrol : MonoBehaviour
     {
         isAttacking = true;
         Debug.Log("ศัตรูใช้ท่าพุ่งชน / โจมตีผู้เล่น!");
-
         yield return new WaitForSeconds(1.0f);
 
         isAttacking = false;
