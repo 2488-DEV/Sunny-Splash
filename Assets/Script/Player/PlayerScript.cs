@@ -72,9 +72,11 @@ public class PlayerScript : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         if (playerHp > playerMaxHp) playerHp = playerMaxHp;
         
+        if (dialogueManager.isDialogue) return;
+
         float move = Input.GetAxisRaw("Horizontal");
         if (move != 0)
         {
@@ -177,39 +179,58 @@ public class PlayerScript : MonoBehaviour
                 }
                 else
                 {   
+                    // 1. หาพิกัดเมาส์ทั่วไปในโลกเกม 2D 
                     Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0; 
 
-                    Vector3 direction = (mousePos - player.transform.position).normalized;
-
+                    // 2. เสกกระสุนไข่ออกมา
                     GameObject newBullet = Instantiate(eggBullet, player.transform.position, Quaternion.identity);
                     SpriteRenderer eggSR = newBullet.GetComponent<SpriteRenderer>();
+                    if (eggSR != null) eggSR.enabled = true;
 
-                    eggSR.enabled = true;
+                    // ดึง EggScript ออกมาเตรียมไว้
+                    EggScript eggScript = newBullet.GetComponent<EggScript>();
 
-                    Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
-                    if (rb != null)
-                    {
-                        rb.velocity = direction * 20f;
-                        rb.angularVelocity = -500f;
-                    }
-
+                    // 3. ยิง Raycast เช็กวัตถุใต้เมาส์ปกติ
                     Vector2 mousePos2D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
                     RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, targetLayer);
 
-                    if (hit.collider != null)
+                    if (eggScript != null)
                     {
-                        Debug.Log($"[2D Hit] ชนวัตถุชื่อ: {hit.collider.name} | Tag: {hit.collider.tag}");
-
-                        if (hit.collider.CompareTag("Enemy"))
+                        // เช็กก่อนว่า เมาส์จิ้มโดนคอลไลเดอร์อะไรไหม (เช่น Area หรือ ศัตรูโดยตรง)
+                        if (hit.collider != null)
                         {
-                            Debug.Log("[SUCCESS] 2D Player เจอ Enemy Area แล้ว!");
+                            Debug.Log($"[Hit Something] ชนวัตถุ: {hit.collider.name} | Tag: {hit.collider.tag}");
+
+                            // เคส A: ถ้าคลิกโดนตัวศัตรูโดยตรง หรือ คลิกโดนพื้นที่เป้าหมาย (LockedArea)
+                            if (hit.collider.CompareTag("Enemy") || hit.collider.name.Contains("Area") || hit.collider.CompareTag("LockedArea"))
+                            {
+                                // ไปตามหาตัวศัตรู SmartEnemyAI ที่มีอยู่ในฉากตอนนั้นแทนการหาใต้เมาส์!
+                                SmartEnemyAI targetEnemy = Object.FindFirstObjectByType<SmartEnemyAI>();
+
+                                if (targetEnemy != null)
+                                {
+                                    Debug.Log($"[Lock Enemy] เจอศัตรูในฉากชื่อ {targetEnemy.name} สั่งล็อกพิกัดปัจจุบันของมัน!");
+                                    eggScript.SetTargetPoint(targetEnemy.transform); // ส่ง Transform ไปเด็ดพิกัด
+                                }
+                                else
+                                {
+                                    // ถ้าในฉากไม่มีศัตรูเหลืออยู่เลย ให้ยิงไปที่พิกัดเมาส์
+                                    eggScript.SetTargetPoint(mousePos);
+                                }
+                            }
+                            else
+                            {
+                                // ชนวัตถุอื่นๆ ที่ไม่เกี่ยว ยิงไปที่เมาส์ปกติ
+                                eggScript.SetTargetPoint(mousePos);
+                            }
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("[Failed 2D] เมาส์จิ้มลงไปในความว่างเปล่า ไม่โดน Collider 2D ตัวไหนใน Layer ที่กำหนดเลย");
+                        else
+                        {
+                            // เคส B: คลิกพื้นว่างเปล่า ไม่โดนอะไรเลย ยิงไปพิกัดเมาส์ปกติ
+                            Debug.Log("[Empty Click] ยิงไปพิกัดเมาส์");
+                            eggScript.SetTargetPoint(mousePos); 
+                        }
                     }
 
                     egg--;
