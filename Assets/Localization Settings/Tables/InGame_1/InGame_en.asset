@@ -46,21 +46,76 @@ MonoBehaviour:
     m_Localized: Quack!
     m_Metadata:
       m_Items: []
-  - m_Id: 16892441890816
-    m_Localized: Pause
+  - m_Id: 30169972576256
+    m_Localized: "\"Quack Quack! Hello there~ My name is 'Maple.' I'm the little
+      duck who takes care of this forest. It\u2019s so nice to meet you!"
     m_Metadata:
       m_Items: []
   - m_Id: 16868546940928
     m_Localized: Egg Mode
     m_Metadata:
       m_Items: []
-  - m_Id: 19146339225600
-    m_Localized: "\"Quack Quack! Hello there~ My name is 'Maple.' I'm the little
-      duck who takes care of this forest. It\u2019s so nice to meet you!"
+  - m_Id: 30747050086400
+    m_Localized: Pause
     m_Metadata:
       m_Items: []
   - m_Id: 27323441057792
     m_Localized: Maple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30332980006912
+    m_Localized: "\"Oh no... look at that! The sun is so scorching that our lush
+      green forest has turned all brown and dry. Let\u2019s work together to Refresh
+      this place and bring the greenery back, shall we?\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30373534732288
+    m_Localized: "\"Eek! But be careful\u2014it\u2019s super hot out here! Every
+      time I walk in the sun or do some work, my 'Overheat Bar' will start rising
+      really fast!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30409467334656
+    m_Localized: "\"If you want to move faster, just hold down the Shift key to run!
+      But keep an eye on my 'Stamina Gauge'\u2014if it runs out, I\u2019ll be too
+      tired to run and will need a little break to catch my breath."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30445999722496
+    m_Localized: "\"If you want to move faster, just hold down the Shift key to run!
+      But keep an eye on my 'Stamina Gauge'\u2014if it runs out, I\u2019ll be too
+      tired to run and will need a little break to catch my breath."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31141193027584
+    m_Localized: "\"Wow! Quick, take me for a dip! It\u2019ll cool me down, \r\nand
+      I can refill the water in my backpack too"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31292913586176
+    m_Localized: '"Once the pack is full, stand near a withered tree and press Spacebar
+      to splash it out. Splashhh!~"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31339524886528
+    m_Localized: "\"Let\u2019s see if this bucket of water can bring the greenery
+      back to life... I\u2019m counting on you! Quack! Quack!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31421368340480
+    m_Localized: "\"Ouch! The ground here is scorching! Be careful\u2014if we walk
+      on these Orange Areas, \r\nmy Heat Bar will skyrocket much faster than usual!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31507699699712
+    m_Localized: "\"Aha! But we have a trick up our sleeve. Look! If we stay under
+      the Cloud Shadows, \r\nthe sun can't reach me, and the heat won't rise at all.
+      It's so cool and comfy!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31544882204672
+    m_Localized: "\"Make sure to use the shadows to save our energy! Alright... stay
+      strong, \r\nMaple! Quack Quack!\""
     m_Metadata:
       m_Items: []
   references:
