@@ -27,6 +27,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-th-TH
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85c9f30b6ba8abc4ea05cf8fe746c85d
     m_Address: Information_th-TH
