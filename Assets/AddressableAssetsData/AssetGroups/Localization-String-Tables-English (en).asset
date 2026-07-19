@@ -35,6 +35,20 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e56f833a58673db49b6a9d71ceb68a61
+    m_Address: How To Play Panel_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7b8ff42d4528dc429d7d99a14a9ba3c
+    m_Address: Ui_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 7378d95afa71fbc4cb0d3ba626afd1a5, type: 2}
   m_SchemaSet:
