@@ -39,7 +39,7 @@ public class PlayerCheat : MonoBehaviour
                 overHeatBar.slider.value = 0;
                 player.playerHp = 3;
                 staminaBar.currentStamina = 100;
-
+                player.egg = 1000;    
             }
 
         // เปลี่ยนมาใช้ GetKeyDown เพื่อตรวจจับการกดปุ่ม "ครั้งเดียว" (ไม่นับตอนกดค้าง)

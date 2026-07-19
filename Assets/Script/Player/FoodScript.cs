@@ -23,10 +23,8 @@ public class FoodScript : MonoBehaviour
         if (h != null) highlight = h.gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // เช็คว่าอยู่ในระยะ และพลั่วไม่ได้ถูกใช้งานอยู่ (กันปุ่มซ้อน)
         if (IsInRange && (shovel == null || !shovel.IsInRange) && (seed == null || !seed.IsInRange))
         {
             if (Input.GetKeyDown(KeyCode.F))
