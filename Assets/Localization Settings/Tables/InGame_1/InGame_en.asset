@@ -82,9 +82,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 30445999722496
-    m_Localized: "\"If you want to move faster, just hold down the Shift key to run!
-      But keep an eye on my 'Stamina Gauge'\u2014if it runs out, I\u2019ll be too
-      tired to run and will need a little break to catch my breath."
+    m_Localized: "\"Alright! Use the W A S D keys to guide me around the forest.
+      I\u2019m ready to go! Quack Quack!"
     m_Metadata:
       m_Items: []
   - m_Id: 31141193027584
@@ -116,6 +115,14 @@ MonoBehaviour:
   - m_Id: 31544882204672
     m_Localized: "\"Make sure to use the shadows to save our energy! Alright... stay
       strong, \r\nMaple! Quack Quack!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46697287749632
+    m_Localized: '"mission failed"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49367243264000
+    m_Localized: '"MISSION COMPLETE"'
     m_Metadata:
       m_Items: []
   references:

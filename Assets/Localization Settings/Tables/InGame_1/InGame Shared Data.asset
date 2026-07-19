@@ -55,6 +55,10 @@ MonoBehaviour:
     m_Key: Maple
     m_Metadata:
       m_Items: []
+  - m_Id: 46697287749632
+    m_Key: mission failed
+    m_Metadata:
+      m_Items: []
   - m_Id: 30169972576256
     m_Key: DE_1_0
     m_Metadata:
@@ -97,6 +101,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 31544882204672
     m_Key: DDE_1_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49367243264000
+    m_Key: MISSION COMPLETE
     m_Metadata:
       m_Items: []
   m_Metadata:
