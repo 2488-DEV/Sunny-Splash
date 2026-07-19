@@ -51,6 +51,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        UpdateTreeCount();
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         dialogueManager = FindFirstObjectByType<VNDialogue>();
@@ -81,10 +82,10 @@ public class PlayerScript : MonoBehaviour
             isLeft = (move == -1);
             isRight = (move == 1);
         }
-
+        
         EquipEgg();
         ShootEgg();
-        UpdateTreeCount();
+        
     }
 
     public void UpdateSeedCount() { if (seedCount != null) seedCount.text = "Seed : " + seed; }
@@ -114,7 +115,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void UpdateTreeCount() { if (treeCount != null) treeCount.text = "Remaining : " + tree; }
+    public void UpdateTreeCount() { if (treeCount != null) treeCount.text = treeCount.text + ":" + tree; }
     public void RefreshAllUI() { UpdateSeedCount(); UpdateTreeCount(); UpdateEggCount(); }
 
     public void EquipEgg()

@@ -56,7 +56,7 @@ public class EggScript : MonoBehaviour
             }
     
             direction.Normalize();
-            rb.velocity = direction * speed;
+            rb.linearVelocity = direction * speed;
         }
     }
 

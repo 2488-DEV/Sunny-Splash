@@ -25,8 +25,23 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f86a4a55f32fc943b5775457fc8dc3c
+    m_Address: Assets/Localization Settings/Tables_assets/MainMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c3fadc23f504294aab194014862d3d3
+    m_Address: Assets/Localization Settings/Tables/InGame_1/Ui Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9175b911b4e4eb4a80c6dc97a6cbe2b
     m_Address: Assets/Localization Settings/Tables/MainMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea20cb626724a8241b38f3ced59bd0ae
+    m_Address: Assets/Localization Settings/Tables/How To Play Panel Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

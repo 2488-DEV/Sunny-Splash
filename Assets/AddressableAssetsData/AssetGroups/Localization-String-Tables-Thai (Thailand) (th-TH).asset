@@ -15,6 +15,19 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Thai (Thailand) (th-TH)
   m_GUID: 5c0e9c0abc1ba4d4493a30e1895a33e7
   m_SerializeEntries:
+  - m_GUID: 06d795bc5b537e14f92dae1fddfc8979
+    m_Address: How To Play Panel_th-TH
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th-TH
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37c19da2d72d5454f8f3e66d8ab2a153
+    m_Address: Ui_th-TH
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th-TH
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85c9f30b6ba8abc4ea05cf8fe746c85d
     m_Address: Information_th-TH
     m_ReadOnly: 1
