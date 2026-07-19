@@ -125,6 +125,14 @@ MonoBehaviour:
     m_Localized: '"MISSION COMPLETE"'
     m_Metadata:
       m_Items: []
+  - m_Id: 65825948012544
+    m_Localized: 'Remaining :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66013492121600
+    m_Localized: 'Remaining :'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
