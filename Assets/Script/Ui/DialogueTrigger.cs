@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class DialogueTrigger : MonoBehaviour
 {
     [Header("Dialogue Content")]
-    public string speakerName = "Maple";
-    [TextArea(3, 10)]
-    public string[] sentences;
+    public LocalizedString speakerName;
+    public LocalizedString[] sentences;
 
     [Header("Reference")]
     public VNDialogue dialogueManager; // ลาก DialogueManage มาใส่ช่องนี้

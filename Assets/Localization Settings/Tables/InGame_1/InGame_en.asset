@@ -1,0 +1,212 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: InGame_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 8c3fadc23f504294aab194014862d3d3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 26633801728
+    m_Localized: 'Remaining :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16571586023424
+    m_Localized: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16641156943872
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16691006246912
+    m_Localized: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16739051999232
+    m_Localized: Pick Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16773403348992
+    m_Localized: Drop Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16812343267328
+    m_Localized: Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30169972576256
+    m_Localized: "\"Quack Quack! Hello there~ My name is 'Maple.' I'm the little
+      duck who takes care of this forest. It\u2019s so nice to meet you!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16868546940928
+    m_Localized: Egg Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30747050086400
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27323441057792
+    m_Localized: Maple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30332980006912
+    m_Localized: "\"Oh no... look at that! The sun is so scorching that our lush
+      green forest has turned all brown and dry. Let\u2019s work together to Refresh
+      this place and bring the greenery back, shall we?\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30373534732288
+    m_Localized: "\"Eek! But be careful\u2014it\u2019s super hot out here! Every
+      time I walk in the sun or do some work, my 'Overheat Bar' will start rising
+      really fast!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30409467334656
+    m_Localized: "\"If you want to move faster, just hold down the Shift key to run!
+      But keep an eye on my 'Stamina Gauge'\u2014if it runs out, I\u2019ll be too
+      tired to run and will need a little break to catch my breath."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30445999722496
+    m_Localized: "\"Alright! Use the W A S D keys to guide me around the forest.
+      I\u2019m ready to go! Quack Quack!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31141193027584
+    m_Localized: "\"Wow! Quick, take me for a dip! It\u2019ll cool me down, \r\nand
+      I can refill the water in my backpack too"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31292913586176
+    m_Localized: '"Once the pack is full, stand near a withered tree and press Spacebar
+      to splash it out. Splashhh!~"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31339524886528
+    m_Localized: "\"Let\u2019s see if this bucket of water can bring the greenery
+      back to life... I\u2019m counting on you! Quack! Quack!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31421368340480
+    m_Localized: "\"Ouch! The ground here is scorching! Be careful\u2014if we walk
+      on these Orange Areas, \r\nmy Heat Bar will skyrocket much faster than usual!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31507699699712
+    m_Localized: "\"Aha! But we have a trick up our sleeve. Look! If we stay under
+      the Cloud Shadows, \r\nthe sun can't reach me, and the heat won't rise at all.
+      It's so cool and comfy!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31544882204672
+    m_Localized: "\"Make sure to use the shadows to save our energy! Alright... stay
+      strong, \r\nMaple! Quack Quack!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46697287749632
+    m_Localized: '"mission failed"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49367243264000
+    m_Localized: '"MISSION COMPLETE"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65825948012544
+    m_Localized: 'Remaining :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66013492121600
+    m_Localized: 'Remaining :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69255651364864
+    m_Localized: '"Quack! This is... ''The Thirsty Valley'', isn''t it? Why is it
+      so incredibly parched here?"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69526821507072
+    m_Localized: "\"It looks like these ashes are smothering the soil, keeping the
+      trees from growing. \r\nWe have to do something about this, quack!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69626876628992
+    m_Localized: '"Quack! Look over there, it''s a Shovel! This place is so dried
+      out... we definitely need to plant some more trees."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69717318406144
+    m_Localized: '"Try pressing F to pick it up! If you want to switch to something
+      else or just put it down, simply press Q to drop the item on the ground."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69742219988992
+    m_Localized: '"Once you have the shovel, walk over to those mounds of ash and
+      press Spacebar to dig a hole for planting. Heave-ho!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69801191903232
+    m_Localized: '"After digging, just drop the seeds in. Now, where did I put them...?
+      Anyway, once you find them, don''t forget to water the saplings! They need
+      all the refreshing energy they can get. Quack, quack!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85260058464256
+    m_Localized: '"This is ''The Ancient Heartwood'' once the beating heart of this
+      entire forest, quack! But look around... its life force has faded away, leaving
+      nothing but this eerie silence, quack."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85311841341440
+    m_Localized: '"These strange-colored waters are heavily contaminated with plant-killing
+      toxins, quack!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85380548235264
+    m_Localized: '"Never ever use it to water the plants! Even a drop will wither
+      them to ash instantly, quack!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85397405143040
+    m_Localized: '"Quack!! W-what is this place?! The heat is so intense... even
+      the air is shimmering like a mirage!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85542846828544
+    m_Localized: "\"The ground is completely scorched... nothing can survive here.
+      If I stay still for too long, \r\nmy Overheat bar will definitely max out!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87889761243136
+    m_Localized: '"These ancient trees were once the pillars that held the world''s
+      balance together, quack!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87928013295616
+    m_Localized: '"Now that they''re gone, you must find a shovel and seeds to replant
+      them, quack!"
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87938213842944
+    m_Localized: '"This is our only shot at making the world beautiful again, quack!
+      quack!"'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

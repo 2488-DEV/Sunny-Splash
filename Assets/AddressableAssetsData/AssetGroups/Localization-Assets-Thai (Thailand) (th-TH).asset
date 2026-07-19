@@ -27,6 +27,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-th-TH
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6c445864f0812542af7316c0bd53b58
+    m_Address: "\u0E25\u0E2D\u0E07\u0E2D\u0E35\u0E01\u0E04\u0E23\u0E31\u0E49\u0E07
+      \u0E20\u0E32\u0E29\u0E32\u0E44\u0E17\u0E22"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th-TH
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 7378d95afa71fbc4cb0d3ba626afd1a5, type: 2}
   m_SchemaSet:

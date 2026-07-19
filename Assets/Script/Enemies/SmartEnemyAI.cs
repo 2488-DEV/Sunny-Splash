@@ -16,13 +16,18 @@ public class SmartEnemyAI : MonoBehaviour
     public float stopAttackRange = 1.6f; // รัศมีเข้าโจมตี
     public float tileSize = 1f;      // ขนาดของ Grid ไทล์ในเกม
     public float slowTimer = 0f;
+    public SpriteRenderer sr; // เพิ่มตัวแปร SpriteRenderer เพื่อใช้ในการพลิกภาพ
 
     [Header("Layer Setup")]
     public LayerMask obstacleLayer;  // เลือก Layer กำแพงใน Inspector
+    public LayerMask stopLayer;
 
     [Header("Combat")]
     public float attackWindup = 0.45f;    // เวลาง้างก่อนตี
     public float attackCooldown = 1.6f;    // เวลาพักหลังตี
+
+    [Header("Animation")]
+    public Animator animator;
 
     public PlayerScript playerScript;
 
@@ -34,7 +39,8 @@ public class SmartEnemyAI : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         // ค้นหาวัตถุที่ใส่ Tag ว่า Player
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
@@ -47,6 +53,13 @@ public class SmartEnemyAI : MonoBehaviour
 
         // สั่งให้ระบบคำนวณไทล์ดักทางทำงานทุกๆ 0.2 วินาที (ไม่รันทุกเฟรมเพื่อประหยัด RAM)
         StartCoroutine(TileLOSLogicLoop());
+    }
+
+    void Update()
+    {
+        // อัปเดตอนิเมชันตามสถานะ
+        animator.SetBool("IsRunning", currentState == State.Pursuing);
+        animator.SetBool("IsAttacking", currentState == State.Attacking);
     }
 
     void FixedUpdate()
@@ -134,6 +147,24 @@ public class SmartEnemyAI : MonoBehaviour
         // ถ้าชนสิ่งกีดขวาง แปลว่าไม่มีสายตา (LOS False) แต่ถ้าไม่ชนอะไรเลย แปลว่ามองเห็นเคลียร์ (LOS True)
         return hit.collider == null;
     }
+    bool IsStopAhead()
+{
+    Vector2 direction = (targetDestination - (Vector2)transform.position).normalized;
+
+    // ถ้าไม่มีทิศทางก็ไม่ต้องเช็ค
+    if (direction == Vector2.zero)
+        return false;
+
+    // ยิง Raycast สั้นๆ ไปด้านหน้าของศัตรู
+    RaycastHit2D hit = Physics2D.Raycast(
+        transform.position,
+        direction,
+        0.5f,
+        stopLayer
+    );
+
+    return hit.collider != null;
+}
 
     // ลูปคำนวณหาไทล์ดักทางเมื่อผู้เล่นเดินหลบมุมตึก
     IEnumerator TileLOSLogicLoop()
@@ -245,13 +276,28 @@ public class SmartEnemyAI : MonoBehaviour
     }
 
     void MoveToTarget()
-    {
+{
     Vector2 direction = (targetDestination - (Vector2)transform.position).normalized;
 
+    if (direction.x > 0.01f)
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+    else if (direction.x < -0.01f)
+    {
+        transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    if (IsStopAhead())
+    {
+        rb.linearVelocity = Vector2.zero;
+        return;
+    }
+
     rb.linearVelocity = Vector2.MoveTowards(
-    rb.linearVelocity,
-    direction * speed,
-    20f * Time.fixedDeltaTime
+        rb.linearVelocity,
+        direction * speed,
+        20f * Time.fixedDeltaTime
     );
 }
 }
