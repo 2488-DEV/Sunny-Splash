@@ -39465,8 +39465,6 @@ MonoBehaviour:
   sentences:
   - '"These strange-colored waters are heavily contaminated with plant-killing toxins,
     quack!"'
-  - '"These strange-colored waters are heavily contaminated with plant-killing toxins,
-    quack!"'
   - '"Never ever use it to water the plants! Even a drop will wither them to ash
     instantly, quack!"'
   dialogueManager: {fileID: 770683159}
