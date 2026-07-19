@@ -9393,7 +9393,7 @@ PrefabInstance:
     - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: seed
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3798479514213425096, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}

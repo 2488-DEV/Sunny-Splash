@@ -26,7 +26,6 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI eggCount;
     private Vector3 originalPosition;
     public GameObject eggBullet;
-    public Transform firePoint;
 
     [Header("Victory Settings")]
     public GameObject victoryPanel;
@@ -67,7 +66,6 @@ public class PlayerScript : MonoBehaviour
         {
             victoryPanel.SetActive(false);
         }
-
         RefreshAllUI();
     }
 
@@ -86,6 +84,7 @@ public class PlayerScript : MonoBehaviour
 
         EquipEgg();
         ShootEgg();
+        UpdateTreeCount();
     }
 
     public void UpdateSeedCount() { if (seedCount != null) seedCount.text = "Seed : " + seed; }
