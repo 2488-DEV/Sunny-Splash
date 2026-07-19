@@ -1023,9 +1023,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 27323441057792
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -2381,9 +2381,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 27323441057792
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -2826,6 +2826,14 @@ MonoBehaviour:
   typingSound: {fileID: 8300000, guid: 9a528bfd71db2384ea5c2792f27912a5, type: 3}
   nextClickSound: {fileID: 8300000, guid: 75f50069af224154a9e20950156b65d1, type: 3}
   sentences:
+  - m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   - m_TableReference:
       m_TableCollectionName: 
     m_TableEntryReference:

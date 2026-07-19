@@ -61,6 +61,10 @@ MonoBehaviour:
       \u0E22\u0E34\u0E19\u0E14\u0E35\u0E17\u0E35\u0E48\u0E44\u0E14\u0E49\u0E23\u0E39\u0E49\u0E08\u0E31\u0E01\u0E19\u0E30!\""
     m_Metadata:
       m_Items: []
+  - m_Id: 27323441057792
+    m_Localized: "\u0E40\u0E21\u0E40\u0E1B\u0E34\u0E49\u0E25"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

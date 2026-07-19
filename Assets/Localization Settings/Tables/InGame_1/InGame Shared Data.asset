@@ -55,6 +55,10 @@ MonoBehaviour:
     m_Key: E_1_0
     m_Metadata:
       m_Items: []
+  - m_Id: 27323441057792
+    m_Key: Maple
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

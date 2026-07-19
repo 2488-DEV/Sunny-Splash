@@ -59,6 +59,10 @@ MonoBehaviour:
       duck who takes care of this forest. It\u2019s so nice to meet you!"
     m_Metadata:
       m_Items: []
+  - m_Id: 27323441057792
+    m_Localized: Maple
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

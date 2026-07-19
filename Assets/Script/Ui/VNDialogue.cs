@@ -15,7 +15,6 @@ public class VNDialogue : MonoBehaviour
     public AudioClip nextClickSound;
 
     [Header("Text Settings")]
-    [TextArea(3, 10)]
     public LocalizedString[] sentences;
     public float typingSpeed = 0.04f;
 
