@@ -3456,42 +3456,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 27323441057792
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   sentences:
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69626876628992
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69717318406144
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69742219988992
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69801191903232
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -4874,17 +4874,17 @@ MonoBehaviour:
   nextClickSound: {fileID: 8300000, guid: 75f50069af224154a9e20950156b65d1, type: 3}
   sentences:
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69255651364864
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   - m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:8c3fadc23f504294aab194014862d3d3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 69526821507072
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
