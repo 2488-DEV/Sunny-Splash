@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: MainMenu Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: MainMenu
+  m_TableCollectionNameGuidString: a9175b911b4e4eb4a80c6dc97a6cbe2b
+  m_Entries:
+  - m_Id: 37136338944
+    m_Key: START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49618587648
+    m_Key: HOW TO PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82879418368
+    m_Key: OPTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790758247960576
+    m_Key: The Beginning of Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790760626130944
+    m_Key: The Thirsty Valley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790763545366528
+    m_Key: The Prowling Woods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790769375449088
+    m_Key: The Ancient Heartwood
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4179326484853817584
+  references:
+    version: 2
+    RefIds:
+    - rid: 4179326484853817584
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1784024439417

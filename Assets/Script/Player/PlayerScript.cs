@@ -18,15 +18,17 @@ public class PlayerScript : MonoBehaviour
     [Header("Status Settings")]
     public int seed;
     public TextMeshProUGUI seedCount;
+    public TextMeshProUGUI seedCountText;
 
     public int tree;
     public TextMeshProUGUI treeCount;
+    public TextMeshProUGUI treeCountText;
 
     public int egg;
-    public TextMeshProUGUI eggCount;
-    private Vector3 originalPosition;
     public GameObject eggBullet;
-    public Transform firePoint;
+    public TextMeshProUGUI eggCount;
+    public TextMeshProUGUI eggCountText;
+    private Vector3 originalPosition;
 
     [Header("Victory Settings")]
     public GameObject victoryPanel;
@@ -67,7 +69,6 @@ public class PlayerScript : MonoBehaviour
         {
             victoryPanel.SetActive(false);
         }
-
         RefreshAllUI();
     }
 
@@ -83,14 +84,23 @@ public class PlayerScript : MonoBehaviour
             isLeft = (move == -1);
             isRight = (move == 1);
         }
-
+        
         EquipEgg();
         ShootEgg();
+        
     }
 
-    public void UpdateSeedCount() { if (seedCount != null) seedCount.text = "Seed : " + seed; }
+    public void UpdateSeedCount()
+{
+    if (seedCount != null)
+        seedCount.text = seed.ToString();
+}
 
-    public void UpdateEggCount() { if (eggCount != null) eggCount.text = "Egg : " + egg; }
+    public void UpdateEggCount()
+{
+    if (eggCount != null)
+        eggCount.text = egg.ToString();
+}
     public void UseSeed() { if (seed > 0) { seed--; UpdateSeedCount(); } }  
     
     public void DecreaseTree()
@@ -115,7 +125,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void UpdateTreeCount() { if (treeCount != null) treeCount.text = "Remaining : " + tree; }
+    public void UpdateTreeCount()
+{
+    if (treeCount != null)
+        treeCount.text = tree.ToString();
+}
     public void RefreshAllUI() { UpdateSeedCount(); UpdateTreeCount(); UpdateEggCount(); }
 
     public void EquipEgg()
