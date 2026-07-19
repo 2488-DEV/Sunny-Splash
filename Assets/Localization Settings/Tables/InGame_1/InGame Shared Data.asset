@@ -10,13 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Ui Shared Data
+  m_Name: InGame Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Ui
+  m_TableCollectionName: InGame
   m_TableCollectionNameGuidString: 8c3fadc23f504294aab194014862d3d3
   m_Entries:
   - m_Id: 26633801728
     m_Key: TreeCountText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16571586023424
+    m_Key: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16641156943872
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16691006246912
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16739051999232
+    m_Key: Pick Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16773403348992
+    m_Key: Drop Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16812343267328
+    m_Key: Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16868546940928
+    m_Key: Egg Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16892441890816
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19146339225600
+    m_Key: E_1_0
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
 
     public int tree;
     public TextMeshProUGUI treeCount;
+    public TextMeshProUGUI treeCountText;
 
     public int egg;
     public TextMeshProUGUI eggCount;
@@ -51,7 +52,6 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        UpdateTreeCount();
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         dialogueManager = FindFirstObjectByType<VNDialogue>();
@@ -115,7 +115,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void UpdateTreeCount() { if (treeCount != null) treeCount.text = treeCount.text + ":" + tree; }
+    public void UpdateTreeCount()
+{
+    if (treeCount != null)
+        treeCount.text = tree.ToString();
+}
     public void RefreshAllUI() { UpdateSeedCount(); UpdateTreeCount(); UpdateEggCount(); }
 
     public void EquipEgg()

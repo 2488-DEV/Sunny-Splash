@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.Localization;
 
 public class VNDialogue : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class VNDialogue : MonoBehaviour
 
     [Header("Text Settings")]
     [TextArea(3, 10)]
-    public string[] sentences;
+    public LocalizedString[] sentences;
     public float typingSpeed = 0.04f;
 
     [Header("Trigger Settings")]
@@ -40,9 +41,9 @@ public class VNDialogue : MonoBehaviour
     }
 
     // --- ฟังก์ชันใหม่สำหรับรับข้อมูลจากสคริปต์ DialogueTrigger (บ่อน้ำ) ---
-    public void StartTriggerDialogue(string name, string[] newSentences)
+    public void StartTriggerDialogue(LocalizedString name, LocalizedString[] newSentences)
     {
-        nameText.text = name;
+        StartCoroutine(SetSpeakerName(name));
         sentences = newSentences;
 
         hasPlayed = true;
@@ -50,7 +51,7 @@ public class VNDialogue : MonoBehaviour
         dialogueBox.SetActive(true);
 
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeText(sentences[index]));
+        StartCoroutine(ShowSentence(index));
     }
 
     void Update()
@@ -93,7 +94,7 @@ public class VNDialogue : MonoBehaviour
         dialogueBox.SetActive(true);
 
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeText(sentences[index]));
+        StartCoroutine(ShowSentence(index));
     }
 
     IEnumerator TypeText(string line)
@@ -122,7 +123,7 @@ public class VNDialogue : MonoBehaviour
     void FinishLineImmediately()
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        contentText.text = sentences[index];
+        contentText.text = sentences[index].GetLocalizedStringAsync().Result;
         isTyping = false;
     }
 
@@ -132,7 +133,7 @@ public class VNDialogue : MonoBehaviour
         {
             index++;
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-            typingCoroutine = StartCoroutine(TypeText(sentences[index]));
+            StartCoroutine(ShowSentence(index));
         }
         else
         {
@@ -140,4 +141,21 @@ public class VNDialogue : MonoBehaviour
             isDialogue = false;
         }
     }
+
+    IEnumerator ShowSentence(int i)
+{
+    var handle = sentences[i].GetLocalizedStringAsync();
+
+    yield return handle;
+
+    typingCoroutine = StartCoroutine(TypeText(handle.Result));
+}
+IEnumerator SetSpeakerName(LocalizedString speaker)
+{
+    var handle = speaker.GetLocalizedStringAsync();
+
+    yield return handle;
+
+    nameText.text = handle.Result;
+}
 }

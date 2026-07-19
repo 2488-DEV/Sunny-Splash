@@ -7177,7 +7177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aab9d148976aa4797cf365b15483e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 770683159}
   currentState: 0
   speed: 5
   targetRange: 9
