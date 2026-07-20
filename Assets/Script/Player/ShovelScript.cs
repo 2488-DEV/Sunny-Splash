@@ -19,10 +19,40 @@ public class ShovelScript : MonoBehaviour
         food = FindFirstObjectByType<FoodScript>();
     }
 
+    void OnEnable() 
+    { 
+        GameInput.OnPickUp += TryPickUpShovel; 
+        GameInput.OnDrop += TryDropShovel; // ฟัง Event Drop
+    }   
+
+    void OnDisable() 
+    { 
+        GameInput.OnPickUp -= TryPickUpShovel; 
+        GameInput.OnDrop -= TryDropShovel; 
+    }   
+
+    // ฟังก์ชันใหม่สำหรับการวางพลั่ว
+    void TryDropShovel()
+    {
+        // เช็กว่าถือพลั่วอยู่ไหม ถ้าไม่ถือก็ไม่ต้อง Drop
+        if (player != null && player.IsShovel)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 130f);
+            player.IsShovel = false;
+            IsInRange = true;
+
+            // อัปเดต Visuals
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
+            Transform hl = transform.Find("Highlight");
+            if (hl != null) hl.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
     void Update()
-    {   
-        if (player.IsShovel)
-        {   
+    { 
+        // ระบบติดตามตัวละครยังคงไว้ที่ Update เหมือนเดิมครับ
+        if (player != null && player.IsShovel)
+        { 
             if (player.isLeft)
             {
                 transform.position = new Vector3(player.transform.position.x - 0.8f , player.transform.position.y - 0.475f , player.transform.position.z);
@@ -33,33 +63,29 @@ public class ShovelScript : MonoBehaviour
                 transform.position = new Vector3(player.transform.position.x + 0.8f , player.transform.position.y - 0.475f , player.transform.position.z);
                 transform.rotation = Quaternion.Euler(0, 0, 100f);
             }
-            
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 130f);
-                player.IsShovel = false;
-                IsInRange = true;
-                GetComponent<SpriteRenderer>().sortingOrder = 1;
-                transform.Find("Highlight").GetComponent<Renderer>().enabled = true;
-            }
         }
-        if (IsInRange && Input.GetKeyDown(KeyCode.F))
-        {
-            // Block if already performing an action
-            if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
-
-            if (player != null && !player.IsShovel)
-            {
-                PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
-                {
-                    player.IsShovel = true;
-                    GetComponent<SpriteRenderer>().sortingOrder = 2;
-                    transform.Find("Highlight").GetComponent<Renderer>().enabled = false;
-                });
-            }
-        }
-        
     }
+
+    // ฟังก์ชันนี้จะถูกเรียกเมื่อกดปุ่ม F หรือปุ่ม PickUp บน UI
+    void TryPickUpShovel()
+    {
+        if (!IsInRange) return;
+        
+        // เช็ก Action อื่น
+        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
+        if (player != null && !player.IsShovel)
+        {
+            PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
+            {
+                player.IsShovel = true;
+                GetComponent<SpriteRenderer>().sortingOrder = 2;
+                Transform hl = transform.Find("Highlight");
+                if (hl != null) hl.GetComponent<Renderer>().enabled = false;
+            });
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.gameObject.CompareTag("Player"))

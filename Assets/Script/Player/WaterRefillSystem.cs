@@ -21,18 +21,20 @@ public class WaterRefillSystem : MonoBehaviour
             waterBar.value = currentWater;
         }
     }
-
+    void OnEnable() { GameInput.OnInteract += TryInteract; }
+    void OnDisable() { GameInput.OnInteract -= TryInteract; }
+    void TryInteract()
+    {
+        // ย้ายโค้ดใน if (GameInput.Instance.GetInteractionTriggered()) มาไว้ในนี้
+        if (!canRefill || PlayerActionManager.Instance.IsPerformingAction) return;
+        
+        StartRefilling();
+    }
     void Update()
     {
         if (waterBar != null)
         {
             waterBar.value = Mathf.MoveTowards(waterBar.value, currentWater, smoothSpeed * 100f * Time.deltaTime);
-        }
-
-        // ระบบเติมน้ำ: เช็ค canRefill (ต้องยืนในบ่อ WaterSource เท่านั้นถึงจะตักได้กวัก!)
-        if (canRefill && Input.GetKeyDown(KeyCode.Space) && !PlayerActionManager.Instance.IsPerformingAction)
-        {
-            StartRefilling();
         }
     }
 
