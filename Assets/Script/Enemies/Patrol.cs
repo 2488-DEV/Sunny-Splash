@@ -27,11 +27,13 @@ public class Patrol : MonoBehaviour
 
     Transform targetPoint = patrolPoints[currentPointIndex];
 
-    transform.position = Vector2.MoveTowards(
-        transform.position,
-        targetPoint.position,
-        speed * Time.deltaTime);
+    float directionX = targetPoint.position.x - transform.position.x;
+    ai.FaceDirection(directionX);
 
+    transform.position = Vector2.MoveTowards(
+    transform.position,
+    targetPoint.position,
+    speed * Time.deltaTime);
     if (Vector2.Distance(transform.position, targetPoint.position) < reachDistance)
     {
         currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;

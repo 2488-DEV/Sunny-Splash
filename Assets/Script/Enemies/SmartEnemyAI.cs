@@ -16,7 +16,6 @@ public class SmartEnemyAI : MonoBehaviour
     public float stopAttackRange = 1.6f; // รัศมีเข้าโจมตี
     public float tileSize = 1f;      // ขนาดของ Grid ไทล์ในเกม
     public float slowTimer = 0f;
-    public SpriteRenderer sr; // เพิ่มตัวแปร SpriteRenderer เพื่อใช้ในการพลิกภาพ
 
     [Header("Layer Setup")]
     public LayerMask obstacleLayer;  // เลือก Layer กำแพงใน Inspector
@@ -29,8 +28,9 @@ public class SmartEnemyAI : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
+    public Patrol patrol; // อ้างอิงสคริปต์ Patrol
     public PlayerScript playerScript;
-
+    public SpriteRenderer sr;
     private Transform player;
     private Rigidbody2D rb;
     private Vector2 targetDestination;
@@ -41,6 +41,7 @@ public class SmartEnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        patrol = GetComponent<Patrol>();
         // ค้นหาวัตถุที่ใส่ Tag ว่า Player
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
@@ -57,7 +58,6 @@ public class SmartEnemyAI : MonoBehaviour
 
     void Update()
     {
-        // อัปเดตอนิเมชันตามสถานะ
         animator.SetBool("IsRunning", currentState == State.Pursuing);
         animator.SetBool("IsAttacking", currentState == State.Attacking);
     }
@@ -80,6 +80,8 @@ public class SmartEnemyAI : MonoBehaviour
         else if (slowTimer <= 0f) {
             speed = 3.5f;
         }
+
+        
 
         switch (currentState)
         {
@@ -279,14 +281,7 @@ public class SmartEnemyAI : MonoBehaviour
 {
     Vector2 direction = (targetDestination - (Vector2)transform.position).normalized;
 
-    if (direction.x > 0.01f)
-    {
-        transform.localScale = new Vector3(1, 1, 1);
-    }
-    else if (direction.x < -0.01f)
-    {
-        transform.localScale = new Vector3(-1, 1, 1);
-    }
+    FaceDirection(direction.x);
 
     if (IsStopAhead())
     {
@@ -299,5 +294,14 @@ public class SmartEnemyAI : MonoBehaviour
         direction * speed,
         20f * Time.fixedDeltaTime
     );
+}
+public void FaceDirection(float directionX)
+{
+    if (Mathf.Abs(directionX) < 0.01f)
+        return;
+
+    Vector3 scale = transform.localScale;
+    scale.x = directionX > 0 ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+    transform.localScale = scale;
 }
 }
