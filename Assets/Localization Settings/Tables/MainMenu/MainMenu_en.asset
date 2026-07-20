@@ -30,6 +30,22 @@ MonoBehaviour:
     m_Localized: OPTION
     m_Metadata:
       m_Items: []
+  - m_Id: 1790758247960576
+    m_Localized: The Beginning of Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790760626130944
+    m_Localized: The Thirsty Valley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790763545366528
+    m_Localized: The Prowling Woods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790769375449088
+    m_Localized: The Ancient Heartwood
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

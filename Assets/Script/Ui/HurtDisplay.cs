@@ -15,13 +15,21 @@ public class HurtDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerScript.playerHp == 2)
+        if (playerScript.playerHp == 3)
+        {
+            SetAlpha(0f);
+        }
+        else if (playerScript.playerHp == 2)
         {
             SetAlpha(0.3f);
         }
         else if (playerScript.playerHp == 1)
         {
             SetAlpha(0.6f);
+        }
+        else if (playerScript.playerHp <= 0)
+        {
+            SetAlpha(0f);
         }
     }
 

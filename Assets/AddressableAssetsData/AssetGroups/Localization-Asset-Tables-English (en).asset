@@ -15,6 +15,13 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-English (en)
   m_GUID: 34747504d2362374fb245472c185dfb8
   m_SerializeEntries:
+  - m_GUID: bf5f0122ea97cfd4ebb02201c1546c4a
+    m_Address: InGameAssets_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ce425424bd1197d418a7f1526bdfe4ee
     m_Address: MainMenu_en
     m_ReadOnly: 1

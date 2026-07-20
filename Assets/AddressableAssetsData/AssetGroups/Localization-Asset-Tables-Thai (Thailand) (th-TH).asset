@@ -15,6 +15,13 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-Thai (Thailand) (th-TH)
   m_GUID: d5e2b25db2a9a764285fd920b3319a4b
   m_SerializeEntries:
+  - m_GUID: 9a646a670a9507b49a9346b11b2c5ac5
+    m_Address: InGameAssets_th-TH
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th-TH
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b1e68631a05f1394a855f4ced5889948
     m_Address: MainMenu_th-TH
     m_ReadOnly: 1

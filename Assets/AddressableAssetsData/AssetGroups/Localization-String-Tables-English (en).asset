@@ -43,7 +43,7 @@ MonoBehaviour:
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f7b8ff42d4528dc429d7d99a14a9ba3c
-    m_Address: Ui_en
+    m_Address: InGame_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

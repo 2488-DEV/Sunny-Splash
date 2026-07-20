@@ -27,6 +27,22 @@ MonoBehaviour:
     m_Key: OPTION
     m_Metadata:
       m_Items: []
+  - m_Id: 1790758247960576
+    m_Key: The Beginning of Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790760626130944
+    m_Key: The Thirsty Valley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790763545366528
+    m_Key: The Prowling Woods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1790769375449088
+    m_Key: The Ancient Heartwood
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

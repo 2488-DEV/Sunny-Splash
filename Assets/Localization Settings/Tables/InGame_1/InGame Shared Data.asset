@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: InGame Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: InGame
+  m_TableCollectionNameGuidString: 8c3fadc23f504294aab194014862d3d3
+  m_Entries:
+  - m_Id: 26633801728
+    m_Key: TreeCountText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16571586023424
+    m_Key: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16641156943872
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16691006246912
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16739051999232
+    m_Key: Pick Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16773403348992
+    m_Key: Drop Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16812343267328
+    m_Key: Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16868546940928
+    m_Key: Egg Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30747050086400
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27323441057792
+    m_Key: Maple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46697287749632
+    m_Key: mission failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30169972576256
+    m_Key: DE_1_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30332980006912
+    m_Key: DE_1_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30373534732288
+    m_Key: DE_1_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30409467334656
+    m_Key: DE_1_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30445999722496
+    m_Key: DE_1_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31141193027584
+    m_Key: WDE_1_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31292913586176
+    m_Key: WDE_1_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31339524886528
+    m_Key: WDE_1_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31421368340480
+    m_Key: DDE_1_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31507699699712
+    m_Key: DDE_1_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31544882204672
+    m_Key: DDE_1_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49367243264000
+    m_Key: MISSION COMPLETE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65825948012544
+    m_Key: Seed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66013492121600
+    m_Key: Egg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69255651364864
+    m_Key: DE_2_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69526821507072
+    m_Key: DE_2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69626876628992
+    m_Key: TDE_2_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69717318406144
+    m_Key: TDE_2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69742219988992
+    m_Key: TDE_2_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69801191903232
+    m_Key: TDE_2_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85260058464256
+    m_Key: DE_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85311841341440
+    m_Key: DTE_4_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85380548235264
+    m_Key: DTE_4_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85397405143040
+    m_Key: DTE_4_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85542846828544
+    m_Key: DTE_4_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87889761243136
+    m_Key: DTE_4_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87928013295616
+    m_Key: DTE_4_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87938213842944
+    m_Key: DTE_4_6
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4179326593964441788
+  references:
+    version: 2
+    RefIds:
+    - rid: 4179326593964441788
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1784437228156
