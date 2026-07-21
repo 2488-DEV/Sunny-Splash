@@ -78,51 +78,51 @@ public class PlayerSound : MonoBehaviour
         {
             actionSource.PlayOneShot(clipToPlay, actionVolume);
         }
+    }   
+
+    void OnEnable() { GameInput.OnQuack += TryQuack; }
+    void OnDisable() { GameInput.OnQuack -= TryQuack; }
+
+    void TryQuack()
+    {
+        timer = 0f; // รีเซ็ตตัวจับเวลาเมื่อกด R
+        isQuack = true;
+        transform.localScale = new Vector3(transform.localScale.x,0.7f,transform.localScale.z);
+        if (QuackSound != null)
+        {   
+            
+            ShowFloatingText();
+            if (QuackSource != null)
+            {
+                QuackSource.PlayOneShot(QuackSound, quackVolume);
+            }
+            else if (actionSource != null)
+            {
+                actionSource.PlayOneShot(QuackSound, quackVolume);
+            }
+            // ===== [ส่วนที่ 2: เพิ่มคำสั่งเรียกศัตรูเมื่อกด R] =====
+            AlertNearbyEnemies();
+            // ===================================================
+        }
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
+    {   
+        if (isQuack)
         {
-            timer = 0f; // รีเซ็ตตัวจับเวลาเมื่อกด R
-            isQuack = true;
-            transform.localScale = new Vector3(transform.localScale.x,0.7f,transform.localScale.z);
+            timer += Time.deltaTime;
 
-            if (QuackSound != null)
-            {   
-                
-                ShowFloatingText();
+            if (timer >= 0.2f)
+            {
+                transform.localScale = new Vector3(
+                    transform.localScale.x,
+                    1f,
+                    transform.localScale.z
+                );
 
-                if (QuackSource != null)
-                {
-                    QuackSource.PlayOneShot(QuackSound, quackVolume);
-                }
-                else if (actionSource != null)
-                {
-                    actionSource.PlayOneShot(QuackSound, quackVolume);
-                }
-
-                // ===== [ส่วนที่ 2: เพิ่มคำสั่งเรียกศัตรูเมื่อกด R] =====
-                AlertNearbyEnemies();
-                // ===================================================
+                isQuack = false;
             }
         }
-
-        if (isQuack)
-{
-    timer += Time.deltaTime;
-
-    if (timer >= 0.2f)
-    {
-        transform.localScale = new Vector3(
-            transform.localScale.x,
-            1f,
-            transform.localScale.z
-        );
-
-        isQuack = false;
-    }
-}
 
         if (playerMovement == null || footstepSource == null) return;
 
