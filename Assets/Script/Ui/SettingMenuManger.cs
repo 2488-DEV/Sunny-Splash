@@ -8,7 +8,8 @@ public class SettingMenuManger : MonoBehaviour
     public TMP_Dropdown ResDropDown;
     public Toggle FullscreenToggle;
     public Toggle FPSToggle; // ลากปุ่มติ๊กถูกเปิดปิด FPS ในหน้า Setting มาใส่ช่องนี้
-
+    public Toggle MobileToggle; // ลากปุ่มติ๊กถูกเปิดปิด FPS ในหน้า Setting มาใส่ช่องนี้
+    public static bool isMobile = false; // ตัวแปรสาธารณะเพื่อให้สคริปต์อื่นๆ สามารถเข้าถึงได้
     Resolution[] AllResolution;
     bool IsFullScreen;
     int SelectResolution;
@@ -19,6 +20,7 @@ public class SettingMenuManger : MonoBehaviour
     {
         // ตรวจสอบว่าในเครื่องเซฟไว้ให้เปิดหรือปิด FPS แล้วปรับหัวข้อติ๊กถูกให้ตรงตามนั้น
         FPSToggle.isOn = PlayerPrefs.GetInt("ShowFPS", 0) == 1;
+        MobileToggle.isOn = PlayerPrefs.GetInt("isMobile", 0) == 1;
 
         IsFullScreen = true;
         AllResolution = Screen.resolutions;
@@ -86,5 +88,12 @@ public class SettingMenuManger : MonoBehaviour
         {
             FPSDisplay.instance.SetFPSVisibility(FPSToggle.isOn);
         }
+    }
+
+    public void Mobile()
+    {
+        isMobile = MobileToggle.isOn;
+        PlayerPrefs.SetInt("isMobile", isMobile ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }

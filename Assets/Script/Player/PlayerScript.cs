@@ -16,7 +16,6 @@ public class PlayerScript : MonoBehaviour
     [Header("Level Settings")]
     [Tooltip("ใส่เลขด่านปัจจุบัน เช่น ด่าน 1 ใส่เลข 1 กวัก")]
     public int currentLevelIndex;
-    public static bool isMobile;
 
     [Header("Status Settings")]
     public int seed;
@@ -48,18 +47,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject player;
     public GameObject enemy; // ตัวเชื่อมกับศัตรูเพื่อปิดเมื่อผู้เล่นตาย
 
-
     private WaterRefillSystem waterSystem;
     private bool isWaitingForVictory = false; // ป้องกันการเรียก Coroutine ซ้ำกวัก
 
     [SerializeField] public Texture2D cursorTexture;
     private Vector2 cursorHotSpot;
-
-    public void ToggleMobile()
-    {
-        isMobile = !isMobile;
-        Debug.Log("Mobile Mode : " + isMobile);
-    }
 
     void Start()
     {

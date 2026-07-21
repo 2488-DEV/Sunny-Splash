@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: 4d5e0bcabb1ada644806f93aeea52126
+guid: 855a16ef65fa5884f977c5ea9e7b0729
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6691394222622750194
-    second: Bee-Sheet_0
+      213: 7867257202228106619
+    second: Bee-Sheet 1_0
   - first:
-      213: -8045890524472250883
-    second: Bee-Sheet_1
+      213: -4900267747116176600
+    second: Bee-Sheet 1_1
   - first:
-      213: 1200397882662715883
-    second: Bee-Sheet_2
+      213: -8730594324552317369
+    second: Bee-Sheet 1_2
   - first:
-      213: 6656485041301784072
-    second: Bee-Sheet_3
+      213: -7688173250846382523
+    second: Bee-Sheet 1_3
   - first:
-      213: -5933158878789901867
-    second: Bee-Sheet_4
+      213: -5619289071219780210
+    second: Bee-Sheet 1_4
   - first:
-      213: 2560999768777588697
-    second: Bee-Sheet_5
+      213: -19674446951599623
+    second: Bee-Sheet 1_5
   - first:
-      213: 2835302419107223384
-    second: Bee-Sheet_6
+      213: 2322078244033896705
+    second: Bee-Sheet 1_6
   - first:
-      213: 2167044939177399756
-    second: Bee-Sheet_7
+      213: -3158571194863349239
+    second: Bee-Sheet 1_7
   - first:
-      213: -3659797448506604403
-    second: Bee-Sheet_8
+      213: -6457515120544570384
+    second: Bee-Sheet 1_8
   - first:
-      213: -5627442601506431514
-    second: Bee-Sheet_9
+      213: -5218765301899073928
+    second: Bee-Sheet 1_9
   - first:
-      213: -1374377334203629872
-    second: Bee-Sheet_10
+      213: 2675093784281610512
+    second: Bee-Sheet 1_10
   - first:
-      213: -667204955108493975
-    second: Bee-Sheet_11
+      213: 3806669725453358670
+    second: Bee-Sheet 1_11
   - first:
-      213: -121523761110083673
-    second: Bee-Sheet_12
+      213: 5720132518065099497
+    second: Bee-Sheet 1_12
   - first:
-      213: -7259659089159473186
-    second: Bee-Sheet_13
+      213: -4685325051382201537
+    second: Bee-Sheet 1_13
   - first:
-      213: -4479981902270555002
-    second: Bee-Sheet_14
+      213: 2973654493454501564
+    second: Bee-Sheet 1_14
   - first:
-      213: 3754723029702412743
-    second: Bee-Sheet_15
+      213: -6541358707468861405
+    second: Bee-Sheet 1_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -82,7 +82,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -171,7 +171,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bee-Sheet_0
+      name: Bee-Sheet 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -186,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e0a487438646323a0800000000000000
-      internalID: -6691394222622750194
+      spriteID: b75907f2ebc1e2d60800000000000000
+      internalID: 7867257202228106619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_1
+      name: Bee-Sheet 1_1
       rect:
         serializedVersion: 2
         x: 166
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfd662b6231475090800000000000000
-      internalID: -8045890524472250883
+      spriteID: 82b26dc5270cefbb0800000000000000
+      internalID: -4900267747116176600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_2
+      name: Bee-Sheet 1_2
       rect:
         serializedVersion: 2
         x: 335
@@ -230,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: be10e39a38ba8a010800000000000000
-      internalID: 1200397882662715883
+      spriteID: 746840fe7b2b6d680800000000000000
+      internalID: -8730594324552317369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_3
+      name: Bee-Sheet 1_3
       rect:
         serializedVersion: 2
         x: 511
@@ -252,14 +252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8068e73a0e5906c50800000000000000
-      internalID: 6656485041301784072
+      spriteID: 54624ab792f1e4590800000000000000
+      internalID: -7688173250846382523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_4
+      name: Bee-Sheet 1_4
       rect:
         serializedVersion: 2
         x: 697
@@ -274,14 +274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d1e5c95f6f29ada0800000000000000
-      internalID: -5933158878789901867
+      spriteID: e85d5bbac564402b0800000000000000
+      internalID: -5619289071219780210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_5
+      name: Bee-Sheet 1_5
       rect:
         serializedVersion: 2
         x: 845
@@ -296,14 +296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9df78df88bf7a8320800000000000000
-      internalID: 2560999768777588697
+      spriteID: 9f13c4ad13a1abff0800000000000000
+      internalID: -19674446951599623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_6
+      name: Bee-Sheet 1_6
       rect:
         serializedVersion: 2
         x: 1003
@@ -318,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85711b13784095720800000000000000
-      internalID: 2835302419107223384
+      spriteID: 101ad4c2cdda93020800000000000000
+      internalID: 2322078244033896705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_7
+      name: Bee-Sheet 1_7
       rect:
         serializedVersion: 2
         x: 1168
@@ -340,14 +340,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc51af304e3e21e10800000000000000
-      internalID: 2167044939177399756
+      spriteID: 902936cab308a24d0800000000000000
+      internalID: -3158571194863349239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_8
+      name: Bee-Sheet 1_8
       rect:
         serializedVersion: 2
         x: 1335
@@ -362,14 +362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8402eb6c99c53dc0800000000000000
-      internalID: -3659797448506604403
+      spriteID: 0f32a34163c4266a0800000000000000
+      internalID: -6457515120544570384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_9
+      name: Bee-Sheet 1_9
       rect:
         serializedVersion: 2
         x: 1502
@@ -384,14 +384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ed1f47f4ce47e1b0800000000000000
-      internalID: -5627442601506431514
+      spriteID: 876eb2eab983397b0800000000000000
+      internalID: -5218765301899073928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_10
+      name: Bee-Sheet 1_10
       rect:
         serializedVersion: 2
         x: 1671
@@ -406,14 +406,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0deb177a81b3dece0800000000000000
-      internalID: -1374377334203629872
+      spriteID: 019f5f0af97df1520800000000000000
+      internalID: 2675093784281610512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_11
+      name: Bee-Sheet 1_11
       rect:
         serializedVersion: 2
         x: 1847
@@ -428,14 +428,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 965b06ad0ac9db6f0800000000000000
-      internalID: -667204955108493975
+      spriteID: e4691ea52f104d430800000000000000
+      internalID: 3806669725453358670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_12
+      name: Bee-Sheet 1_12
       rect:
         serializedVersion: 2
         x: 2033
@@ -450,14 +450,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a7934b78c2405ef0800000000000000
-      internalID: -121523761110083673
+      spriteID: 9e25e67f73ef16f40800000000000000
+      internalID: 5720132518065099497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_13
+      name: Bee-Sheet 1_13
       rect:
         serializedVersion: 2
         x: 2181
@@ -472,14 +472,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed7b6309582804b90800000000000000
-      internalID: -7259659089159473186
+      spriteID: f33002f80b16afeb0800000000000000
+      internalID: -4685325051382201537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_14
+      name: Bee-Sheet 1_14
       rect:
         serializedVersion: 2
         x: 2339
@@ -494,14 +494,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68c1cf22238e3d1c0800000000000000
-      internalID: -4479981902270555002
+      spriteID: cb68917b10b844920800000000000000
+      internalID: 2973654493454501564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bee-Sheet_15
+      name: Bee-Sheet 1_15
       rect:
         serializedVersion: 2
         x: 2504
@@ -516,8 +516,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c9046fb3b47b1430800000000000000
-      internalID: 3754723029702412743
+      spriteID: 32009e4c9ec6835a0800000000000000
+      internalID: -6541358707468861405
       vertices: []
       indices: 
       edges: []
@@ -536,22 +536,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bee-Sheet_0: -6691394222622750194
-      Bee-Sheet_1: -8045890524472250883
-      Bee-Sheet_10: -1374377334203629872
-      Bee-Sheet_11: -667204955108493975
-      Bee-Sheet_12: -121523761110083673
-      Bee-Sheet_13: -7259659089159473186
-      Bee-Sheet_14: -4479981902270555002
-      Bee-Sheet_15: 3754723029702412743
-      Bee-Sheet_2: 1200397882662715883
-      Bee-Sheet_3: 6656485041301784072
-      Bee-Sheet_4: -5933158878789901867
-      Bee-Sheet_5: 2560999768777588697
-      Bee-Sheet_6: 2835302419107223384
-      Bee-Sheet_7: 2167044939177399756
-      Bee-Sheet_8: -3659797448506604403
-      Bee-Sheet_9: -5627442601506431514
+      Bee-Sheet 1_0: 7867257202228106619
+      Bee-Sheet 1_1: -4900267747116176600
+      Bee-Sheet 1_10: 2675093784281610512
+      Bee-Sheet 1_11: 3806669725453358670
+      Bee-Sheet 1_12: 5720132518065099497
+      Bee-Sheet 1_13: -4685325051382201537
+      Bee-Sheet 1_14: 2973654493454501564
+      Bee-Sheet 1_15: -6541358707468861405
+      Bee-Sheet 1_2: -8730594324552317369
+      Bee-Sheet 1_3: -7688173250846382523
+      Bee-Sheet 1_4: -5619289071219780210
+      Bee-Sheet 1_5: -19674446951599623
+      Bee-Sheet 1_6: 2322078244033896705
+      Bee-Sheet 1_7: -3158571194863349239
+      Bee-Sheet 1_8: -6457515120544570384
+      Bee-Sheet 1_9: -5218765301899073928
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

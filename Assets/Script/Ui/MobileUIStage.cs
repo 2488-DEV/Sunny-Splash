@@ -12,6 +12,7 @@ public class MobileUIStage : MonoBehaviour
     public GameObject sprintButton;
     public GameObject joyStick;
     public PlayerScript player;
+    public SettingMenuManger settingMenuManager;
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class MobileUIStage : MonoBehaviour
 
     void Update()
     {
-        if (PlayerScript.isMobile)
+        if (SettingMenuManger.isMobile)
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
             if (joyStick != null) joyStick.SetActive(true); 
