@@ -36,6 +36,7 @@ public class PlayerSound : MonoBehaviour
     [Header("Quack Text")]
     public GameObject FloatingText;
     bool isQuack = false;
+    private float timer = 0f;
 
     // ===== [ส่วนที่ 1: เพิ่มตัวแปรสำหรับระบบเรียกศัตรู] =====
     [Header("Enemy Alert Settings")]
@@ -83,11 +84,15 @@ public class PlayerSound : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            timer = 0f; // รีเซ็ตตัวจับเวลาเมื่อกด R
+            isQuack = true;
+            transform.localScale = new Vector3(transform.localScale.x,0.7f,transform.localScale.z);
+
             if (QuackSound != null)
             {   
-                isQuack = true;
-                ShowFloatingText();
                 
+                ShowFloatingText();
+
                 if (QuackSource != null)
                 {
                     QuackSource.PlayOneShot(QuackSound, quackVolume);
@@ -102,6 +107,22 @@ public class PlayerSound : MonoBehaviour
                 // ===================================================
             }
         }
+
+        if (isQuack)
+{
+    timer += Time.deltaTime;
+
+    if (timer >= 0.2f)
+    {
+        transform.localScale = new Vector3(
+            transform.localScale.x,
+            1f,
+            transform.localScale.z
+        );
+
+        isQuack = false;
+    }
+}
 
         if (playerMovement == null || footstepSource == null) return;
 
@@ -142,7 +163,6 @@ public class PlayerSound : MonoBehaviour
     {
         if (isQuack != false){
             Instantiate(FloatingText, transform.position, Quaternion.identity, transform);
-            isQuack = false;
         }
     }
 

@@ -207,6 +207,36 @@ MonoBehaviour:
       quack!"'
     m_Metadata:
       m_Items: []
+  - m_Id: 474258509631488
+    m_Localized: This is 'The Prowling Woods,' huh?...It's so hot! Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 474379251060736
+    m_Localized: They say there are dangerous animals like 'Striped Snakes' living
+      here! We need to be careful! Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 474478161137664
+    m_Localized: Quack! That bush looks big enough for me to hide in!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 474609077948416
+    m_Localized: Oh!! That's wheat!! I'm so hungry! Let's go eat! Quack!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475215737884672
+    m_Localized: (Eating wheat will heal Maple when he is injured.)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475333794959360
+    m_Localized: (And when you eat wheat, the number of eggs in Maple's body will
+      increase by one.)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475345241214976
+    m_Localized: (You can switch between Egg-Mode using the E button.)
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
