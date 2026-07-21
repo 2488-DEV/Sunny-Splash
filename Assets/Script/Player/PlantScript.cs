@@ -23,6 +23,48 @@ public class PlantScript : MonoBehaviour
         staminaBar = FindFirstObjectByType<StaminaBar>();
     }
 
+    void OnEnable() { GameInput.OnInteract += TryInteract; }
+    void OnDisable() { GameInput.OnInteract -= TryInteract; }
+
+    void TryInteract()
+    {
+        // ถ้าไม่อยู่ในระยะ หรือ กำลังทำ Action อื่นอยู่ ให้ข้ามไปเลย
+        if (!IsInRange || player == null || PlayerActionManager.Instance.IsPerformingAction) return;
+
+        if (staminaBar != null && staminaBar.currentStamina < 10f) return;
+
+        // 1. ขุดซากกองเถ้า
+        if (currentStage == PlantState.Dead && player.IsShovel)
+        {
+            PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
+                HandlePlantLogic(ActionType.Dig);
+                if (playerSound != null) playerSound.PlayActionSound("Dig");
+            });
+        }
+        // 2. ปลูกเมล็ด
+        else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
+        {
+            PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () => {
+                player.UseSeed();
+                HandlePlantLogic(ActionType.PlantSeed);
+                if (playerSound != null) playerSound.PlayActionSound("Plant");
+            });
+        }
+        // 3. รดน้ำ
+        else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
+        {
+            if (waterSystem != null && waterSystem.currentWater >= 33f)
+            {
+                PlayerActionManager.Instance.TryStartAction(ActionType.Water, () => {
+                    waterSystem.UseWaterForPlanting();
+                    HandlePlantLogic(ActionType.Water);
+                    player.DecreaseTree();
+                    if (playerSound != null) playerSound.PlayActionSound("Water");
+                });
+            }
+        }
+    }
+
     void Update()
     {
         if (!IsInRange || player == null || PlayerActionManager.Instance.IsPerformingAction)
@@ -31,45 +73,6 @@ public class PlantScript : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (staminaBar != null && staminaBar.currentStamina < 10f) return;
-
-            // 1. ขุดซากกองเถ้า (ต้องถือพลั่ว)
-            if (currentStage == PlantState.Dead && player.IsShovel)
-            {
-                PlayerActionManager.Instance.TryStartAction(ActionType.Dig, () => {
-                    HandlePlantLogic(ActionType.Dig);
-                    if (playerSound != null) playerSound.PlayActionSound("Dig");
-                });
-            }
-            // 2. ปลูกเมล็ด (ห้ามถือพลั่ว + ต้องมีเมล็ดอย่างน้อย 1)
-            else if (currentStage == PlantState.Empty && !player.IsShovel && player.seed >= 1)
-            {
-                PlayerActionManager.Instance.TryStartAction(ActionType.PlantSeed, () => {
-                    // ใช้ฟังก์ชัน UseSeed เพื่อตัดยอดและอัปเดต UI ทันทีกวัก!
-                    player.UseSeed();
-                    HandlePlantLogic(ActionType.PlantSeed);
-                    if (playerSound != null) playerSound.PlayActionSound("Plant");
-                });
-            }
-            // 3. รดน้ำ (ห้ามถือพลั่ว + ต้องมีน้ำพอ)
-            else if (currentStage == PlantState.Dehydrated && !player.IsShovel)
-            {
-                if (waterSystem != null && waterSystem.currentWater >= 33f)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.Water, () => {
-                        waterSystem.UseWaterForPlanting();
-                        HandlePlantLogic(ActionType.Water);
-
-                        // ปลูกสำเร็จจน Fresh แล้ว ให้ลดจำนวนต้นไม้ที่เหลือในด่านกวัก!
-                        player.DecreaseTree();
-
-                        if (playerSound != null) playerSound.PlayActionSound("Water");
-                    });
-                }
-            }
-        }
         UpdateVisuals();
     }
 

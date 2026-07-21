@@ -24,26 +24,27 @@ public class SeedScript : MonoBehaviour
         if (h != null) highlight = h.gameObject;
     }
 
+    void OnEnable() { GameInput.OnPickUp += TryPickUp; }
+    void OnDisable() { GameInput.OnPickUp -= TryPickUp; }
+
+    void TryPickUp()
+    {
+        // เช็คระยะและเงื่อนไขเดิมของเจมส์
+        if (!IsInRange || (shovel != null && shovel.IsInRange)) return;
+        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
+        // ... (โค้ดเก็บของเดิมของเจมส์)
+        PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
+        {
+            player.seed += 1;
+            player.UpdateSeedCount();
+            gameObject.SetActive(false);
+        });
+    }
+
     void Update()
     {
-        // เช็คว่าอยู่ในระยะ และพลั่วไม่ได้ถูกใช้งานอยู่ (กันปุ่มซ้อน)
-        if (IsInRange && (shovel == null || !shovel.IsInRange))
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
 
-                if (player != null)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
-                    {
-                        player.seed += 1;
-                        player.UpdateSeedCount(); // อัปเดตตัวเลขบนจอทันทีกวัก!
-                        gameObject.SetActive(false);
-                    });
-                }
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

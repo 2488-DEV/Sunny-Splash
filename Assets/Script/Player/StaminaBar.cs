@@ -80,6 +80,12 @@ public class StaminaBar : MonoBehaviour
 
     bool IsMoving()
     {
+        // เปลี่ยนจากเช็กปุ่มกด เป็นเช็กค่าจาก playerMovement.moveInput โดยตรง
+        if (playerMovement != null)
+        {
+            return playerMovement.moveInput.magnitude > 0.1f;
+        }
+        // ถ้าไม่มี playerMovement ให้กลับไปเช็กคีย์บอร์ด (สำหรับ PC)
         return Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0;
     }
 

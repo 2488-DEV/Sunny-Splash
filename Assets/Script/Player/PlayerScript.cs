@@ -3,17 +3,20 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem; // จำเป็นต้องมีเพื่อใช้ Coroutine กวัก!
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
     public bool IsShovel;
     public bool isEgg;
+    private PlayerMovement movementScript;
     private VNDialogue dialogueManager;
     [SerializeField] private LayerMask targetLayer;
 
     [Header("Level Settings")]
     [Tooltip("ใส่เลขด่านปัจจุบัน เช่น ด่าน 1 ใส่เลข 1 กวัก")]
     public int currentLevelIndex;
+    public static bool isMobile;
 
     [Header("Status Settings")]
     public int seed;
@@ -52,13 +55,19 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public Texture2D cursorTexture;
     private Vector2 cursorHotSpot;
 
+    public void ToggleMobile()
+    {
+        isMobile = !isMobile;
+        Debug.Log("Mobile Mode : " + isMobile);
+    }
+
     void Start()
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
-        dialogueManager = FindFirstObjectByType<VNDialogue>();
+        movementScript = GetComponent<PlayerMovement>();
 
-        originalPosition = eggCount.rectTransform.localPosition;
+        dialogueManager = FindFirstObjectByType<VNDialogue>();
 
         Time.timeScale = 1f;
         waterSystem = GetComponent<WaterRefillSystem>();
@@ -75,32 +84,41 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {   
         if (playerHp > playerMaxHp) playerHp = playerMaxHp;
-        
-        if (dialogueManager.isDialogue) return;
 
-        float move = Input.GetAxisRaw("Horizontal");
-        if (move != 0)
+        // ตรวจสอบ null ก่อนเรียกใช้ dialogueManager ด้วยครับ กันเหนียวไว้ก่อนกวัก!
+        if (dialogueManager != null && dialogueManager.isDialogue) return;
+
+        // --- ส่วนแก้ตรงนี้ครับ ---
+        if (movementScript != null)
         {
-            isLeft = (move == -1);
-            isRight = (move == 1);
+            Vector2 moveInput = movementScript.moveInput; // ดึงค่ามาใช้แค่ในฟังก์ชันนี้
+
+            // เช็กแค่ฝั่ง x เพราะเราเน้นแค่หันซ้าย/ขวา
+            if (Mathf.Abs(moveInput.x) > 0.1f) // ใช้ Mathf.Abs เพื่อให้ครอบคลุมทั้งติดลบและเป็นบวก
+            {
+                isLeft = (moveInput.x < 0);
+                isRight = (moveInput.x > 0);
+            }
         }
+        // -----------------------
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "InGame_Lv1" || currentSceneName == "InGame_Lv2") return;
         
-        EquipEgg();
         ShootEgg();
-        
     }
 
     public void UpdateSeedCount()
-{
-    if (seedCount != null)
-        seedCount.text = seed.ToString();
-}
-
-    public void UpdateEggCount()
-{
-    if (eggCount != null)
-        eggCount.text = egg.ToString();
-}
+    {
+        if (seedCount != null)
+            seedCount.text = seed.ToString();
+    }
+    
+        public void UpdateEggCount()
+    {
+        if (eggCount != null)
+            eggCount.text = egg.ToString();
+    }
     public void UseSeed() { if (seed > 0) { seed--; UpdateSeedCount(); } }  
     
     public void DecreaseTree()
@@ -126,32 +144,37 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void UpdateTreeCount()
-{
-    if (treeCount != null)
-        treeCount.text = tree.ToString();
-}
+    {
+        if (treeCount != null)
+            treeCount.text = tree.ToString();
+    }
     public void RefreshAllUI() { UpdateSeedCount(); UpdateTreeCount(); UpdateEggCount(); }
 
-    public void EquipEgg()
-    { 
+    void OnEnable() { GameInput.OnEgg += TryEgg; }
+    void OnDisable() { GameInput.OnEgg -= TryEgg; }
+
+    public void TryEgg()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "InGame_Lv1" || currentSceneName == "InGame_Lv2") return;
+
         if (dialogueManager.isDialogue) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!isEgg)
         {
-            if (!isEgg)
-            {
-                Debug.Log("EggMode : On");
-                isEgg = true;
-                cursorHotSpot = new Vector2(cursorTexture.width / 2 , cursorTexture.height / 2);
-                Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.Auto);
-            }
-            else
-            {
-                Debug.Log("EggMode : Off");
-                isEgg = false;
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-            }
+            Debug.Log("EggMode : On");
+            originalPosition = eggCount.rectTransform.localPosition;
+            isEgg = true;
+            cursorHotSpot = new Vector2(cursorTexture.width / 2 , cursorTexture.height / 2);
+            Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.Auto);
         }
+        else
+        {
+            Debug.Log("EggMode : Off");
+            isEgg = false;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
+        
     }
     public void TriggerShakeEffect()
     {

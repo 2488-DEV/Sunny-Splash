@@ -23,26 +23,30 @@ public class FoodScript : MonoBehaviour
         if (h != null) highlight = h.gameObject;
     }
 
-    void Update()
-    {
-        if (IsInRange && (shovel == null || !shovel.IsInRange) && (seed == null || !seed.IsInRange))
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+    void OnEnable() { GameInput.OnPickUp += TryPickUpFood; }
+    void OnDisable() { GameInput.OnPickUp -= TryPickUpFood; }
 
-                if (player != null)
-                {
-                    PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
-                    {
-                        player.playerHp += 1;
-                        player.egg += 1;
-                        player.UpdateEggCount();
-                        gameObject.SetActive(false);
-                    });
-                }
-            }
+    void TryPickUpFood()
+    {
+        if (!IsInRange || (shovel != null && shovel.IsInRange) || (seed != null && seed.IsInRange)) return;
+        
+        if (PlayerActionManager.Instance != null && PlayerActionManager.Instance.IsPerformingAction) return;
+
+        if (player != null)
+        {
+            PlayerActionManager.Instance.TryStartAction(ActionType.PickUpItem, () =>
+            {
+                player.playerHp += 1;
+                player.egg += 1;
+                player.UpdateEggCount();
+                gameObject.SetActive(false);
+            });
         }
+    }
+
+    void Update() 
+    {
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

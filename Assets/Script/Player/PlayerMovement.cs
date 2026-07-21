@@ -1,9 +1,9 @@
-using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Joystick joystick;
     public Vector2 moveInput;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isInWater = false;
     public bool WaterWalking = false;
     public bool isPlayerRunning = false;
+    public bool isToggleRunning = false;
 
     private PlayerActionManager actionManager;
 
@@ -27,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         actionManager = GetComponent<PlayerActionManager>();
     }
 
+    public void ToggleSprint()
+    {
+        isToggleRunning = !isToggleRunning; // สลับค่า (True เป็น False / False เป็น True)
+        Debug.Log("Sprint Mode: " + isToggleRunning);
+    }
     void Update()
     {
         if (dialogueManager.isDialogue) 
@@ -44,16 +50,38 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
+        Vector2 joystickInput = Vector2.zero;
+        // สมมติว่าเจมส์มีตัวแปรชื่อ joystick ให้เรียกใช้แบบนี้ (ถ้าชื่ออื่นให้เปลี่ยนครับ)
+        if (joystick != null) 
+        {
+            joystickInput = joystick.Direction;
+        }
+
+        if (joystickInput.magnitude > 0.1f)
+        {
+            moveInput = joystickInput;
+        }
+        else
+        {
+            // ถ้าไม่ใช้จอยสติ๊ก ให้ใช้คีย์บอร์ดแทน
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
+        }
+
         moveInput = moveInput.normalized;
 
+        bool runRequested = Input.GetKey(KeyCode.LeftShift) || isToggleRunning;
         bool hasStamina = (staminaBar != null && staminaBar.currentStamina >= 1f);
 
-        if (Input.GetKey(KeyCode.LeftShift) && hasStamina && moveInput != Vector2.zero)
+        if (runRequested && hasStamina && moveInput != Vector2.zero)
         {
             rb.linearVelocity = moveInput * speed * sprint;
             isPlayerRunning = true;
+
+            if (staminaBar != null)
+            {
+                staminaBar.currentStamina -= 10f * Time.deltaTime;
+            }
         }
         else
         {
