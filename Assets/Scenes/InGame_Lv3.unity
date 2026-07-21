@@ -10941,11 +10941,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
       insertIndex: 10
-      addedObject: {fileID: 1082912973}
+      addedObject: {fileID: 5644883537776617916}
     - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5644883537776617916}
+      insertIndex: 11
+      addedObject: {fileID: 1082912973}
     - targetCorrespondingSourceObject: {fileID: 7653246168840089921, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
       insertIndex: 0
@@ -77157,7 +77157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 615.24, y: -339}
+  m_AnchoredPosition: {x: 615.24243, y: -495.2905}
   m_SizeDelta: {x: 77.644, y: 91.179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910781321

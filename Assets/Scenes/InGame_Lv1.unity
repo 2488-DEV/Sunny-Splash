@@ -9131,6 +9131,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6332511623562958521, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 615.24243
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332511623562958521, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -495.2905
+      objectReference: {fileID: 0}
     - target: {fileID: 6637537150698263833, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
       propertyPath: m_fontAsset
@@ -9311,7 +9321,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6126940088365771841, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
-      insertIndex: -1
+      insertIndex: 9
       addedObject: {fileID: 2135209192103112123}
     - targetCorrespondingSourceObject: {fileID: 7653246168840089921, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
@@ -71154,6 +71164,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameInput, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2134101213315162113, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
+        type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 2051437893}
     - target: {fileID: 3087823934955923253, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -71339,6 +71354,11 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 2051437893}
+    - target: {fileID: 8808280743699993472, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9159404056491223345, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
