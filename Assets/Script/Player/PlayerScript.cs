@@ -127,7 +127,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     StartCoroutine(WaitBeforeWin(10f));
                 }
-                else if (currentLevelIndex != 3)
+                else if (currentLevelIndex != 4)
                 {
                     WinGame();
                 }
