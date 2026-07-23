@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class MobileUIStage : MonoBehaviour
@@ -12,11 +13,18 @@ public class MobileUIStage : MonoBehaviour
     public GameObject sprintButton;
     public GameObject joyStick;
     public PlayerScript player;
+    public Texture2D egg_toggled;
+    public Texture2D sprint_toggled;
+    public Texture2D egg_normal;
+    public Texture2D sprint_normal;
+    private RawImage egg_img;
+    private RawImage sprint_img;
     public SettingMenuManger settingMenuManager;
 
     void Start()
     {
-        
+        egg_img = eggButton.GetComponent<RawImage>();
+        sprint_img = sprintButton.GetComponent<RawImage>();
     }
 
     void Update()
@@ -28,6 +36,10 @@ public class MobileUIStage : MonoBehaviour
             if (interactButton != null) interactButton.SetActive(true); 
             if (quackButton != null) quackButton.SetActive(true); 
             if (sprintButton != null) sprintButton.SetActive(true); 
+            if (PlayerScript.isEgg) egg_img.texture = egg_toggled;
+            else egg_img.texture = egg_normal;
+            if (PlayerMovement.isToggleRunning) sprint_img.texture = sprint_toggled;
+            else sprint_img.texture = sprint_normal;
             if (currentSceneName == "InGame_Lv1")
             {
                 if (eggButton != null) eggButton.SetActive(false); 
