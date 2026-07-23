@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     public bool IsShovel;
-    public static bool isEgg;
+    public bool isEgg;
     private PlayerMovement movementScript;
     private VNDialogue dialogueManager;
     [SerializeField] private LayerMask targetLayer;

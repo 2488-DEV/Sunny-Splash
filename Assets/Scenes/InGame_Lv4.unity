@@ -5922,7 +5922,7 @@ Transform:
   m_GameObject: {fileID: 61240796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18851566, y: 22.444147, z: -10.1}
+  m_LocalPosition: {x: -0.21349716, y: 22.444147, z: -10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188685,26 +188685,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 525752146}
-    - target: {fileID: 5056901834320103674, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
-        type: 3}
-      propertyPath: egg_normal
-      value: 
-      objectReference: {fileID: 2800000, guid: 3441b8e5acb165d48ae247814fcbf83c, type: 3}
-    - target: {fileID: 5056901834320103674, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
-        type: 3}
-      propertyPath: egg_toggle
-      value: 
-      objectReference: {fileID: 2800000, guid: a7cd63530843daf42b1fb6c55b57ff86, type: 3}
-    - target: {fileID: 5056901834320103674, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
-        type: 3}
-      propertyPath: sprint_normal
-      value: 
-      objectReference: {fileID: 2800000, guid: 3c72e56ac06b8cc4db79c6a8399b1355, type: 3}
-    - target: {fileID: 5056901834320103674, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
-        type: 3}
-      propertyPath: sprint_toggle
-      value: 
-      objectReference: {fileID: 2800000, guid: ae390cfa35943364ca1004a210c6de62, type: 3}
     - target: {fileID: 5112344614968452966, guid: 951965afdfd25d649b2b1f85fc0ee2a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

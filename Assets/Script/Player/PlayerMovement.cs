@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isInWater = false;
     public bool WaterWalking = false;
     public bool isPlayerRunning = false;
-    public static bool isToggleRunning = false;
+    public bool isToggleRunning = false;
 
     private PlayerActionManager actionManager;
 
