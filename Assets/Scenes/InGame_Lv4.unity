@@ -43069,6 +43069,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584232495}
     m_Modifications:
+    - target: {fileID: 2577585254280797808, guid: fb2df5b680b64b449a78162ebcd98e97,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577585254280797808, guid: fb2df5b680b64b449a78162ebcd98e97,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -48046815
+      objectReference: {fileID: 0}
     - target: {fileID: 2577585254963922476, guid: fb2df5b680b64b449a78162ebcd98e97,
         type: 3}
       propertyPath: m_Mass
