@@ -483,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 61240796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.865346, y: 20.955238, z: -10.1}
+  m_LocalPosition: {x: 1.8414536, y: 20.955269, z: -10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1554,6 +1554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StaminaBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122390829559693962, guid: d0f623ecdac949943849b9479b9f772a,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6252654967157597632, guid: d0f623ecdac949943849b9479b9f772a,
         type: 3}
@@ -4301,7 +4306,7 @@ PrefabInstance:
     - target: {fileID: 8784550006459636183, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8784550006459636183, guid: 66a9e58eb54c5c84eb0e7445388757e6,
         type: 3}
@@ -8962,6 +8967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MaxValue
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012443435012233094, guid: b5200b802a983434b9546a764c532e85,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
