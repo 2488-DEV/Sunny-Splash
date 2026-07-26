@@ -15,6 +15,7 @@ public class OverHeatBar : MonoBehaviour
     public Slider slider;
     public Image fillImage;
     public GameObject player;
+    public Image Burning;
 
     public GameObject deathPanel;
     private PlayerSound playerSound;
@@ -98,8 +99,8 @@ public class OverHeatBar : MonoBehaviour
                 player.SetActive(false);
             }
         }
-        else if (slider.value >= 85f) fillImage.color = Color.red;
-        else fillImage.color = new Color32(255, 113, 0, 255);
+        else if (slider.value >= 85f) {fillImage.color = Color.red;Burning.color = new Color32(255, 0, 0, 50);}
+        else {fillImage.color = new Color32(255, 113, 0, 255);Burning.color = new Color32(255, 0, 0, 0);}
     }
 
     public void TryAgain()
