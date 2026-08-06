@@ -9322,6 +9322,11 @@ PrefabInstance:
       objectReference: {fileID: 2051437891}
     - target: {fileID: 7728185517027127251, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
         type: 3}
+      propertyPath: Burning
+      value: 
+      objectReference: {fileID: 1787916389}
+    - target: {fileID: 7728185517027127251, guid: 6ba8b3a62fcdbe846aee3e06b82bacbc,
+        type: 3}
       propertyPath: sunSystem
       value: 
       objectReference: {fileID: 799418348}
